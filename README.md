@@ -1,1 +1,2 @@
-# DATS2300
+# DATS2300 Algoritmer og datastrukturer
+

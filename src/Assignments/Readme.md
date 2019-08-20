@@ -1,0 +1,1 @@
+Dette er Git-repositoryen for obligene i AlgDat

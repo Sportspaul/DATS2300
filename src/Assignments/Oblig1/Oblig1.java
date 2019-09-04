@@ -1,4 +1,4 @@
-package Assignments;
+package Assignments.Oblig1;
 
 public class Oblig1 {
 

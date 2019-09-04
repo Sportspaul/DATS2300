@@ -71,7 +71,31 @@ public class Oblig1 {
         }
     }
 
-    public static void rotasjon(char [] values, int k) { }
+    //TODO: Gjøre metoden mer effektiv
+    public static void rotasjon(char [] values, int k) {
+        int i = 0;
+        if(k > 0) {     // Tester om k er positiv
+
+            while (i < k) {
+                rotasjon(values);
+                i++;
+            }
+        }else if(k < 0) {   // Tester om k er negativ
+
+            while (i > k) {
+                int siste_idx = values.length - 1;
+                char temp = values[0];
+
+                for (int j = 1; j <= siste_idx; j++) {
+                    values[j - 1] = values[j];
+                }
+
+                values[siste_idx] = temp;
+                i--;
+            }
+        }
+
+    }
 
     public static String flett(String s1, String s2) {
         return "";

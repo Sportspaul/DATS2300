@@ -59,13 +59,12 @@ class Oblig1UnitTest {
     }
 
     @Test
-    void rotasjon() {
-
+    void rotasjon1() {
         // En liste fra A - J i alfabetisk rekkefølge
         char[] a = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
         char[] b = {'J', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'};
         Oblig1.rotasjon(a);
-        assertEquals(Arrays.toString(b), Arrays.toString(a), "Implementer rotasjon og denne testen");
+        assertEquals(Arrays.toString(b), Arrays.toString(a));
 
         // En tom liste
         char[] tomTabell = {};
@@ -76,6 +75,21 @@ class Oblig1UnitTest {
         char[] etElement = {'A'};
         Oblig1.rotasjon(etElement);
         assertEquals(etElement, etElement);
+    }
+
+    @Test
+    void rotasjon2() {
+        // Tester for positiv verdi for antall rotasjoner
+        char[] a = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+        char[] b = {'H', 'I', 'J', 'A', 'B', 'C', 'D', 'E', 'F', 'G'};
+        Oblig1.rotasjon(a, 3);
+        assertEquals(Arrays.toString(b), Arrays.toString(a));
+
+        // Tester for negativ verdi for antall rotasjoner
+        char[] c = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+        char[] d = {'D', 'E', 'F', 'G', 'H', 'I', 'J', 'A', 'B', 'C',};
+        Oblig1.rotasjon(c, -3);
+        assertEquals(Arrays.toString(d), Arrays.toString(c));
     }
 
     @Test

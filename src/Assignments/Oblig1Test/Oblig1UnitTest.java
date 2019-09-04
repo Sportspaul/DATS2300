@@ -16,6 +16,10 @@ class Oblig1UnitTest {
         int[] liste = {1, 2, 7, 34, 3, 99, 64, 12, 5, 999, 43, 123, 55, 86};
         assertEquals(999, Oblig1.maks(liste), "Største element ligger ikke sist i arrayet");
         System.out.println(Oblig1.maks(liste));
+
+        int[] liste1 = {-1, -2, -7, -34, -3, -99, -64, -12, -5, -999, -43, -123, -55, -86};
+        assertEquals(-1, Oblig1.maks(liste1), "Største element ligger ikke sist i arrayet");
+        System.out.println(Oblig1.maks(liste1));
     }
 
     @Test

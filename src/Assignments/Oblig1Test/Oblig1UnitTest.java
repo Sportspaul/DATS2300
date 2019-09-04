@@ -1,5 +1,6 @@
 package Assignments.Oblig1Test;
 
+import Assignments.Oblig1.Oblig1;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,12 +13,28 @@ class Oblig1UnitTest {
 
     @Test
     void maks() {
-        assertEquals(true, false, "Implementer maks og denne testen");
+        int[] liste = {1, 2, 7, 34, 3, 99, 64, 12, 5, 999, 43, 123, 55, 86};
+        assertEquals(999, Oblig1.maks(liste), "Største element ligger ikke sist i arrayet");
+        System.out.println(Oblig1.maks(liste));
     }
 
     @Test
     void ombyttinger() {
-        assertEquals(true, false, "Implementer ombyttinger og denne testen");
+
+        int n = 100; int i =1;
+        int sum = 0;
+
+        while(i < n){
+            int[] heltall = Oblig1Test.randPerm(15);
+            int ant = Oblig1.ombyttinger(heltall);
+            System.out.println("Antall ombyttinger: " + ant);
+            sum += ant;
+            //sum = sum + ant;
+            System.out.println(sum);
+            i++;
+        }
+        double snitt = sum/n;
+        System.out.println("Gjennomsnittlig antall ombyttinger er: " + snitt);
     }
 
     @Test

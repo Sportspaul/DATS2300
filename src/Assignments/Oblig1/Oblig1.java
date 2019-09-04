@@ -51,7 +51,16 @@ public class Oblig1 {
 
     public static void delsortering(int [] values) { }
 
-    public static void rotasjon(char[] a) { }
+    public static void rotasjon(char[] a) {
+        int siste_idx = a.length - 1;
+        char temp = a[siste_idx];
+
+        for(int i = siste_idx - 1; i >= 0; i--){
+           a[i + 1] = a[i];
+        }
+
+        a[0] = temp;
+    }
 
     public static void rotasjon(char [] values, int k) { }
 

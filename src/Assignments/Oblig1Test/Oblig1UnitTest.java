@@ -3,6 +3,8 @@ package Assignments.Oblig1Test;
 import Assignments.Oblig1.Oblig1;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -58,7 +60,22 @@ class Oblig1UnitTest {
 
     @Test
     void rotasjon() {
-        assertEquals(true, false, "Implementer rotasjon og denne testen");
+
+        // En liste fra A - J i alfabetisk rekkefølge
+        char[] a = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+        char[] b = {'J', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'};
+        Oblig1.rotasjon(a);
+        assertEquals(Arrays.toString(b), Arrays.toString(a), "Implementer rotasjon og denne testen");
+
+        // En tom liste
+        char[] tomTabell = {};
+        Oblig1.rotasjon(tomTabell);
+        assertEquals(tomTabell, tomTabell);
+
+        // En liste med bare et element
+        char[] etElement = {'A'};
+        Oblig1.rotasjon(etElement);
+        assertEquals(etElement, etElement);
     }
 
     @Test

@@ -51,15 +51,24 @@ public class Oblig1 {
 
     public static void delsortering(int [] values) { }
 
+
+    /* Metode som tar inn en liste med 'char'-elementer og roterer alle elementene 1 plass mot høyre
+    * eks. char[] a = {'A', 'B', 'C', 'D'}
+    * rotasjon(a)
+    * a == {'D', 'A', 'B', 'C'} */
     public static void rotasjon(char[] a) {
-        int siste_idx = a.length - 1;
-        char temp = a[siste_idx];
 
-        for(int i = siste_idx - 1; i >= 0; i--){
-           a[i + 1] = a[i];
+        // Tester om listen har mer enn 1 element
+        if(a.length > 1) {
+            int siste_idx = a.length - 1;
+            char temp = a[siste_idx];                       //Tar vare på verdien til siste element
+
+            for (int i = siste_idx - 1; i >= 0; i--) {      //Looper gjennom listen fra høyre til venstre
+                a[i + 1] = a[i];                            //Flytter elementene en plass til høyre
+            }
+
+            a[0] = temp;                                    //Setter første element i listen lik a[siste_idx]
         }
-
-        a[0] = temp;
     }
 
     public static void rotasjon(char [] values, int k) { }

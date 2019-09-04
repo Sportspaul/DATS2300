@@ -1,6 +1,7 @@
 package Assignments.Oblig1Test;
 
 import Assignments.Oblig1.Oblig1;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,7 +29,7 @@ import java.util.*;
 public class Oblig1Test {
 
     ///// Oppgave 1 //////////////////////////////////////
-    @org.junit.jupiter.api.Test
+    @Test
     void oppgave1() {
         int antallFeil = 0;
 
@@ -82,7 +83,7 @@ public class Oblig1Test {
     }
 
     ///// Oppgave 2 /////////////////////////////////////
-    @org.junit.jupiter.api.Test
+    @Test
     void oppgave2() {
         int antallFeil = 0;
 
@@ -134,7 +135,7 @@ public class Oblig1Test {
     }
 
     ///// Oppgave 3 //////////////////////////////////////
-    @org.junit.jupiter.api.Test
+    @Test
     void oppgave3() {
         int antallFeil = 0;
 
@@ -174,7 +175,7 @@ public class Oblig1Test {
     }
 
     ///// Oppgave 4 //////////////////////////////////////
-    @org.junit.jupiter.api.Test
+    @Test
     void oppgave4() {
         int antallFeil = 0;
 
@@ -331,7 +332,7 @@ public class Oblig1Test {
     }
 
     ///// Oppgave 5 //////////////////////////////////////
-    @org.junit.jupiter.api.Test
+    @Test
     void oppgave5() {
         int antallFeil = 0;
 
@@ -374,7 +375,7 @@ public class Oblig1Test {
     }
 
     ///// Oppgave 6 //////////////////////////////////////
-    @org.junit.jupiter.api.Test
+    @Test
     void oppgave6() {
         int antallFeil = 0;
 
@@ -487,7 +488,7 @@ public class Oblig1Test {
     }
 
     ///// Oppgave 7 //////////////////////////////////////
-    @org.junit.jupiter.api.Test
+    @Test
     void oppgave7() {
         int antallFeil = 0;
         String s = null;
@@ -613,7 +614,7 @@ public class Oblig1Test {
     }
 
     ///// Oppgave 8 //////////////////////////////////////
-    @org.junit.jupiter.api.Test
+    @Test
     void oppgave8() {
         int antallFeil = 0;
 
@@ -716,7 +717,7 @@ public class Oblig1Test {
     }
 
     ///// Oppgave 9 //////////////////////////////////////
-    @org.junit.jupiter.api.Test
+    @Test
     void oppgave9() {
         int antallFeil = 0;
 
@@ -807,7 +808,7 @@ public class Oblig1Test {
     }
 
     ///// Oppgave 10 //////////////////////////////////////
-    @org.junit.jupiter.api.Test
+    @Test
     void oppgave10() {
         int antallFeil = 0;
         boolean b = false;

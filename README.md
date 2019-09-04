@@ -2,5 +2,5 @@
 Andreas Hartmann s333759 
 Daniel Hansen s333748
 Felix Leypoldt s333743
-Herman Rustad s333769
+Herman Rustad s333769 \n
 Paul Høglend s333733

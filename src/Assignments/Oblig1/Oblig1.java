@@ -80,8 +80,8 @@ public class Oblig1 {
         String [] strArray1 = str1.split("\\s");
         String [] strArray2 = str2.split("\\s");
         //test
-        for(String s: strArray1) {
-            System.out.println(s);
+        //TODO: Ikke ferdig
+        for(int i = 1; i < strArray1.length; i++ ) {
         }
         if(s2.length() > s1.length()) {
             //TODO:Lage exception

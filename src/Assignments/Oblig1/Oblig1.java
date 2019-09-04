@@ -4,11 +4,6 @@ import java.util.NoSuchElementException;
 
 public class Oblig1 {
 
-    //TODO: Må fjernes!!!!!!!!
-    // For å sjekke ut ting underveis
-    public static void main(String args[]) {
-        Oblig1.inneholdt("abca","dddd");
-    }
 
     //TODO: implementer metodene
     public static int maks(int [] values ) {
@@ -81,7 +76,9 @@ public class Oblig1 {
         String [] strArray2 = str2.split("\\s");
         //test
         //TODO: Ikke ferdig
-        for(int i = 1; i < strArray1.length; i++ ) {
+
+        for(int i = 0; i < strArray1.length; i++ ) {
+
         }
         if(s2.length() > s1.length()) {
             //TODO:Lage exception

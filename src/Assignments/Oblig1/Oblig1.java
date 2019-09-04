@@ -1,16 +1,45 @@
 package Assignments.Oblig1;
 
+import java.util.NoSuchElementException;
+
 public class Oblig1 {
 
     //TODO: implementer metodene
     //TODO: Bli enige om metodenavn
     public static int maks(int [] values ) {
-        return 0;
+        if(values.length <= 0){
+            throw new NoSuchElementException("Tabellen er tom");
+        }
+        for(int i = 0; i < values.length - 1; i++){
+            for(int j = i + 1; j < values.length; j++){
+                int bytt = values[i];
+                if(values[i] > values[j]){
+                    values[i] = values[j];
+                    values[j] = bytt;
+                }
+            }
+        }
+       return values[values.length -1];
     }
 
     public static int ombyttinger(int [] values ) {
-        return 0;
+        if(values.length <= 0){
+            throw new NoSuchElementException("Tabellen er tom");
+        }
+        int antall = 0;
+        for(int i = 0; i < values.length - 1; i++){
+            for(int j = i + 1; j < values.length; j++){
+                int bytt = values[i];
+                if(values[i] > values[j]){
+                    values[i] = values[j];
+                    values[j] = bytt;
+                    antall++;
+                }
+            }
+        }
+        return antall;
     }
+
 
     public static int antallUlikeSortert( int [] values ) {
         return 0;

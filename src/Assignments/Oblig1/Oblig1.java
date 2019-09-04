@@ -4,47 +4,43 @@ public class Oblig1 {
 
     //TODO: implementer metodene
     //TODO: Bli enige om metodenavn
-    public static int max(int [] values ) {
+    public static int maks(int [] values ) {
         return 0;
     }
 
-    public static int interchanges(int [] values ) {
+    public static int ombyttinger(int [] values ) {
         return 0;
     }
 
-    public static int numberOfDifferentSorted( int [] values ) {
+    public static int antallUlikeSortert( int [] values ) {
         return 0;
     }
 
-    public static int numberOfDifferentUnsorted( int [] values ) {
+    public static int antallUlikeUsortert( int [] values ) {
         return 0;
     }
 
-    public static void partSorted(int [] values) {
+    public static void delsortering(int [] values) { }
 
-    }
+    public static void rotasjon(char[] a) { }
 
-    public static void rotation(char [] values, int k) {
+    public static void rotasjon(char [] values, int k) { }
 
-    }
-
-    public static String merge(String s1, String s2) {
+    public static String flett(String s1, String s2) {
         return "";
     }
 
-    public static String merge(String [] strings) {
-        return "";
-    }
+    public static String flett(String... s) {return "";}
 
-    public static int [] indexSort(int [] values) {
+    public static int [] indekssortering(int [] values) {
         return null;
     }
 
-    public static int [] thirdSmallest(int [] values)  {
+    public static int [] tredjeMin(int [] values)  {
         return null;
     }
 
-    public static boolean contained(String s1, String s2) {
+    public static boolean inneholdt(String s1, String s2) {
         return false;
     }
 

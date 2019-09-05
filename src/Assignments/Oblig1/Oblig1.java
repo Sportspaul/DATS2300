@@ -4,8 +4,16 @@ import java.util.NoSuchElementException;
 
 public class Oblig1 {
 
+    /*
+    Andreas Hartmann s333759
+    Daniel Hansen s333748
+    Felix Leypoldt s333743
+    Herman Rustad s333769
+    Paul Høglend s333733
+     */
 
-    //TODO: implementer metodene
+
+
     public static int maks(int [] values ) {
         if(values.length <= 0){
             throw new NoSuchElementException("Tabellen er tom");
@@ -40,7 +48,7 @@ public class Oblig1 {
         return antall;
     }
 
-
+    //TODO: implementer metodene
     public static int antallUlikeSortert( int [] values ) {
         return 0;
     }

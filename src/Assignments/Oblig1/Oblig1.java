@@ -55,7 +55,26 @@ public class Oblig1 {
     }
 
     public static int antallUlikeUsortert( int [] values ) {
-        return 0;
+
+        int antallUlike = 0;
+
+        //Går gjennom alle verdiene i arrayet values
+        for (int i = 0; i < values.length; i++) {
+
+            int j;
+            //Om i og j ikke har samme index (j < i) hopper den inn i if-setningen
+            for (j = 0; j < i; j++) {
+                //Om verdiene på index i og j har samme verdi går den ut av for-løkken
+                if (values[i] == values[j]) {
+                    break;
+                }
+            }
+            //Om indexen til i og j er like øker antallet ulike tall
+            if (i == j) {
+                antallUlike++;
+            }
+        }
+        return antallUlike;
     }
 
     public static void delsortering(int [] values) { }

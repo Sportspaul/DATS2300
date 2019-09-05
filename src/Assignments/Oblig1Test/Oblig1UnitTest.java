@@ -18,11 +18,9 @@ class Oblig1UnitTest {
         int[] liste = {1, 2, 7, 34, 3, 99, 64, 12, 5, 999, 43, 123, 55, 86};
         assertEquals(999, Oblig1.maks(liste), "Største element ligger ikke sist i arrayet");
         System.out.println(Oblig1.maks(liste));
-        System.out.println("Testen er bestått");
 
         int[] liste1 = {-1, -2, -7, -34, -3, -99, -64, -12, -5, -999, -43, -123, -55, -86};
         assertEquals(-1, Oblig1.maks(liste1), "Største element ligger ikke sist i arrayet");
-        System.out.println("Testen er bestått");
         System.out.println(Oblig1.maks(liste1));
     }
 
@@ -48,19 +46,16 @@ class Oblig1UnitTest {
     @Test
     void antallUlikeSortert() {
         assertEquals(true, false, "Implementer antallUlikeSortert og denne testen");
-        System.out.println("Testen er bestått");
     }
 
     @Test
     void antallUlikeUsortert() {
         assertEquals(true, false, "Implementer antallUlikeUsortert og denne testen");
-        System.out.println("Testen er bestått");
     }
 
     @Test
     void delsortering() {
         assertEquals(true, false, "Implementer delsortering og denne testen");
-        System.out.println("Testen er bestått");
     }
 
     @Test
@@ -70,19 +65,16 @@ class Oblig1UnitTest {
         char[] b = {'J', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'};
         Oblig1.rotasjon(a);
         assertEquals(Arrays.toString(b), Arrays.toString(a));
-        System.out.println("Testen er bestått");
 
         // En tom liste
         char[] tomTabell = {};
         Oblig1.rotasjon(tomTabell);
         assertEquals(tomTabell, tomTabell);
-        System.out.println("Testen er bestått");
 
         // En liste med bare et element
         char[] etElement = {'A'};
         Oblig1.rotasjon(etElement);
         assertEquals(etElement, etElement);
-        System.out.println("Testen er bestått");
     }
 
     @Test
@@ -92,40 +84,36 @@ class Oblig1UnitTest {
         char[] b = {'H', 'I', 'J', 'A', 'B', 'C', 'D', 'E', 'F', 'G'};
         Oblig1.rotasjon(a, 3);
         assertEquals(Arrays.toString(b), Arrays.toString(a));
-        System.out.println("Testen er bestått");
 
         // Tester for negativ verdi for antall rotasjoner
         char[] c = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
         char[] d = {'D', 'E', 'F', 'G', 'H', 'I', 'J', 'A', 'B', 'C',};
         Oblig1.rotasjon(c, -3);
         assertEquals(Arrays.toString(d), Arrays.toString(c));
-        System.out.println("Testen er bestått");
     }
 
     @Test
     void flett() {
         assertEquals(true, false, "Implementer flett og denne testen");
-        System.out.println("Testen er bestått");
     }
 
     @Test
     void indekssortering() {
         assertEquals(true, false, "Implementer indekssortering og denne testen");
-        System.out.println("Testen er bestått");
     }
 
     @Test
     void tredjeMin() {
         assertEquals(true, false, "Implementer tredjeMin og denne testen");
-        System.out.println("Testen er bestått");
+    }
+
+    @Test
+    void bokstavNr() {
+        assertEquals(true, false, "Implementer bokstavNr og denne testen");
     }
 
     @Test
     void inneholdt() {
-        String t = "";
-        String test = "AVCDFEFE";
-        char [] letters = test.toCharArray();
-        assertEquals(true, Oblig1.inneholdt(t,test));
-        System.out.println("Testen er bestått");
+        assertEquals(true, false, "Implementer inneholdt og denne testen");
     }
 }

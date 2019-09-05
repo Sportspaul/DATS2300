@@ -53,8 +53,30 @@ public class Oblig1 {
         return 0;
     }
 
-    public static int antallUlikeUsortert( int [] values ) {
-        return 0;
+
+    /**Itererer gjennom en tabell, og finner ut av hvor mange unike tall det er i den*/
+
+    public static int antallUlikeUsortert(int [] values) {
+
+        int antallUlike = 0;
+
+        //Går gjennom alle verdiene i arrayet values
+        for (int i = 0; i < values.length; i++) {
+
+                int j;
+                //Om i og j ikke har samme index (j < i) hopper den inn i if-setningen
+                for (j = 0; j < i; j++) {
+                    //Om verdiene på index i og j har samme verdi går den ut av for-løkken
+                    if (values[i] == values[j]) {
+                        break;
+                    }
+                }
+                //Om indexen til i og j er like øker antallet ulike tall
+                if (i == j) {
+                    antallUlike++;
+                }
+            }
+        return antallUlike;
     }
 
     public static void delsortering(int [] values) { }

@@ -1,5 +1,6 @@
 package Assignments.Oblig1;
 
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 public class Oblig1 {
@@ -53,30 +54,8 @@ public class Oblig1 {
         return 0;
     }
 
-
-    /**Itererer gjennom en tabell, og finner ut av hvor mange unike tall det er i den*/
-
-    public static int antallUlikeUsortert(int [] values) {
-
-        int antallUlike = 0;
-
-        //Går gjennom alle verdiene i arrayet values
-        for (int i = 0; i < values.length; i++) {
-
-                int j;
-                //Om i og j ikke har samme index (j < i) hopper den inn i if-setningen
-                for (j = 0; j < i; j++) {
-                    //Om verdiene på index i og j har samme verdi går den ut av for-løkken
-                    if (values[i] == values[j]) {
-                        break;
-                    }
-                }
-                //Om indexen til i og j er like øker antallet ulike tall
-                if (i == j) {
-                    antallUlike++;
-                }
-            }
-        return antallUlike;
+    public static int antallUlikeUsortert( int [] values ) {
+        return 0;
     }
 
     public static void delsortering(int [] values) { }
@@ -86,45 +65,107 @@ public class Oblig1 {
     * eks. char[] a = {'A', 'B', 'C', 'D'}
     * rotasjon(a)
     * a == {'D', 'A', 'B', 'C'} */
+
     public static void rotasjon(char[] a) {
 
         // Tester om listen har mer enn 1 element
         if(a.length > 1) {
             int siste_idx = a.length - 1;
-            char temp = a[siste_idx];                       //Tar vare på verdien til siste element
+            char temp = a[siste_idx];                       // Tar vare på verdien til siste element
 
-            for (int i = siste_idx - 1; i >= 0; i--) {      //Looper gjennom listen fra høyre til venstre
-                a[i + 1] = a[i];                            //Flytter elementene en plass til høyre
+            for (int i = siste_idx - 1; i >= 0; i--) {      // Looper gjennom listen fra høyre til venstre
+                a[i + 1] = a[i];                            // Flytter elementene en plass til høyre
             }
 
-            a[0] = temp;                                    //Setter første element i listen lik a[siste_idx]
+            a[0] = temp;                                    // Setter første element i listen lik a[siste_idx]
         }
     }
 
-    //TODO: Gjøre metoden mer effektiv
+    //TODO: Rydde opp i metoden, se på muligheter for å gjøre den mer generell, og hindre duplikatkode
+    //TODO: Legge til komentarer i koden
     public static void rotasjon(char [] values, int k) {
-        int i = 0;
-        if(k > 0) {     // Tester om k er positiv
-
-            while (i < k) {
-                rotasjon(values);
-                i++;
-            }
-        }else if(k < 0) {   // Tester om k er negativ
-
-            while (i > k) {
-                int siste_idx = values.length - 1;
-                char temp = values[0];
-
-                for (int j = 1; j <= siste_idx; j++) {
-                    values[j - 1] = values[j];
-                }
-
-                values[siste_idx] = temp;
-                i--;
-            }
+        int n = values.length;
+        char[] temp = new char[n];
+        System.arraycopy(values, 0, temp, 0, n);
+        if(n == 2){
+            char tempValues = values[1];
+            values[1] = values[0];
+            values[0] = tempValues;
         }
 
+        if (k > 0 && n > 2) {
+            int mod = k % n;
+            if(k > n) {                                     // Tester om k > n
+                if (mod <= n / 2) {
+                    int teller = 0;
+                    for (int i = 0; i < n; i++) {
+                        if (i + mod < n) {
+                            values[i + mod] = temp[i];
+                        } else if (i + mod > n - 1) {
+                            values[teller] = temp[i];
+                            teller++;
+                        }
+                    }
+                } else if (mod > n / 2) {                      // Tester om k % n > n / 2
+                    int antallFlytt = n - mod;
+
+                    for (int i = n - 1; i >= 0; i--) {
+                        if (i - antallFlytt >= 0) {
+                            values[i - antallFlytt] = temp[i];
+                        } else if (i - antallFlytt < 0) {
+                            values[n + i - antallFlytt] = temp[i];
+                        }
+                    }
+                }
+            }else{                  // if k < n
+                int teller = 0;
+                for (int i = 0; i < n; i++) {
+                    if (i + k < n) {
+                        values[i + k] = temp[i];
+                    } else if (i + k >= n) {
+                        values[teller] = temp[i];
+                        teller++;
+                    }
+                }
+            }
+
+        } else if (k < 0 && n > 2) {
+            int mod = Math.abs(k) % n;
+            if (Math.abs(k) > n) {
+                if (mod <= n / 2) {
+                    int teller = n - 1;
+                    for (int i = n - 1; i >= 0; i--) {
+                        if (i - mod >= 0) {
+                            values[i - mod] = temp[i];
+                        } else if (i - mod < 0) {
+                            values[teller] = temp[i];
+                            teller--;
+                        }
+                    }
+                } else if (mod > n / 2) {                      // Tester om k % n > n / 2
+                    int antallFlytt = n - mod;
+                    int teller = 0;
+                    for (int i = 0; i < n; i++) {
+                        if (i + antallFlytt < n) {
+                            values[i + antallFlytt] = temp[i];
+                        } else if (i + antallFlytt > n-1) {
+                            values[teller] = temp[i];
+                            teller++;
+                        }
+                    }
+                }
+            } else if(Math.abs(k) < n){                  // if k < n
+                int teller = n-1;
+                for (int i = n-1; i >= 0; i--) {
+                    if (k + i >= 0) {
+                        values[k + i] = temp[i];
+                    } else if (k + i < 0) {
+                        values[teller] = temp[i];
+                        teller--;
+                    }
+                }
+            }
+        }
     }
 
     public static String flett(String s1, String s2) {
@@ -142,14 +183,19 @@ public class Oblig1 {
     }
 
     public static boolean inneholdt(String s1, String s2) {
-        if(s1.length() == 0) { //tomme strenger
-            return true;
-        }
         String str1 = s1.toUpperCase();
         String str2 = s2.toUpperCase();
-        char [] chars1 = str1.toCharArray();
-        char [] chars2 = str2.toCharArray();
-        
+        String [] strArray1 = str1.split("\\s");
+        String [] strArray2 = str2.split("\\s");
+        //test
+        //TODO: Ikke ferdig
+
+        for(int i = 0; i < strArray1.length; i++ ) {
+
+        }
+        if(s2.length() > s1.length()) {
+            //TODO:Lage exception
+        }
         return false;
     }
 

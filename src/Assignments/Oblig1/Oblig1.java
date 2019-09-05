@@ -120,19 +120,14 @@ public class Oblig1 {
     }
 
     public static boolean inneholdt(String s1, String s2) {
+        if(s1.length() == 0) { //tomme strenger
+            return true;
+        }
         String str1 = s1.toUpperCase();
         String str2 = s2.toUpperCase();
-        String [] strArray1 = str1.split("\\s");
-        String [] strArray2 = str2.split("\\s");
-        //test
-        //TODO: Ikke ferdig
-
-        for(int i = 0; i < strArray1.length; i++ ) {
-
-        }
-        if(s2.length() > s1.length()) {
-            //TODO:Lage exception
-        }
+        char [] chars1 = str1.toCharArray();
+        char [] chars2 = str2.toCharArray();
+        
         return false;
     }
 

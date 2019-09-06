@@ -114,6 +114,9 @@ class Oblig1UnitTest {
 
     @Test
     void inneholdt() {
-        assertEquals(true, false, "Implementer inneholdt og denne testen");
+        String s1 = "";
+        String s2 = "AD";
+
+        assertEquals(true, Oblig1.inneholdt(s1, s2), "Implementer inneholdt og denne testen");
     }
 }

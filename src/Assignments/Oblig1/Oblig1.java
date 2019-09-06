@@ -1,6 +1,5 @@
 package Assignments.Oblig1;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
@@ -197,9 +196,41 @@ public class Oblig1 {
     public static int [] indekssortering(int [] values) {
         return null;
     }
+        //TODO: Fikse copy-paste, spesielt kommentarer
 
-    public static int [] tredjeMin(int [] values)  {
-        return null;
+    public static int [] tredjeMin(int [] values) {
+        int n = values.length;     // tabellens lengde
+        if (n < 3) throw      // må ha minst tre verdier
+                new NoSuchElementException("values.length(" + n + ") < 2!");
+
+        int m1 = 0;      // m er posisjonen til største verdi
+        int m2 = 1;     // nm er posisjonen til nest største verdi
+        int m3 = 2;
+        // bytter om m og nm hvis a[1] er større enn a[0]
+        if (values[1] < values[0]) {
+            m1 = 1;
+            m2 = 0;
+        }
+
+        int minverdi = values[m1];                // største verdi
+        int nestminverdi = values[m2];      // nest største verdi
+        int tredjeminverdi = values[m3];
+
+        for (int i = 2; i < n; i++) {
+            if (values[i] > nestminverdi) {
+                if (values[i] > minverdi) {
+                    m2 = m1;
+                    nestminverdi = minverdi;     // ny nest størst
+
+                    m1 = i;
+                    minverdi = values[m1];              // ny størst
+                } else {
+                    m2 = i;
+                    nestminverdi = values[m2];         // ny nest størst
+                }
+            }
+        }
+        return null;  //TODO: Treminste verdier-array
     }
 
     public static boolean inneholdt(String s1, String s2) {

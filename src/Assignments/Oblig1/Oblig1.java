@@ -100,92 +100,36 @@ public class Oblig1 {
         }
     }
 
-    //TODO: Rydde opp i metoden, se på muligheter for å gjøre den mer generell, og hindre duplikatkode
-    //TODO: Legge til komentarer i koden
     public static void rotasjon(char [] values, int k) {
         int n = values.length;
         char[] temp = new char[n];
-        System.arraycopy(values, 0, temp, 0, n);
-        if(n == 2){
-            char tempValues = values[1];
-            values[1] = values[0];
-            values[0] = tempValues;
+
+        if(n == 2) { rotasjon(values); }    // Roterer 1 plass hvis n == 2
+
+        if(n > 0 && n != 2) {
+            System.arraycopy(values, 0, temp, 0, n);        // Lager en kopi av 'values'-listen
+            int kAbs = Math.abs(k);                   // Finner absoluttverdien til k (eks. -5 => 5, 5 => 5)
+
+            if (kAbs > n && k > 0) { rotasjon(values, temp, n, k % n); }
+            else if (kAbs < n && k > 0) { rotasjon(values, temp, n, k); }
+            else if (kAbs > n && k < 0) { rotasjon(values, temp, n, k % n); }
+            else if (kAbs < n && k < 0) { rotasjon(values, temp, n, k + n); }
         }
+    }
 
-        if (k > 0 && n > 2) {
-            int mod = k % n;
-            if(k > n) {                                     // Tester om k > n
-                if (mod <= n / 2) {
-                    int teller = 0;
-                    for (int i = 0; i < n; i++) {
-                        if (i + mod < n) {
-                            values[i + mod] = temp[i];
-                        } else if (i + mod > n - 1) {
-                            values[teller] = temp[i];
-                            teller++;
-                        }
-                    }
-                } else if (mod > n / 2) {                      // Tester om k % n > n / 2
-                    int antallFlytt = n - mod;
-
-                    for (int i = n - 1; i >= 0; i--) {
-                        if (i - antallFlytt >= 0) {
-                            values[i - antallFlytt] = temp[i];
-                        } else if (i - antallFlytt < 0) {
-                            values[n + i - antallFlytt] = temp[i];
-                        }
-                    }
-                }
-            }else{                  // if k < n
-                int teller = 0;
-                for (int i = 0; i < n; i++) {
-                    if (i + k < n) {
-                        values[i + k] = temp[i];
-                    } else if (i + k >= n) {
-                        values[teller] = temp[i];
-                        teller++;
-                    }
-                }
-            }
-
-        } else if (k < 0 && n > 2) {
-            int mod = Math.abs(k) % n;
-            if (Math.abs(k) > n) {
-                if (mod <= n / 2) {
-                    int teller = n - 1;
-                    for (int i = n - 1; i >= 0; i--) {
-                        if (i - mod >= 0) {
-                            values[i - mod] = temp[i];
-                        } else if (i - mod < 0) {
-                            values[teller] = temp[i];
-                            teller--;
-                        }
-                    }
-                } else if (mod > n / 2) {                      // Tester om k % n > n / 2
-                    int antallFlytt = n - mod;
-                    int teller = 0;
-                    for (int i = 0; i < n; i++) {
-                        if (i + antallFlytt < n) {
-                            values[i + antallFlytt] = temp[i];
-                        } else if (i + antallFlytt > n-1) {
-                            values[teller] = temp[i];
-                            teller++;
-                        }
-                    }
-                }
-            } else if(Math.abs(k) < n){                  // if k < n
-                int teller = n-1;
-                for (int i = n-1; i >= 0; i--) {
-                    if (k + i >= 0) {
-                        values[k + i] = temp[i];
-                    } else if (k + i < 0) {
-                        values[teller] = temp[i];
-                        teller--;
-                    }
-                }
+    // Helpeklasse for metoden over
+    public static void rotasjon(char[] values, char[] temp, int n, int k) {
+        int teller = 0;
+        for (int i = 0; i < n; i++) {
+            if (i + k < n) {
+                values[i + k] = temp[i];
+            } else if (i + k > n - 1) {
+                values[teller] = temp[i];
+                teller++;
             }
         }
     }
+
 
     public static String flett(String s1, String s2) {
         return "";

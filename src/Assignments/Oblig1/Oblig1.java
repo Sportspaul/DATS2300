@@ -75,26 +75,28 @@ public class Oblig1 {
         return antallUlike;
     }
 
-    public static void delsortering(int [] values) {
-        for(int i = 0; i < values.length; i++) {
-            for(int j = 1; j < values.length; j++){
-                if(i == 0 && values[i]%2 !=0) {
+    /**Metode som sorterer et array med oddetall på vesten halvdel og partall på høyre, i stigende rekkefølge*/
 
-                } else if(i == 0 && values[i]%2 == 0){
-                    int temp = values[i];
-                    values[i] = values[j];
-                    values[j] = temp;
-                } else if(values[i]%2 != 0) {
-                    int temp = values[i];
-                    values[i] = values[j];
-                    values[j] = temp;
-                }
-            }
+    public static void delsortering(int[] values) {
+        int fra = 0;                                            //Setter fra som index-plassen til første plass i values
+        int til = values.length - 1;                            //Setter til som index-plassen til siste plass i values
+
+        while (true) {                                          //While løkken stopper når fra > til
+            while (fra <= til && values[fra] % 2 != 0) fra++;   //fra er vaktpost/stoppeverdi for til
+            while (fra <= til && values[til] % 2 == 0) til--;   //til er vaktpost/stoppeverdi for fra
+
+        if(fra < til) {
+            bytt(values, fra++, til--);                         //bytter om a[fra] og a[til] sine posisjoner
+        }
+            else break;                                         //hopper ut av while-løkken
         }
         int skille = finnSkille(values);
 
         sorterToDeler(values, skille);
+    }
 
+    public static void bytt(int[] a, int i, int j) {
+        int temp = a[i]; a[i] = a[j]; a[j] = temp;              //Bytter posisjonen til a[i] og a[j] med hverandre
     }
 
     public static int finnSkille(int[] values) {
@@ -126,7 +128,6 @@ public class Oblig1 {
             }
         }
     }
-
 
     /* Metode som tar inn en liste med 'char'-elementer og roterer alle elementene 1 plass mot høyre
     * eks. char[] a = {'A', 'B', 'C', 'D'}

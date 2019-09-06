@@ -54,30 +54,78 @@ public class Oblig1 {
         return 0;
     }
 
-    public static int antallUlikeUsortert( int [] values ) {
+    /**Itererer gjennom en tabell, og finner ut av hvor mange unike tall det er i den*/
+
+    public static int antallUlikeUsortert(int [] values ) {
 
         int antallUlike = 0;
 
-        //Går gjennom alle verdiene i arrayet values
-        for (int i = 0; i < values.length; i++) {
+        for (int i = 0; i < values.length; i++) {                          //Går gjennom alle verdiene i arrayet values
 
             int j;
-            //Om i og j ikke har samme index (j < i) hopper den inn i if-setningen
-            for (j = 0; j < i; j++) {
-                //Om verdiene på index i og j har samme verdi går den ut av for-løkken
-                if (values[i] == values[j]) {
+            for (j = 0; j < i; j++) {            //Om i og j ikke har samme index (j < i) hopper den inn i if-setningen
+                if (values[i] == values[j]) {    //Om verdiene på index i og j har samme verdi går den ut av for-løkken
                     break;
                 }
             }
-            //Om indexen til i og j er like øker antallet ulike tall
-            if (i == j) {
+            if (i == j) {                        //Om indexen til i og j er like øker antallet ulike tall
                 antallUlike++;
             }
         }
         return antallUlike;
     }
 
-    public static void delsortering(int [] values) { }
+    public static void delsortering(int [] values) {
+        for(int i = 0; i < values.length; i++) {
+            for(int j = 1; j < values.length; j++){
+                if(i == 0 && values[i]%2 !=0) {
+
+                } else if(i == 0 && values[i]%2 == 0){
+                    int temp = values[i];
+                    values[i] = values[j];
+                    values[j] = temp;
+                } else if(values[i]%2 != 0) {
+                    int temp = values[i];
+                    values[i] = values[j];
+                    values[j] = temp;
+                }
+            }
+        }
+        int skille = finnSkille(values);
+
+        sorterToDeler(values, skille);
+
+    }
+
+    public static int finnSkille(int[] values) {
+        for(int i = 0; i < values.length; i++) {
+            if(values[i]%2 == 0) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    public static void sorterToDeler(int[] values, int skille) {
+        for(int i = 0; i < skille; i++) {
+            for(int j = 1; j < skille; j++) {
+                if(values[i] > values[j] && i < j) {
+                    int temp = values[i];
+                    values[i] = values[j];
+                    values[j] = temp;
+                }
+            }
+        }
+        for(int i = skille; i < values.length; i++) {
+            for(int j = skille+1; j < values.length; j++) {
+                if(values[i] > values[j] && i < j) {
+                    int temp = values[i];
+                    values[i] = values[j];
+                    values[j] = temp;
+                }
+            }
+        }
+    }
 
 
     /* Metode som tar inn en liste med 'char'-elementer og roterer alle elementene 1 plass mot høyre

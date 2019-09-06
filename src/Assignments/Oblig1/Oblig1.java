@@ -1,5 +1,6 @@
 package Assignments.Oblig1;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
@@ -202,21 +203,35 @@ public class Oblig1 {
     }
 
     public static boolean inneholdt(String s1, String s2) {
-        String str1 = s1.toUpperCase();
-        String str2 = s2.toUpperCase();
-        String [] strArray1 = str1.split("\\s");
-        String [] strArray2 = str2.split("\\s");
-        //test
-        //TODO: Ikke ferdig
+        if(s1.equals(s2)) { return true; }              // Returnerer true hvis s1 og s2 er like
+        if(s1.equals("")) { return true; }              // Returnerer true hvis s1 er en tom streng
+        if(s2.equals("")) { return false; }             // Returnerer false hvis s2 er en tom streng
+        if(s2.length() < s1.length()) { return false; } // Returnerer false hvis s2 er korterer enn s1
 
-        for(int i = 0; i < strArray1.length; i++ ) {
+        // Sorterer strengene i leksikografisk rekkefølge
+        char[] sortedArray1 = s1.toCharArray();
+        char[] sortedArray2 = s2.toCharArray();
+        Arrays.sort(sortedArray1);
+        Arrays.sort(sortedArray2);
+        s1 = new String(sortedArray1);
+        s2 = new String(sortedArray2);
 
+        /* Går gjennom hver bokstav i s2
+        * Hvis en av bokstavene er lik en bokstav i s1 øker 'lik' variabelen med 1  */
+        int lik = 0;
+        for(int i = 0; i < s2.length(); i++){
+
+            // Hindrer s1.charAt(lik) å være outOfBounds når 'lik' == s1.length()
+            if(lik < s1.length()) {
+                if (s2.charAt(i) == s1.charAt(lik)) {
+                    lik++;
+                }
+            }
         }
-        if(s2.length() > s1.length()) {
-            //TODO:Lage exception
-        }
-        return false;
+
+        if(lik == s1.length()) { return true; }        // Returnerer true hvis lik == s1.length()
+        else { return false; }
+
     }
-
 
 }

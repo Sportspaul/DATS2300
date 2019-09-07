@@ -192,12 +192,13 @@ public class Oblig1 {
     public static int [] indekssortering(int [] verdier) {
         return null;
     }
-        //TODO: Fikse copy-paste, spesielt kommentarer
 
+
+   //TODO: Ikke testet
     public static int [] tredjeMin(int [] verdier) {
         int n = verdier.length;     // tabellens lengde
         if (n < 3) throw      // må ha minst tre verdier
-                new NoSuchElementException("verdier.length(" + n + ") < 2!");
+                new NoSuchElementException("verdier.length(" + n + ") < 3!");
 
         int m1 = 0;      // m_1 er posisjonen til minste verdi
         int m2 = 1;      // m_2 er posisjonen til nest minste verdi
@@ -207,26 +208,41 @@ public class Oblig1 {
             m1 = 1;
             m2 = 0;
         }
+        // bytter om m_1 og m_3 hvis a[2] er mindre enn a[0]
+        if (verdier[2] < verdier[0]) {
+            m1 = 2;
+            m3 = 0;
+        }
+        // bytter om m_2 og m_3 hvis a[2] er mindre enn a[1]
+        if(verdier[2] < verdier[1]) {
+            m2 = 2;
+            m3 = 1;
+        }
 
         int minverdi = verdier[m1];                // minste verdi
         int nestminverdi = verdier[m2];      // nest minste verdi
         int tredjeminverdi = verdier[m3];    // tredje minste verdi
 
-        for (int i = 2; i < n; i++) {
-            if (verdier[i] > nestminverdi) {
-                if (verdier[i] > minverdi) {
-                    m2 = m1;
-                    nestminverdi = minverdi;     // ny nest størst
+        for (int i = 3; i < n; i++) {
+            if (verdier[i] < tredjeminverdi) {
+                if (verdier[i] < nestminverdi) {
+                    if(verdier[i] < minverdi) {
+                        m3 = m1;
+                        tredjeminverdi = minverdi;     // ny nest minste
 
-                    m1 = i;
-                    minverdi = verdier[m1];              // ny størst
+                        m1 = i;
+                        minverdi = verdier[m1];              // ny minste
+                    } else {
+                        m2 = i;
+                        nestminverdi = verdier[m2];
+                    }
                 } else {
-                    m2 = i;
-                    nestminverdi = verdier[m2];         // ny nest størst
+                    m3 = i;
+                   tredjeminverdi = verdier[m3];         // ny tredje minste
                 }
             }
         }
-        return null;  //TODO: Treminste verdier-array
+        return new int[] {m1,m2,m3};
     }
 
     public static boolean inneholdt(String s1, String s2) {

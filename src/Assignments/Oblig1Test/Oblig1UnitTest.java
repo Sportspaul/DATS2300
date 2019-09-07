@@ -108,15 +108,6 @@ class Oblig1UnitTest {
     }
 
     @Test
-    void bokstavNr() {
-        assertEquals(true, false, "Implementer bokstavNr og denne testen");
-    }
-
-    @Test
     void inneholdt() {
-        String s1 = "";
-        String s2 = "AD";
-
-        assertEquals(true, Oblig1.inneholdt(s1, s2), "Implementer inneholdt og denne testen");
     }
 }

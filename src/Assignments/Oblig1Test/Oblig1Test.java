@@ -79,7 +79,7 @@ public class Oblig1Test {
             System.out.println("Oppgave 1: e) Feil opptelling i ombyttingsmetoden!");
             antallFeil++;
         }
-        assertEquals(0, antallFeil, "Du har for mange feil i oppgave 1");
+         assertEquals(0, antallFeil, "Du har for mange feil i oppgave 1");
     }
 
     ///// Oppgave 2 /////////////////////////////////////

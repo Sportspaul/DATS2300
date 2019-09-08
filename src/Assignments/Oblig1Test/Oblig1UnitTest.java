@@ -94,7 +94,92 @@ class Oblig1UnitTest {
 
     @Test
     void flett() {
-        assertEquals(true, false, "Implementer flett og denne testen");
+        int feil = 0;
+
+        // Test nr. 1
+        String a = "ABC";
+        String b = "ABC";
+        String expected = "AABBCC";
+        String c = Oblig1.flett(a,b);
+        if(!c.equals(expected)){
+            System.out.println("Test 1 feilet");
+            feil++;
+        }
+
+        // Test nr. 2
+        a = "";
+        b = "ABC";
+        expected = "ABC";
+        c = Oblig1.flett(a,b);
+        if(!c.equals(expected)){
+            System.out.println("Test 2 feilet, expected: " + expected + ", actual: " + c);
+            feil++;
+        }
+
+        // Test nr. 3
+        a = "ABC";
+        b = "";
+        expected = "ABC";
+        c = Oblig1.flett(a,b);
+        if(!c.equals(expected)){
+            System.out.println("Test 3 feilet, expected: " + expected + ", actual: " + c);
+            feil++;
+        }
+
+        // Test nr. 4
+        a = "";
+        b = "";
+        expected = "";
+        c = Oblig1.flett(a,b);
+        if(!c.equals(expected)){
+            System.out.println("Test 4 feilet, expected: " + expected + ", actual: " + c);
+            feil++;
+        }
+
+        // Test nr. 5
+        a = "AAAA";
+        b = "BB";
+        expected = "ABABAA";
+        c = Oblig1.flett(a,b);
+        if(!c.equals(expected)){
+            System.out.println("Test 5 feilet, expected: " + expected + ", actual: " + c);
+            feil++;
+        }
+
+        // Test nr. 6
+        a = "A";
+        b = "BCDEF";
+        expected = "ABCDEF";
+        c = Oblig1.flett(a,b);
+        if(!c.equals(expected)){
+            System.out.println("Test 6 feilet, expected: " + expected + ", actual: " + c);
+            feil++;
+        }
+
+        // Test nr. 7
+        a = "ACDEF";
+        b = "B";
+        expected = "ABCDEF";
+        c = Oblig1.flett(a,b);
+        if(!c.equals(expected)){
+            System.out.println("Test 7 feilet, expected: " + expected + ", actual: " + c);
+            feil++;
+        }
+
+        // Test nr. 7
+        a = "ACDEFACDEFACDEFACDEF";
+        b = "ACDEFACDEFACDEFACDEF";
+        expected = "AACCDDEEFFAACCDDEEFFAACCDDEEFFAACCDDEEFF";
+        c = Oblig1.flett(a,b);
+        if(!c.equals(expected)){
+            System.out.println("Test 7 feilet, expected: " + expected + ", actual: " + c);
+            feil++;
+        }
+
+
+
+
+        assertEquals(0, feil, "Implementer flett og denne testen");
     }
 
     @Test
@@ -114,9 +199,49 @@ class Oblig1UnitTest {
 
     @Test
     void inneholdt() {
-        String s1 = "";
-        String s2 = "AD";
+        int feil = 0;
 
-        assertEquals(true, Oblig1.inneholdt(s1, s2), "Implementer inneholdt og denne testen");
+        // Test1
+        String a = "ABBA";
+        String b = "ABBA";
+        if (Oblig1.inneholdt(a, b) == false) {
+            System.out.println("Test 1 feilet, feil når s1 og s2 er like");
+            feil++;
+        }
+
+        // Test2
+        String c = "ABBA";
+        String d = "ABCABC";
+        if(Oblig1.inneholdt(c, d) == false){
+            System.out.println("Test 2 feilet, feil når s1 = '" + c + "' og s2 = '" + d + "'");
+            feil++;
+        }
+
+        // Test3 - metoden skal returnere false hvis s1 er lenger enn s2
+        String e = "BBBBBB";
+        String f = "BBB";
+        if(Oblig1.inneholdt(e, f) == true){
+            System.out.println("Test 3 feilet, feil når s1 = '" + e + "' og s2 = '" + f + "'");
+            feil++;
+        }
+
+        // Test4
+        String g = "AABB";
+        String h = "ABDF";
+        if(Oblig1.inneholdt(g, h) == true){
+            System.out.println("Test 4 feilet, feil når s1 = '" + c + "' og s2 = '" + d + "'");
+            feil++;
+        }
+
+        // Test4
+        String i = "";
+        String j = "";
+        if(Oblig1.inneholdt(g, h) == true){
+            System.out.println("Test 5 feilet, feil når s1 = '" + c + "' og s2 = '" + d + "'");
+            feil++;
+        }
+
+
+        assertEquals(0, feil, "Metoden har " + feil + " feil som må fikses");
     }
 }

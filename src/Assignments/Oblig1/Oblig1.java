@@ -11,37 +11,37 @@ public class Oblig1 {
     Felix Leypoldt s333743
     Herman Rustad s333769
     Paul Høglend s333733
-     */
+    */
 
 
 
-    public static int maks(int [] values ) {
-        if(values.length <= 0){
+    public static int maks(int [] verdier ) {
+        if(verdier.length <= 0){
             throw new NoSuchElementException("Tabellen er tom");
         }
-        for(int i = 0; i < values.length - 1; i++){
-            for(int j = i + 1; j < values.length; j++){
-                int bytt = values[i];
-                if(values[i] > values[j]){
-                    values[i] = values[j];
-                    values[j] = bytt;
+        for(int i = 0; i < verdier.length - 1; i++){
+            for(int j = i + 1; j < verdier.length; j++){
+                int bytt = verdier[i];
+                if(verdier[i] > verdier[j]){
+                    verdier[i] = verdier[j];
+                    verdier[j] = bytt;
                 }
             }
         }
-       return values[values.length -1];
+       return verdier[verdier.length -1];
     }
 
-    public static int ombyttinger(int [] values ) {
-        if(values.length <= 0){
+    public static int ombyttinger(int [] verdier ) {
+        if(verdier.length <= 0){
             throw new NoSuchElementException("Tabellen er tom");
         }
         int antall = 0;
-        for(int i = 0; i < values.length - 1; i++){
-            for(int j = i + 1; j < values.length; j++){
-                int bytt = values[i];
-                if(values[i] > values[j]){
-                    values[i] = values[j];
-                    values[j] = bytt;
+        for(int i = 0; i < verdier.length - 1; i++){
+            for(int j = i + 1; j < verdier.length; j++){
+                int bytt = verdier[i];
+                if(verdier[i] > verdier[j]){
+                    verdier[i] = verdier[j];
+                    verdier[j] = bytt;
                     antall++;
                 }
             }
@@ -50,129 +50,133 @@ public class Oblig1 {
     }
 
     //TODO: implementer metodene
-    public static int antallUlikeSortert( int [] values ) {
+    public static int antallUlikeSortert( int [] verdier ) {
         return 0;
     }
 
     /**Itererer gjennom en tabell, og finner ut av hvor mange unike tall det er i den*/
 
-    public static int antallUlikeUsortert(int [] values ) {
+    public static int antallUlikeUsortert(int [] verdier ) {
 
         int antallUlike = 0;
 
-        for (int i = 0; i < values.length; i++) {                          //Går gjennom alle verdiene i arrayet values
+        for (int i = 0; i < verdier.length; i++) {                 //Går gjennom alle verdiene i arrayet verdier
 
             int j;
-            for (j = 0; j < i; j++) {            //Om i og j ikke har samme index (j < i) hopper den inn i if-setningen
-                if (values[i] == values[j]) {    //Om verdiene på index i og j har samme verdi går den ut av for-løkken
+            for (j = 0; j < i; j++) {            //Om i og j ikke har samme indeks (j < i) hopper den inn i if-setningen
+                if (verdier[i] == verdier[j]) {    //Om verdiene på indeks i og j har samme verdi 
+                                                   // går den ut av for-løkken
                     break;
                 }
             }
-            if (i == j) {                        //Om indexen til i og j er like øker antallet ulike tall
+            if (i == j) {                        //Om indeksen til i og j er like øker antallet ulike tall
                 antallUlike++;
             }
         }
         return antallUlike;
     }
 
-    public static void delsortering(int [] values) {
-        for(int i = 0; i < values.length; i++) {
-            for(int j = 1; j < values.length; j++){
-                if(i == 0 && values[i]%2 !=0) {
+    /**Metode som sorterer et array med oddetall på vesten halvdel og partall på høyre, i stigende rekkefølge*/
 
-                } else if(i == 0 && values[i]%2 == 0){
-                    int temp = values[i];
-                    values[i] = values[j];
-                    values[j] = temp;
-                } else if(values[i]%2 != 0) {
-                    int temp = values[i];
-                    values[i] = values[j];
-                    values[j] = temp;
-                }
-            }
+    public static void delsortering(int[] verdier) {
+        int fra = 0;                                   // Setter fra som indeks-plassen til første plass i verdier
+        int til = verdier.length - 1;                  // Setter til som indeks-plassen til siste plass i verdier
+
+        while (true) {                                          // While løkken stopper når fra > til
+            while (fra <= til && verdier[fra] % 2 != 0) fra++;   // fra er vaktpost/stoppeverdi for til
+            while (fra <= til && verdier[til] % 2 == 0) til--;   // til er vaktpost/stoppeverdi for fra
+
+        if(fra < til) {
+            bytt(verdier, fra++, til--);                         //bytter om a[fra] og a[til] sine posisjoner
         }
-        int skille = finnSkille(values);
+            else break;                                         //hopper ut av while-løkken
+        }
+        int skille = finnSkille(verdier);
 
-        sorterToDeler(values, skille);
-
+        sorterToDeler(verdier, skille);
     }
 
-    public static int finnSkille(int[] values) {
-        for(int i = 0; i < values.length; i++) {
-            if(values[i]%2 == 0) {
+    public static void bytt(int[] verdier, int i, int j) {
+        int temp = verdier[i]; 
+        verdier[i] = verdier[j]; 
+        verdier[j] = temp;    //Bytter posisjonen til verdier[i] og verdier[j] med hverandre
+    }
+
+    public static int finnSkille(int[] verdier) {
+        for(int i = 0; i < verdier.length; i++) {
+            if(verdier[i]%2 == 0) {
                 return i;
             }
         }
         return 0;
     }
 
-    public static void sorterToDeler(int[] values, int skille) {
+    public static void sorterToDeler(int[] verdier, int skille) {
         for(int i = 0; i < skille; i++) {
             for(int j = 1; j < skille; j++) {
-                if(values[i] > values[j] && i < j) {
-                    int temp = values[i];
-                    values[i] = values[j];
-                    values[j] = temp;
+                if(verdier[i] > verdier[j] && i < j) {
+                    int temp = verdier[i];
+                    verdier[i] = verdier[j];
+                    verdier[j] = temp;
                 }
             }
         }
-        for(int i = skille; i < values.length; i++) {
-            for(int j = skille+1; j < values.length; j++) {
-                if(values[i] > values[j] && i < j) {
-                    int temp = values[i];
-                    values[i] = values[j];
-                    values[j] = temp;
+        for(int i = skille; i < verdier.length; i++) {
+            for(int j = skille+1; j < verdier.length; j++) {
+                if(verdier[i] > verdier[j] && i < j) {
+                    int temp = verdier[i];
+                    verdier[i] = verdier[j];
+                    verdier[j] = temp;
                 }
             }
         }
     }
-
 
     /* Metode som tar inn en liste med 'char'-elementer og roterer alle elementene 1 plass mot høyre
     * eks. char[] a = {'A', 'B', 'C', 'D'}
     * rotasjon(a)
     * a == {'D', 'A', 'B', 'C'} */
 
-    public static void rotasjon(char[] a) {
+    public static void rotasjon(char[] verdier) {
 
         // Tester om listen har mer enn 1 element
-        if(a.length > 1) {
-            int siste_idx = a.length - 1;
-            char temp = a[siste_idx];                       // Tar vare på verdien til siste element
+        if(verdier.length > 1) {
+            int siste_idx = verdier.length - 1;
+            char temp = verdier[siste_idx];                       // Tar vare på verdien til siste element
 
             for (int i = siste_idx - 1; i >= 0; i--) {      // Looper gjennom listen fra høyre til venstre
-                a[i + 1] = a[i];                            // Flytter elementene en plass til høyre
+                verdier[i + 1] = verdier[i];                            // Flytter elementene en plass til høyre
             }
 
-            a[0] = temp;                                    // Setter første element i listen lik a[siste_idx]
+            verdier[0] = temp;                                    // Setter første element i listen lik verdier[siste_idx]
         }
     }
 
-    public static void rotasjon(char [] values, int k) {
-        int n = values.length;
+    public static void rotasjon(char [] verdier, int k) {
+        int n = verdier.length;
         char[] temp = new char[n];
 
-        if(n == 2) { rotasjon(values); }    // Roterer 1 plass hvis n == 2
+        if(n == 2) { rotasjon(verdier); }    // Roterer 1 plass hvis n == 2
 
         if(n > 0 && n != 2) {
-            System.arraycopy(values, 0, temp, 0, n);        // Lager en kopi av 'values'-listen
+            System.arraycopy(verdier, 0, temp, 0, n);        // Lager en kopi av 'values'-listen
             int kAbs = Math.abs(k);                   // Finner absoluttverdien til k (eks. -5 => 5, 5 => 5)
 
-            if (kAbs > n && k > 0) { rotasjon(values, temp, n, k % n); }
-            else if (kAbs < n && k > 0) { rotasjon(values, temp, n, k); }
-            else if (kAbs > n && k < 0) { rotasjon(values, temp, n, k % n); }
-            else if (kAbs < n && k < 0) { rotasjon(values, temp, n, k + n); }
+            if (kAbs > n && k > 0) { rotasjon(verdier, temp, n, k % n); }
+            else if (kAbs < n && k > 0) { rotasjon(verdier, temp, n, k); }
+            else if (kAbs > n && k < 0) { rotasjon(verdier, temp, n, k % n); }
+            else if (kAbs < n && k < 0) { rotasjon(verdier, temp, n, k + n); }
         }
     }
 
     // Helpeklasse for metoden over
-    public static void rotasjon(char[] values, char[] temp, int n, int k) {
+    public static void rotasjon(char[] verdier, char[] temp, int n, int k) {
         int teller = 0;
         for (int i = 0; i < n; i++) {
             if (i + k < n) {
-                values[i + k] = temp[i];
+                verdier[i + k] = temp[i];
             } else if (i + k > n - 1) {
-                values[teller] = temp[i];
+                verdier[teller] = temp[i];
                 teller++;
             }
         }
@@ -185,44 +189,60 @@ public class Oblig1 {
 
     public static String flett(String... s) {return "";}
 
-    public static int [] indekssortering(int [] values) {
+    public static int [] indekssortering(int [] verdier) {
         return null;
     }
-        //TODO: Fikse copy-paste, spesielt kommentarer
 
-    public static int [] tredjeMin(int [] values) {
-        int n = values.length;     // tabellens lengde
+
+   //TODO: Ikke testet
+    public static int [] tredjeMin(int [] verdier) {
+        int n = verdier.length;     // tabellens lengde
         if (n < 3) throw      // må ha minst tre verdier
-                new NoSuchElementException("values.length(" + n + ") < 2!");
+                new NoSuchElementException("verdier.length(" + n + ") < 3!");
 
-        int m1 = 0;      // m er posisjonen til største verdi
-        int m2 = 1;     // nm er posisjonen til nest største verdi
-        int m3 = 2;
-        // bytter om m og nm hvis a[1] er større enn a[0]
-        if (values[1] < values[0]) {
+        int m1 = 0;      // m_1 er posisjonen til minste verdi
+        int m2 = 1;      // m_2 er posisjonen til nest minste verdi
+        int m3 = 2;      // m_3 er posisjonen til tredje minste verdi
+        // bytter om m_1 og m_2 hvis a[1] er mindre enn a[0]
+        if (verdier[1] < verdier[0]) {
             m1 = 1;
             m2 = 0;
         }
+        // bytter om m_1 og m_3 hvis a[2] er mindre enn a[0]
+        if (verdier[2] < verdier[0]) {
+            m1 = 2;
+            m3 = 0;
+        }
+        // bytter om m_2 og m_3 hvis a[2] er mindre enn a[1]
+        if(verdier[2] < verdier[1]) {
+            m2 = 2;
+            m3 = 1;
+        }
 
-        int minverdi = values[m1];                // største verdi
-        int nestminverdi = values[m2];      // nest største verdi
-        int tredjeminverdi = values[m3];
+        int minverdi = verdier[m1];                // minste verdi
+        int nestminverdi = verdier[m2];      // nest minste verdi
+        int tredjeminverdi = verdier[m3];    // tredje minste verdi
 
-        for (int i = 2; i < n; i++) {
-            if (values[i] > nestminverdi) {
-                if (values[i] > minverdi) {
-                    m2 = m1;
-                    nestminverdi = minverdi;     // ny nest størst
+        for (int i = 3; i < n; i++) {
+            if (verdier[i] < tredjeminverdi) {
+                if (verdier[i] < nestminverdi) {
+                    if(verdier[i] < minverdi) {
+                        m3 = m1;
+                        tredjeminverdi = minverdi;     // ny nest minste
 
-                    m1 = i;
-                    minverdi = values[m1];              // ny størst
+                        m1 = i;
+                        minverdi = verdier[m1];              // ny minste
+                    } else {
+                        m2 = i;
+                        nestminverdi = verdier[m2];
+                    }
                 } else {
-                    m2 = i;
-                    nestminverdi = values[m2];         // ny nest størst
+                    m3 = i;
+                   tredjeminverdi = verdier[m3];         // ny tredje minste
                 }
             }
         }
-        return null;  //TODO: Treminste verdier-array
+        return new int[] {m1,m2,m3};
     }
 
     public static boolean inneholdt(String s1, String s2) {

@@ -193,11 +193,6 @@ class Oblig1UnitTest {
     }
 
     @Test
-    void bokstavNr() {
-        assertEquals(true, false, "Implementer bokstavNr og denne testen");
-    }
-
-    @Test
     void inneholdt() {
         int feil = 0;
 

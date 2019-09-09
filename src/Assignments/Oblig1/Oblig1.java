@@ -197,6 +197,7 @@ public class Oblig1 {
 
 
    //TODO: Ikke testet
+   ///// Oppgave 9 //////////////////////////////////////
     public static int [] tredjeMin(int [] verdier) {
         int n = verdier.length;     // tabellens lengde
         if (n < 3) throw      // må ha minst tre verdier
@@ -247,6 +248,7 @@ public class Oblig1 {
         return new int[] {m1,m2,m3};
     }
 
+    ///// Oppgave 10 //////////////////////////////////////
     public static boolean inneholdt(String s1, String s2) {
         if(s1.equals(s2)) { return true; }              // Returnerer true hvis s1 og s2 er like
         if(s1.equals("")) { return true; }              // Returnerer true hvis s1 er en tom streng

@@ -26,8 +26,29 @@ class Oblig1UnitTest {
 
     @Test
     void ombyttinger() {
+        int[] a = {6, 5, 4, 3, 2, 1};
+        int[] b = {1, 2, 3, 4, 5};
+        int[] c = {4, 9, 3, 6, 1, 5, 7, 8, 10, 2};
+        int[] d = {2, 5, 8, 4, 3, 10, 1, 7, 6, 9};
 
-        int n = 100; int i =1;
+        if (Oblig1.ombyttinger(a) != 5) {
+            System.out.println("Oppgave 1: " + Oblig1.ombyttinger(a));
+        }
+        if (Oblig1.ombyttinger(b) != 0) {
+            System.out.println("Oppgave 2: " + Oblig1.ombyttinger(b));
+        }
+        if (Oblig1.ombyttinger(c) != 7) {
+            System.out.println("Oppgave 3: " +Oblig1.ombyttinger(c));
+        }
+        if (Oblig1.ombyttinger(d) != 6) {
+            System.out.println("Oppgave 4: " + Oblig1.ombyttinger(d));
+        }
+
+
+
+
+
+      /*  int n = 100; int i =1;
         int sum = 0;
 
         while(i < n){
@@ -40,7 +61,7 @@ class Oblig1UnitTest {
             i++;
         }
         double snitt = sum/n;
-        System.out.println("Gjennomsnittlig antall ombyttinger er: " + snitt);
+        System.out.println("Gjennomsnittlig antall ombyttinger er: " + snitt); */
     }
 
     @Test

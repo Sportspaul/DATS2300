@@ -19,16 +19,15 @@ public class Oblig1 {
         if(verdier.length <= 0){
             throw new NoSuchElementException("Tabellen er tom");
         }
-        for(int i = 0; i < verdier.length - 1; i++){
-            for(int j = i + 1; j < verdier.length; j++){
-                int bytt = verdier[i];
-                if(verdier[i] > verdier[j]){
-                    verdier[i] = verdier[j];
-                    verdier[j] = bytt;
-                }
+        for(int i = 0; i < verdier.length-1; i++){
+                if(verdier[i] > verdier[i+1]){
+                    int bytt = verdier[i];
+                    verdier[i] = verdier[i+1];
+                    verdier[i+1] = bytt;
+
             }
         }
-       return verdier[verdier.length -1];
+       return verdier[verdier.length-1];
     }
 
     public static int ombyttinger(int [] verdier ) {
@@ -36,14 +35,13 @@ public class Oblig1 {
             throw new NoSuchElementException("Tabellen er tom");
         }
         int antall = 0;
-        for(int i = 0; i < verdier.length - 1; i++){
-            for(int j = i + 1; j < verdier.length; j++){
+        for(int i = 0; i < verdier.length-1; i++){
+            if(verdier[i] > verdier[i+1]){
                 int bytt = verdier[i];
-                if(verdier[i] > verdier[j]){
-                    verdier[i] = verdier[j];
-                    verdier[j] = bytt;
-                    antall++;
-                }
+                verdier[i] = verdier[i+1];
+                verdier[i+1] = bytt;
+                antall++;
+
             }
         }
         return antall;

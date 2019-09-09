@@ -132,11 +132,12 @@ public class Oblig1 {
         }
     }
 
+
+    ///// Oppgave 6 //////////////////////////////////////
     /* Metode som tar inn en liste med 'char'-elementer og roterer alle elementene 1 plass mot høyre
     * eks. char[] a = {'A', 'B', 'C', 'D'}
     * rotasjon(a)
     * a == {'D', 'A', 'B', 'C'} */
-
     public static void rotasjon(char[] verdier) {
 
         // Tester om listen har mer enn 1 element
@@ -152,6 +153,7 @@ public class Oblig1 {
         }
     }
 
+    ///// Oppgave 7 //////////////////////////////////////
     public static void rotasjon(char [] verdier, int k) {
         int n = verdier.length;
         char[] temp = new char[n];

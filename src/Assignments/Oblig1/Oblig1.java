@@ -77,7 +77,6 @@ public class Oblig1 {
     }
 
     /**Metode som sorterer et array med oddetall på vesten halvdel og partall på høyre, i stigende rekkefølge*/
-
     public static void delsortering(int[] verdier) {
         int fra = 0;                                   // Setter fra som indeks-plassen til første plass i verdier
         int til = verdier.length - 1;                  // Setter til som indeks-plassen til siste plass i verdier
@@ -153,32 +152,56 @@ public class Oblig1 {
         }
     }
 
-
+    ///// Oppgave 7 //////////////////////////////////////
     public static void rotasjon(char [] verdier, int k) {
         int n = verdier.length;
-        char[] temp = new char[n];
 
-        if(n == 2) { rotasjon(verdier); }    // Roterer 1 plass hvis n == 2
+        // Roterer 1 plass for lengde lik 2 og 'antall flytt' % 'lengde' == 1
+        if(n == 2 && k%n == 1) { rotasjon(verdier); }
+        char[] temp = new char[n];                         // hjelpeliste
 
         if(n > 0 && n != 2) {
-            System.arraycopy(verdier, 0, temp, 0, n);        // Lager en kopi av 'values'-listen
-            int kAbs = Math.abs(k);                   // Finner absoluttverdien til k (eks. -5 => 5, 5 => 5)
 
-            if (kAbs > n && k > 0) { rotasjon(verdier, temp, n, k % n); }
-            else if (kAbs < n && k > 0) { rotasjon(verdier, temp, n, k); }
-            else if (kAbs > n && k < 0) { rotasjon(verdier, temp, n, k % n); }
-            else if (kAbs < n && k < 0) { rotasjon(verdier, temp, n, k + n); }
+            // hjelpearrayet får samme verdier som 'verdier'-listen
+            System.arraycopy(verdier, 0, temp, 0, n);
+            int kAbs = Math.abs(k);                          // Finner absoluttverdien til k (eks. -5 => 5, 5 => 5)
+            int flytt;
+
+            if (kAbs > n && k > 0) {
+
+                // Antall flytt til høyre blir lik: 'antall flytt' % 'lengde'
+                flytt = k%n;
+                rotasjon(verdier, temp, n, flytt);
+            }
+            else if (kAbs < n && k > 0) {
+
+                // Antall flytt til høyre blir lik: 'antall flytt'
+                flytt = k;
+                rotasjon(verdier, temp, n, flytt);
+            }
+            else if (kAbs > n && k < 0) {
+
+                // Antall flytt til høyre blir lik: 'antall flytt' % 'lengde' + 'lengde'
+                flytt = k % n + n;
+                rotasjon(verdier, temp, n, flytt);
+            }
+            else if (kAbs < n && k < 0) {
+
+                // Antall flytt til høyre blir lik: 'antall flytt' + 'lengde'
+                // eks. k: -3, n: 5, -3 + 5 = 2
+                flytt = k + n;
+                rotasjon(verdier, temp, n, flytt);
+            }
         }
     }
 
-
-    // Helpeklasse for metoden over
-    public static void rotasjon(char[] verdier, char[] temp, int n, int k) {
+    // Helpemetode for metoden over
+    public static void rotasjon(char[] verdier, char[] temp, int n, int flytt) {
         int teller = 0;
         for (int i = 0; i < n; i++) {
-            if (i + k < n) {
-                verdier[i + k] = temp[i];
-            } else if (i + k > n - 1) {
+            if (i + flytt < n) {
+                verdier[i + flytt] = temp[i];
+            } else if (i + flytt > n - 1) {
                 verdier[teller] = temp[i];
                 teller++;
             }

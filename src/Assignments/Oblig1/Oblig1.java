@@ -153,7 +153,7 @@ public class Oblig1 {
         }
     }
 
-    ///// Oppgave 7 //////////////////////////////////////
+
     public static void rotasjon(char [] verdier, int k) {
         int n = verdier.length;
         char[] temp = new char[n];
@@ -171,6 +171,7 @@ public class Oblig1 {
         }
     }
 
+
     // Helpeklasse for metoden over
     public static void rotasjon(char[] verdier, char[] temp, int n, int k) {
         int teller = 0;
@@ -185,11 +186,67 @@ public class Oblig1 {
     }
 
 
+
+
+
+    ///// Oppgave 7 //////////////////////////////////////
+    //a)
     public static String flett(String s1, String s2) {
-        return "";
+        //creating string to append values to from both strings
+        String out= "";
+
+        for (int i =0; i<s1.length() + s2.length(); i++){
+            //checks that there is a char at index i in s1
+            if (i<s1.length()){
+                out += s1.charAt(i);
+            }
+            //checks that there is a char at index i in s2
+            if (i<s2.length()){
+                out += s2.charAt(i);
+            }
+        }
+        return out;
     }
 
-    public static String flett(String... s) {return "";}
+
+    //b)
+    public static String flett(String... s) {
+        //out is the String that will be appended to to create the merged string
+        String out = "";
+        //totalLength is the total length of all the strings we add
+        int totalLength =0;
+
+        //for loop that goes through all the String paramater and finds total length
+        for (int i=0; i<s.length;i++){
+            totalLength +=s[i].length();
+        }
+
+
+
+        for (int i=0;i<totalLength;i++){
+
+            //goes through the paramatar strings and adds the char to "out"
+            for (int j=0; j<s.length;j++){
+
+                //checks if the String has a char at that index
+                if (i<s[j].length()){
+                    //if everything is ok we add the char from String at j at index i
+                    out+=s[j].charAt(i);
+                }
+            }
+        }
+        return out;
+    }
+
+
+
+
+
+
+
+
+    ///// Oppgave 8 //////////////////////////////////////
+    //a)
 
     public static int [] indekssortering(int [] verdier) {
         return null;

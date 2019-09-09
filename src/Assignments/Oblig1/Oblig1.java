@@ -14,7 +14,7 @@ public class Oblig1 {
     */
 
 
-
+    ///// Oppgave 1 //////////////////////////////////////
     public static int maks(int [] verdier ) {
         if(verdier.length <= 0){
             throw new NoSuchElementException("Tabellen er tom");

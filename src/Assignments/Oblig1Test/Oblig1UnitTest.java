@@ -210,13 +210,11 @@ class Oblig1UnitTest {
 
     @Test
     void tredjeMin() {
-        int [] tabell = {1,2,3};
-        int [] res = {0,1,2};
-        assertArrayEquals(res, Oblig1.tredjeMin(tabell), "Indeksene er ikke sortert i stigende rekkefølge");
-        System.out.println("Testen passerte");
-        int [] tabell1 ={1,3,5,6,2,4};
-        int [] res1 = {0,4,1};
+        int [] tabell1 ={10,7,5,6,2,4,1,3};
+        int [] res1 = {6,4,7};
+        Oblig1.tredjeMin(tabell1);
         assertArrayEquals(res1, Oblig1.tredjeMin(tabell1),"Indeksene er ikke sortert i stigende rekkefølge");
+
     }
 
     @Test

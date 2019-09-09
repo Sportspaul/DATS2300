@@ -308,18 +308,21 @@ public class Oblig1 {
             if (verdier[i] < tredjeminverdi) {
                 if (verdier[i] < nestminverdi) {
                     if(verdier[i] < minverdi) {
-                        m3 = m1;
-                        tredjeminverdi = minverdi;     // ny nest minste
-
+                        m3 = m2;
+                        tredjeminverdi = verdier[m3];
+                        m2 = m1;
+                        nestminverdi = verdier[m2];
                         m1 = i;
-                        minverdi = verdier[m1];              // ny minste
+                        minverdi = verdier[m1];
                     } else {
+                        m3 = m2;
+                        tredjeminverdi = verdier[m3];
                         m2 = i;
                         nestminverdi = verdier[m2];
                     }
                 } else {
                     m3 = i;
-                   tredjeminverdi = verdier[m3];         // ny tredje minste
+                    tredjeminverdi = verdier[m3];    // ny tredje minste
                 }
             }
         }

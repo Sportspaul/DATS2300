@@ -284,21 +284,8 @@ public class Oblig1 {
         int m1 = 0;      // m_1 er posisjonen til minste verdi
         int m2 = 1;      // m_2 er posisjonen til nest minste verdi
         int m3 = 2;      // m_3 er posisjonen til tredje minste verdi
-        // bytter om m_1 og m_2 hvis a[1] er mindre enn a[0]
-        if (verdier[1] < verdier[0]) {
-            m1 = 1;
-            m2 = 0;
-        }
-        // bytter om m_1 og m_3 hvis a[2] er mindre enn a[0]
-        if (verdier[2] < verdier[0]) {
-            m1 = 2;
-            m3 = 0;
-        }
-        // bytter om m_2 og m_3 hvis a[2] er mindre enn a[1]
-        if(verdier[2] < verdier[1]) {
-            m2 = 2;
-            m3 = 1;
-        }
+
+        //TODO: Bruke indekssortering på de tre første verdiene
 
         int minverdi = verdier[m1];                // minste verdi
         int nestminverdi = verdier[m2];      // nest minste verdi

@@ -228,7 +228,7 @@ class Oblig1UnitTest {
             System.out.println("Test 1 feilet, feil når s1 og s2 er like");
             feil++;
         } else {
-            System.out.println("Strengen "+ a + " er inneholdt i " + b);
+            System.out.println("Strengen "+ a + " er inneholdt i " + b + " ,Oblig1.inneholdt(a, b): " + Oblig1.inneholdt(a, b));
         }
 
         // Test2
@@ -238,7 +238,7 @@ class Oblig1UnitTest {
             System.out.println("Test 2 feilet, feil når s1 = '" + c + "' og s2 = '" + d + "'");
             feil++;
         } else {
-            System.out.println("Strengen "+ c + " er inneholdt i " + d);
+            System.out.println("Strengen "+ c + " er inneholdt i " + d + " ,Oblig1.inneholdt(c, d): " + Oblig1.inneholdt(c, d));
         }
 
         // Test3 - metoden skal returnere false hvis s1 er lenger enn s2
@@ -248,7 +248,7 @@ class Oblig1UnitTest {
             System.out.println("Test 3 feilet, feil når s1 = '" + e + "' og s2 = '" + f + "'");
             feil++;
         } else {
-            System.out.println("Strengen "+ e + " er ikke inneholdt  i " + f);
+            System.out.println("Strengen "+ e + " er ikke inneholdt  i " + f + " ,Oblig1.inneholdt(e, f): " + Oblig1.inneholdt(e, f));
         }
 
         // Test4
@@ -258,7 +258,7 @@ class Oblig1UnitTest {
             System.out.println("Test 4 feilet, feil når s1 = '" + g + "' og s2 = '" + h + "'");
             feil++;
         } else {
-            System.out.println("Strengen "+ g + " er ikke inneholdt i " + h);
+            System.out.println("Strengen "+ g + " er ikke inneholdt i " + h + " , Oblig1.inneholdt(g, h): " + Oblig1.inneholdt(g, h));
         }
 
         // Test5
@@ -268,7 +268,7 @@ class Oblig1UnitTest {
             System.out.println("Test 5 feilet, feil når s1 = '" + i + "' og s2 = '" + j + "'");
             feil++;
         } else {
-            System.out.println("Strengen ''  er inneholdt i  ''" );
+            System.out.println("Strengen ''  er inneholdt i  '',"+ " Oblig1.inneholdt(i, j): " + Oblig1.inneholdt(i, j));
         }
 
 

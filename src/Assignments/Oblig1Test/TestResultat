@@ -20,8 +20,8 @@ Testkjøring
 
 ///// Oppgave 10 /////////////////////////////////////
 
-Strengen ABBA er inneholdt i ABBA
-Strengen ABBA er inneholdt i ABCABC
-Strengen BBBBBB er ikke inneholdt  i BBB
-Strengen AABB er ikke inneholdt i ABDF
-Strengen ''  er inneholdt i  ''
+Strengen ABBA er inneholdt i ABBA ,Oblig1.inneholdt(a, b): true
+Strengen ABBA er inneholdt i ABCABC ,Oblig1.inneholdt(c, d): true
+Strengen BBBBBB er ikke inneholdt  i BBB ,Oblig1.inneholdt(e, f): false
+Strengen AABB er ikke inneholdt i ABDF , Oblig1.inneholdt(g, h): false
+Strengen ''  er inneholdt i  '', Oblig1.inneholdt(i, j): true

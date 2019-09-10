@@ -210,10 +210,27 @@ class Oblig1UnitTest {
 
     @Test
     void tredjeMin() {
+        /* Test1
+        int [] verdier1 = {1,2};
+        System.out.println("Tester om arrayet {1,2} kaster et unntak:");
+        Oblig1.tredjeMin(verdier1); */
+
+        //Test2
+        int [] tabell ={1,2,3,10,7,5,6,4};
+        int [] res = {0,1,2};
+        assertArrayEquals(res, Oblig1.tredjeMin(tabell),"Indeksene er ikke sortert i stigende rekkefølge");
+        int [] test2 = Oblig1.tredjeMin(tabell);
+        System.out.println(" Arrayet {1,2,3,10,7,5,6,4} skal gi {0,1,2}, Oblig1.tredjeMin(tabell):\n {" + test2[0] + "," +
+                test2[1] +"," + test2[2] +"}"  );
+
+
+        //Test3
         int [] tabell1 ={10,7,5,6,2,4,1,3};
         int [] res1 = {6,4,7};
-        //Oblig1.tredjeMin(tabell1);
         assertArrayEquals(res1, Oblig1.tredjeMin(tabell1),"Indeksene er ikke sortert i stigende rekkefølge");
+        int [] test3 = Oblig1.tredjeMin(tabell1);
+        System.out.println(" Arrayet {10,7,5,6,2,4,1,3} skal gi {6,4,7}, Oblig1.tredjeMin(tabell1):\n {" + test3[0] + "," +
+                test3[1] +"," + test3[2] +"}"  );
 
     }
 

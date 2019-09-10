@@ -279,7 +279,7 @@ public class Oblig1 {
     public static int [] tredjeMin(int [] verdier) {
         int n = verdier.length;     // tabellens lengde
         if (n < 3) throw      // må ha minst tre verdier
-                new NoSuchElementException("verdier.length(" + n + ") < 3!");
+                new NoSuchElementException("Det er for få verdier i arrayet, verdier.length(" + n + ") < 3!");
 
         int m1 = 0;      // m_1 er posisjonen til minste verdi
         int m2 = 1;      // m_2 er posisjonen til nest minste verdi

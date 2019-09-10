@@ -1,4 +1,6 @@
+Testkjøring
 ///// Oppgave 1 //////////////////////////////////////
+
 
 ///// Oppgave 2 //////////////////////////////////////
 
@@ -17,3 +19,9 @@
 ///// Oppgave 9 //////////////////////////////////////
 
 ///// Oppgave 10 /////////////////////////////////////
+
+Strengen ABBA er inneholdt i ABBA
+Strengen ABBA er inneholdt i ABCABC
+Strengen BBBBBB er ikke inneholdt  i BBB
+Strengen AABB er ikke inneholdt i ABDF
+Strengen ''  er inneholdt i  ''

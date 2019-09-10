@@ -227,6 +227,8 @@ class Oblig1UnitTest {
         if (Oblig1.inneholdt(a, b) == false) {
             System.out.println("Test 1 feilet, feil når s1 og s2 er like");
             feil++;
+        } else {
+            System.out.println("Strengen "+ a + " er inneholdt i " + b);
         }
 
         // Test2
@@ -235,6 +237,8 @@ class Oblig1UnitTest {
         if(Oblig1.inneholdt(c, d) == false){
             System.out.println("Test 2 feilet, feil når s1 = '" + c + "' og s2 = '" + d + "'");
             feil++;
+        } else {
+            System.out.println("Strengen "+ c + " er inneholdt i " + d);
         }
 
         // Test3 - metoden skal returnere false hvis s1 er lenger enn s2
@@ -243,22 +247,28 @@ class Oblig1UnitTest {
         if(Oblig1.inneholdt(e, f) == true){
             System.out.println("Test 3 feilet, feil når s1 = '" + e + "' og s2 = '" + f + "'");
             feil++;
+        } else {
+            System.out.println("Strengen "+ e + " er ikke inneholdt  i " + f);
         }
 
         // Test4
         String g = "AABB";
         String h = "ABDF";
         if(Oblig1.inneholdt(g, h) == true){
-            System.out.println("Test 4 feilet, feil når s1 = '" + c + "' og s2 = '" + d + "'");
+            System.out.println("Test 4 feilet, feil når s1 = '" + g + "' og s2 = '" + h + "'");
             feil++;
+        } else {
+            System.out.println("Strengen "+ g + " er ikke inneholdt i " + h);
         }
 
-        // Test4
+        // Test5
         String i = "";
         String j = "";
-        if(Oblig1.inneholdt(g, h) == true){
-            System.out.println("Test 5 feilet, feil når s1 = '" + c + "' og s2 = '" + d + "'");
+        if(Oblig1.inneholdt(i, j) == false){
+            System.out.println("Test 5 feilet, feil når s1 = '" + i + "' og s2 = '" + j + "'");
             feil++;
+        } else {
+            System.out.println("Strengen ''  er inneholdt i  ''" );
         }
 
 

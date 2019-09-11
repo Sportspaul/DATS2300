@@ -217,7 +217,7 @@ public class Oblig1 {
     }
 
     // Helpemetode for metoden over
-    public static void rotasjon(char[] verdier, char[] temp, int n, int flytt) {
+    private static void rotasjon(char[] verdier, char[] temp, int n, int flytt) {
         int teller = 0;
         for (int i = 0; i < n; i++) {
             if (i + flytt < n) {

@@ -130,7 +130,7 @@ public class Oblig1 {
     }
 
 
-    ///// Oppgave 6 //////////////////////////////////////
+    ///// Oppgave 5 //////////////////////////////////////
     /* Metode som tar inn en liste med 'char'-elementer og roterer alle elementene 1 plass mot høyre
     * eks. char[] a = {'A', 'B', 'C', 'D'}
     * rotasjon(a)
@@ -150,12 +150,12 @@ public class Oblig1 {
         }
     }
 
-    ///// Oppgave 7 //////////////////////////////////////
+    ///// Oppgave 6 //////////////////////////////////////
     public static void rotasjon(char [] verdier, int k) {
         int n = verdier.length;
 
-        // Roterer 1 plass for lengde lik 2 og 'antall flytt' % 'lengde' == 1
-        if(n == 2 && k%n == 1) { rotasjon(verdier); }
+        // Roterer 1 plass hvis lengde lik 2 og 'antall flytt' % 'lengde' != 0
+        if(n == 2 && k%n != 0) { rotasjon(verdier); return;}
         char[] temp = new char[n];                         // hjelpeliste
 
         if(n > 0 && n != 2) {
@@ -287,7 +287,7 @@ public class Oblig1 {
 
         //TODO: Bruke indekssortering på de tre første verdiene
 
-        int minverdi = verdier[m1];                // minste verdi
+        int minverdi = verdier[m1];          // minste verdi
         int nestminverdi = verdier[m2];      // nest minste verdi
         int tredjeminverdi = verdier[m3];    // tredje minste verdi
 
@@ -333,18 +333,18 @@ public class Oblig1 {
 
         /* Går gjennom hver bokstav i s2
         * Hvis en av bokstavene er lik en bokstav i s1 øker 'lik' variabelen med 1  */
-        int lik = 0;
+        int antallLike = 0;
         for(int i = 0; i < s2.length(); i++){
 
-            // Hindrer s1.charAt(lik) å være outOfBounds når 'lik' == s1.length()
-            if(lik < s1.length()) {
-                if (s2.charAt(i) == s1.charAt(lik)) {
-                    lik++;
+            // Hindrer s1.charAt(antallLike) å være outOfBounds når 'antallLike' == s1.length()
+            if(antallLike < s1.length()) {
+                if (s2.charAt(i) == s1.charAt(antallLike)) {
+                    antallLike++;
                 }
             }
         }
 
-        if(lik == s1.length()) { return true; }        // Returnerer true hvis lik == s1.length()
+        if(antallLike == s1.length()) { return true; }        // Returnerer true hvis altallLike == s1.length()
         else { return false; }
 
     }

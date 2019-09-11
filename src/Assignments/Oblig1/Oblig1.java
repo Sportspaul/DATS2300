@@ -210,8 +210,8 @@ public class Oblig1 {
 
 
 
-    ///// Oppgave 7 //////////////////////////////////////
-    //a)
+    ///// Oppgave 8 //////////////////////////////////////
+    /////  a)        //////////////////////////////////////
     public static String flett(String s1, String s2) {
         //creating string to append values to from both strings
         String out= "";
@@ -230,7 +230,7 @@ public class Oblig1 {
     }
 
 
-    //b)
+    ////  b)        //////////////////////////////////////
     public static String flett(String... s) {
         //out is the String that will be appended to to create the merged string
         String out = "";

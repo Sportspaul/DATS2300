@@ -14,7 +14,18 @@ Testkjøring
 
 ///// Oppgave 7 //////////////////////////////////////
 
+
 ///// Oppgave 8 //////////////////////////////////////
+////  a)        //////////////////////////////////////
+
+AABBCC forventet:AABBCC
+ABC forventet:ABC
+ABC forventet:ABC
+(tom) forventet: (tom)
+ABABAA forventet:ABABAA
+ABCDEF forventet:ABCDEF
+ABCDEF forventet:ABCDEF
+AACCDDEEFFAACCDDEEFFAACCDDEEFFAACCDDEEFF forventet:AACCDDEEFFAACCDDEEFFAACCDDEEFFAACCDDEEFF
 
 ///// Oppgave 9 //////////////////////////////////////
 

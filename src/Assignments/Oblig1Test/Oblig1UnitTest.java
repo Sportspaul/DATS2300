@@ -120,87 +120,91 @@ class Oblig1UnitTest {
         // Test nr. 1
         String a = "ABC";
         String b = "ABC";
-        String expected = "AABBCC";
-        String c = Oblig1.flett(a,b);
-        if(!c.equals(expected)){
-            System.out.println("Test 1 feilet");
+        String expected1 = "AABBCC";
+        String c1 = Oblig1.flett(a,b);
+        if(!c1.equals(expected1)){
+            System.out.println("Test 1 feilet,  expected: " + expected1 + ", actual: " + c1);
             feil++;
         }
+        System.out.println(c1 + " forventet:" + expected1);
 
         // Test nr. 2
         a = "";
         b = "ABC";
-        expected = "ABC";
-        c = Oblig1.flett(a,b);
-        if(!c.equals(expected)){
-            System.out.println("Test 2 feilet, expected: " + expected + ", actual: " + c);
+        String expected2 = "ABC";
+        String c2 = Oblig1.flett(a,b);
+        if(!c2.equals(expected2)){
+            System.out.println("Test 2 feilet, expected: " + expected2 + ", actual: " + c2);
             feil++;
         }
+        System.out.println(c2 + " forventet:" + expected2);
 
         // Test nr. 3
         a = "ABC";
         b = "";
-        expected = "ABC";
-        c = Oblig1.flett(a,b);
-        if(!c.equals(expected)){
-            System.out.println("Test 3 feilet, expected: " + expected + ", actual: " + c);
+        String expected3 = "ABC";
+        String c3 = Oblig1.flett(a,b);
+        if(!c3.equals(expected3)){
+            System.out.println("Test 3 feilet, expected: " + expected3 + ", actual: " + c3);
             feil++;
         }
+        System.out.println(c3 + " forventet:" + expected3);
 
         // Test nr. 4
         a = "";
         b = "";
-        expected = "";
-        c = Oblig1.flett(a,b);
-        if(!c.equals(expected)){
-            System.out.println("Test 4 feilet, expected: " + expected + ", actual: " + c);
+        String expected4 = "";
+        String c4 = Oblig1.flett(a,b);
+        if(!c4.equals(expected4)){
+            System.out.println("Test 4 feilet, expected: " + expected4 + ", actual: " + c4);
             feil++;
         }
+        System.out.println(c4 + "(tom)" + " forventet:" + expected4 + " (tom)");
 
         // Test nr. 5
         a = "AAAA";
         b = "BB";
-        expected = "ABABAA";
-        c = Oblig1.flett(a,b);
-        if(!c.equals(expected)){
-            System.out.println("Test 5 feilet, expected: " + expected + ", actual: " + c);
+        String expected5 = "ABABAA";
+        String c5 = Oblig1.flett(a,b);
+        if(!c5.equals(expected5)){
+            System.out.println("Test 5 feilet, expected: " + expected5 + ", actual: " + c5);
             feil++;
         }
+        System.out.println(c5 + " forventet:" + expected5);
 
         // Test nr. 6
         a = "A";
         b = "BCDEF";
-        expected = "ABCDEF";
-        c = Oblig1.flett(a,b);
-        if(!c.equals(expected)){
-            System.out.println("Test 6 feilet, expected: " + expected + ", actual: " + c);
+        String expected6 = "ABCDEF";
+        String c6 = Oblig1.flett(a,b);
+        if(!c6.equals(expected6)){
+            System.out.println("Test 6 feilet, expected: " + expected6 + ", actual: " + c6);
             feil++;
         }
+        System.out.println(c6 + " forventet:" + expected6);
 
         // Test nr. 7
         a = "ACDEF";
         b = "B";
-        expected = "ABCDEF";
-        c = Oblig1.flett(a,b);
-        if(!c.equals(expected)){
-            System.out.println("Test 7 feilet, expected: " + expected + ", actual: " + c);
+        String expected7 = "ABCDEF";
+        String c7 = Oblig1.flett(a,b);
+        if(!c7.equals(expected7)){
+            System.out.println("Test 7 feilet, expected: " + expected7 + ", actual: " + c7);
             feil++;
         }
+        System.out.println(c7 + " forventet:" + expected7);
 
-        // Test nr. 7
-        a = "ACDEFACDEFACDEFACDEF";
-        b = "ACDEFACDEFACDEFACDEF";
-        expected = "AACCDDEEFFAACCDDEEFFAACCDDEEFFAACCDDEEFF";
-        c = Oblig1.flett(a,b);
-        if(!c.equals(expected)){
-            System.out.println("Test 7 feilet, expected: " + expected + ", actual: " + c);
+        // Test nr. 8
+        String a8 = "ACDEFACDEFACDEFACDEF";
+        String b8 = "ACDEFACDEFACDEFACDEF";
+        String expected8 = "AACCDDEEFFAACCDDEEFFAACCDDEEFFAACCDDEEFF";
+        String c8 = Oblig1.flett(a8,b8);
+        if(!c8.equals(expected8)){
+            System.out.println("Test 8 feilet, expected: " + expected8 + ", actual: " + c8);
             feil++;
         }
+        System.out.println(c8 + " forventet:" + expected8);
 
-
-
-
-        assertEquals(0, feil, "Implementer flett og denne testen");
     }
 
     @Test

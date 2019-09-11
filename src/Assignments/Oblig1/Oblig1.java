@@ -52,6 +52,7 @@ public class Oblig1 {
         return 0;
     }
 
+    ///// Oppgave 4 //////////////////////////////////////
     /**Itererer gjennom en tabell, og finner ut av hvor mange unike tall det er i den*/
 
     public static int antallUlikeUsortert(int [] verdier ) {
@@ -62,9 +63,8 @@ public class Oblig1 {
 
             int j;
             for (j = 0; j < i; j++) {            //Om i og j ikke har samme indeks (j < i) hopper den inn i if-setningen
-                if (verdier[i] == verdier[j]) {    //Om verdiene på indeks i og j har samme verdi 
-                                                   // går den ut av for-løkken
-                    break;
+                if (verdier[i] == verdier[j]) {  //Om verdiene på indeks i og j har samme verdi
+                    break;                       // går den ut av for-løkken
                 }
             }
             if (i == j) {                        //Om indeksen til i og j er like øker antallet ulike tall
@@ -74,67 +74,89 @@ public class Oblig1 {
         return antallUlike;
     }
 
-    /**Metode som sorterer et array med oddetall på vesten halvdel og partall på høyre, i stigende rekkefølge*/
-    public static void delsortering(int[] verdier) {
-        int fra = 0;                                   // Setter fra som indeks-plassen til første plass i verdier
-        int til = verdier.length - 1;                  // Setter til som indeks-plassen til siste plass i verdier
-
-        while (true) {                                          // While løkken stopper når fra > til
-            while (fra <= til && verdier[fra] % 2 != 0) fra++;   // fra er vaktpost/stoppeverdi for til
-            while (fra <= til && verdier[til] % 2 == 0) til--;   // til er vaktpost/stoppeverdi for fra
-
-        if(fra < til) {
-            bytt(verdier, fra++, til--);                         //bytter om a[fra] og a[til] sine posisjoner
-        }
-            else break;                                         //hopper ut av while-løkken
-        }
-        int skille = finnSkille(verdier);
-
-        sorterToDeler(verdier, skille);
-    }
-
-    public static void bytt(int[] verdier, int i, int j) {
-        int temp = verdier[i]; 
-        verdier[i] = verdier[j]; 
-        verdier[j] = temp;    //Bytter posisjonen til verdier[i] og verdier[j] med hverandre
-    }
-
-    public static int finnSkille(int[] verdier) {
-        for(int i = 0; i < verdier.length; i++) {
-            if(verdier[i]%2 == 0) {
-                return i;
-            }
-        }
-        return 0;
-    }
-
-    public static void sorterToDeler(int[] verdier, int skille) {
-        for(int i = 0; i < skille; i++) {
-            for(int j = 1; j < skille; j++) {
-                if(verdier[i] > verdier[j] && i < j) {
-                    int temp = verdier[i];
-                    verdier[i] = verdier[j];
-                    verdier[j] = temp;
-                }
-            }
-        }
-        for(int i = skille; i < verdier.length; i++) {
-            for(int j = skille+1; j < verdier.length; j++) {
-                if(verdier[i] > verdier[j] && i < j) {
-                    int temp = verdier[i];
-                    verdier[i] = verdier[j];
-                    verdier[j] = temp;
-                }
-            }
-        }
-    }
-
-
     ///// Oppgave 5 //////////////////////////////////////
-    /* Metode som tar inn en liste med 'char'-elementer og roterer alle elementene 1 plass mot høyre
+    /**Metode som sorterer et array med oddetall på venstre halvdel og partall på høyre, i stigende rekkefølge*/
+
+    public static void delsortering(int[] verdier) {
+        int fra = 0;
+        int til = verdier.length - 1;
+        int i = 0;
+
+        while (i < verdier.length) {                              //sorterer et array med oddetall på venste side, og
+                                                                  //partall på høyre, stopper når i > verdier.length
+
+            while (til >= fra && verdier[fra]%2!=0) {             //kjører mens til er større/lik fra, og verdier[fra]
+                                                                  //ikke gir tilbake et heltall når det deles med 2
+                fra++;                                            //til er stoppeverdi for fra
+            }
+            while (til >= fra && verdier[til]%2==0) {             //kjører mens fra er større/lik til, og verdier[til]
+                                                                  //gir tilbake et heltall når det deles med 2
+                til--;                                            //fra er stoppverdi for til
+            }
+
+            if (fra < til) {
+                bytt(verdier,fra++,til--); }                      //bytter om verdier[fra] og verdier[til]
+            i++;
+        }
+
+        kvikksortering(verdier, 0, til);                    //bruker quicksort til å sortere oddetallene
+        kvikksortering(verdier,fra, verdier.length - 1);    //bruker quicksort til å sortere partallene
+    }
+
+    private static void bytt(int[] verdier, int i, int j) {
+        int temp = verdier[i];
+        verdier[i] = verdier[j];
+        verdier[j] = temp;    //Bytter posisjonen til verdier[i] og verdier[j]
+    }
+
+    private static void kvikksortering(int[] verdier, int fra, int til) {
+        kvikksorteringStigende(verdier, fra, til);                          //sorterer verdier[fra:til] stigende
+    }
+
+    private static void kvikksorteringStigende(int[] verdier, int fra, int til) {
+        if (fra >= til) {
+            return;               //returnerer om verdier[fra:til] om verdier er tomt eller bare har 1 element
+        }
+        int midtverdi = sParterStigende(verdier, fra, til, (fra + til)/2);  //finner midtverdien
+
+        kvikksorteringStigende(verdier, fra, midtverdi - 1);          //sorterer venstre siden av verdier
+        kvikksorteringStigende(verdier, midtverdi + 1, til);          //sorterer høyreside av verdier
+    }
+
+    private static int sParterStigende(int[] verdier, int fra, int til, int skilleIndeks) {
+        bytt(verdier, skilleIndeks, til);           //verdier[skilleIndeks] flyttes bakerst
+        int posisjon = parterStigende(verdier, fra, til - 1, verdier[til]);  //partisjonerer verdier[fra:til-1]
+        // i stigende rekkefølge
+        bytt(verdier, posisjon, til);               //bytter for å få verdier[skilleIndeks] på rett plass
+        return posisjon;                            //returnerer posisjonen til skilleverdien
+    }
+
+    private static int parterStigende(int[] verdier, int fra, int til, int skilleverdi) {
+        while (true) {                                                //stopper når fra > til
+            while (fra <= til && verdier[fra] < skilleverdi) {
+                fra++;                                                //til er stoppverdi for fra
+            }
+            while (fra <= til && verdier[til] >= skilleverdi) {
+                til--;                                                //fra er stoppverdi for til
+            }
+
+            if (fra < til) {
+                bytt(verdier, fra++, til--);                          //bytter om a[fra] og a[til]
+            }
+            else  return fra;           //a[fra] er første verdi som ikke er mindre enn skilleverdi
+        }
+    }
+
+
+
+
+
+    ///// Oppgave 6 //////////////////////////////////////
+    /** Metode som tar inn en liste med 'char'-elementer og roterer alle elementene 1 plass mot høyre
     * eks. char[] a = {'A', 'B', 'C', 'D'}
     * rotasjon(a)
     * a == {'D', 'A', 'B', 'C'} */
+
     public static void rotasjon(char[] verdier) {
 
         // Tester om listen har mer enn 1 element
@@ -150,12 +172,12 @@ public class Oblig1 {
         }
     }
 
-    ///// Oppgave 6 //////////////////////////////////////
+    ///// Oppgave 7 //////////////////////////////////////
     public static void rotasjon(char [] verdier, int k) {
         int n = verdier.length;
 
-        // Roterer 1 plass hvis lengde lik 2 og 'antall flytt' % 'lengde' != 0
-        if(n == 2 && k%n != 0) { rotasjon(verdier); return;}
+        // Roterer 1 plass for lengde lik 2 og 'antall flytt' % 'lengde' == 1
+        if(n == 2 && k%n == 1) { rotasjon(verdier); }
         char[] temp = new char[n];                         // hjelpeliste
 
         if(n > 0 && n != 2) {
@@ -211,7 +233,7 @@ public class Oblig1 {
 
 
     ///// Oppgave 7 //////////////////////////////////////
-    /////  a)        //////////////////////////////////////
+    //a)
     public static String flett(String s1, String s2) {
         //creating string to append values to from both strings
         String out= "";
@@ -230,7 +252,7 @@ public class Oblig1 {
     }
 
 
-    ////  b)        //////////////////////////////////////
+    //b)
     public static String flett(String... s) {
         //out is the String that will be appended to to create the merged string
         String out = "";
@@ -267,6 +289,7 @@ public class Oblig1 {
 
 
     ///// Oppgave 8 //////////////////////////////////////
+    //a)
 
     public static int [] indekssortering(int [] verdier) {
         return null;
@@ -286,7 +309,7 @@ public class Oblig1 {
 
         //TODO: Bruke indekssortering på de tre første verdiene
 
-        int minverdi = verdier[m1];          // minste verdi
+        int minverdi = verdier[m1];                // minste verdi
         int nestminverdi = verdier[m2];      // nest minste verdi
         int tredjeminverdi = verdier[m3];    // tredje minste verdi
 
@@ -332,18 +355,18 @@ public class Oblig1 {
 
         /* Går gjennom hver bokstav i s2
         * Hvis en av bokstavene er lik en bokstav i s1 øker 'lik' variabelen med 1  */
-        int antallLike = 0;
+        int lik = 0;
         for(int i = 0; i < s2.length(); i++){
 
-            // Hindrer s1.charAt(antallLike) å være outOfBounds når 'antallLike' == s1.length()
-            if(antallLike < s1.length()) {
-                if (s2.charAt(i) == s1.charAt(antallLike)) {
-                    antallLike++;
+            // Hindrer s1.charAt(lik) å være outOfBounds når 'lik' == s1.length()
+            if(lik < s1.length()) {
+                if (s2.charAt(i) == s1.charAt(lik)) {
+                    lik++;
                 }
             }
         }
 
-        if(antallLike == s1.length()) { return true; }        // Returnerer true hvis altallLike == s1.length()
+        if(lik == s1.length()) { return true; }        // Returnerer true hvis lik == s1.length()
         else { return false; }
 
     }

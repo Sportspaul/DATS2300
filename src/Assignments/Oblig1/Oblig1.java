@@ -47,10 +47,36 @@ public class Oblig1 {
         return antall;
     }
 
-    //TODO: implementer metoden
     ///// Oppgave 2 //////////////////////////////////////
     public static int antallUlikeSortert( int [] verdier ) {
-        return 0;
+        if(verdier.length == 0) {
+            return 0;
+        } else if(verdier.length == 1) {
+            return 1;
+        }
+        int antall = 1;
+
+        if(!erSortert(verdier)) {
+            throw new IllegalStateException("Arrayet er ikke sortert i stigende rekkefølge");
+        }
+        int temp = verdier[0];
+        for(int i = 1; i < verdier.length; i++) {
+            if(verdier[i] > temp) {
+                antall++;
+                temp = verdier[i];
+            }
+        }
+        return antall;
+    }
+
+    ///// Hjelpemetode fra kompendiet //////////////////////////////////////
+    public static boolean erSortert(int[] verdier) {
+        for (int i = 1; i < verdier.length; i++)      // starter med i = 1
+            if (verdier[i-1] > verdier[i]) {
+                return false;      // en inversjon
+            }
+
+        return true;
     }
 
     ///// Oppgave 3 //////////////////////////////////////

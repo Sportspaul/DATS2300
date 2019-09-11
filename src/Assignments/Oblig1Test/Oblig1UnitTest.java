@@ -79,6 +79,8 @@ class Oblig1UnitTest {
             }
     }
 
+    /////////////////////////////////////////////////////////////////////////////////
+
     @Test
     void ombyttinger() {
         int[] a = {6, 5, 4, 3, 2, 1};
@@ -121,7 +123,8 @@ class Oblig1UnitTest {
 
     @Test
     void antallUlikeSortert() {
-        assertEquals(true, false, "Implementer antallUlikeSortert og denne testen");
+        int [] test = {1,2,3,3,3,4};
+        assertEquals(4, Oblig1.antallUlikeSortert(test), "Metoden teller galt antall distinkte elementer");
     }
 
     @Test

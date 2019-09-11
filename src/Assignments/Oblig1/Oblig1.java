@@ -316,8 +316,45 @@ public class Oblig1 {
 
 
     ///// Oppgave 8 //////////////////////////////////////
-    public static int [] indekssortering(int [] verdier) {
-        return null;
+    public static int [] indekssortering(int... verdier) {
+        int[] copyArray = verdier.clone();
+
+        int[] indexArray = new int[verdier.length];
+
+
+        for (int i=0;i<indexArray.length;i++){
+            indexArray[i]=-1;
+        }
+        for (int i = 0; i <copyArray.length;i++ ){
+            indexArray[i] = findMinIndex(copyArray,indexArray);
+
+        }
+
+        return indexArray;
+    }
+
+
+
+    public static int findMinIndex(int[] array, int[] ignoreIndexes){
+        int min = 187278361;
+        int index = 0;
+        for (int i = 0; i < array.length; i++){
+            if (array[i]<min && !(isValueInArray(ignoreIndexes, i))){
+                min = array[i];
+                index = i;
+            }
+        }
+        return index;
+    }
+
+
+    public static boolean isValueInArray(int[] array, int value){
+        for (int i=0; i < array.length; i++){
+            if (array[i] == value){
+                return true;
+            }
+        }
+        return false;
     }
 
 

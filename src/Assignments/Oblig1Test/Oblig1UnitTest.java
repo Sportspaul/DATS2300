@@ -4,6 +4,7 @@ import Assignments.Oblig1.Oblig1;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,63 +24,6 @@ class Oblig1UnitTest {
         assertEquals(-1, Oblig1.maks(liste1), "Største element ligger ikke sist i arrayet");
         System.out.println(Oblig1.maks(liste1));
     }
-
-    ///// maksmetodene fra undervisningen //////////////////////////////////////
-    public static int maks1(int[] a)  // a er en heltallstabell
-    {
-        if (a.length < 1)
-            throw new java.util.NoSuchElementException("Tabellen a er tom!");
-
-        int m = 0;  // indeks til foreløpig største verdi
-
-        for (int i = 1; i < a.length; i++) // obs: starter med i = 1
-        {
-            if (a[i] > a[m]) m = i;  // indeksen oppdateres
-        }
-
-        return m;  // returnerer indeksen/posisjonen til største verdi
-
-    }
-
-    public static int maks2(int[] a)   // versjon 2 av maks-metoden
-    {
-        int m = 0;               // indeks til største verdi
-        int maksverdi = a[0];    // største verdi
-
-        for (int i = 1; i < a.length; i++) if (a[i] > maksverdi)
-        {
-            maksverdi = a[i];     // største verdi oppdateres
-            m = i;                // indeks til største verdi oppdateres
-        }
-        return m;   // returnerer indeks/posisjonen til største verdi
-
-    }
-
-    public static int maks3(int[] a)  // versjon 3 av maks-metoden
-    {
-        int sist = a.length - 1;       // siste posisjon i tabellen
-        int m = 0;                     // indeks til største verdi
-        int maksverdi = a[0];          // største verdi
-        int temp = a[sist];            // tar vare på siste verdi
-        a[sist] = 0x7fffffff;          // legger tallet 2147483647 sist
-
-        for (int i = 0; ; i++)         // i starter med 0
-            if (a[i] >= maksverdi)       // denne blir sann til slutt
-            {
-                if (i == sist)             // sjekker om vi er ferdige
-                {
-                    a[sist] = temp;          // legger siste verdi tilbake
-                    return temp >= maksverdi ? sist : m;   // er siste størst?
-                }
-                else
-                {
-                    maksverdi = a[i];        // maksverdi oppdateres
-                    m = i;                   // m oppdateres
-                }
-            }
-    }
-
-    /////////////////////////////////////////////////////////////////////////////////
 
     @Test
     void ombyttinger() {
@@ -104,21 +48,19 @@ class Oblig1UnitTest {
 
 
 
-
-      /*  int n = 100; int i =1;
+        Random random = new Random();
+        int antall = 100; int i =1;
         int sum = 0;
-
-        while(i < n){
-            int[] heltall = Oblig1Test.randPerm(15);
+        int n = random.nextInt(20);
+        while(i < antall){
+            int[] heltall = Oblig1Test.randPerm(n);
             int ant = Oblig1.ombyttinger(heltall);
-            System.out.println("Antall ombyttinger: " + ant);
+
             sum += ant;
-            //sum = sum + ant;
-            System.out.println(sum);
             i++;
         }
-        double snitt = sum/n;
-        System.out.println("Gjennomsnittlig antall ombyttinger er: " + snitt); */
+        double snitt = sum/antall;
+        System.out.println("Gjennomsnittlig antall ombyttinger på et array av lengde " + n +" er: " + snitt);
     }
 
     @Test

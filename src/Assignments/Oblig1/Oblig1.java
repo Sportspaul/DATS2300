@@ -54,11 +54,12 @@ public class Oblig1 {
         } else if(verdier.length == 1) {
             return 1;
         }
-        int antall = 1;
-
         if(!erSortert(verdier)) {
             throw new IllegalStateException("Arrayet er ikke sortert i stigende rekkefølge");
         }
+
+        int antall = 1;
+
         int temp = verdier[0];
         for(int i = 1; i < verdier.length; i++) {
             if(verdier[i] > temp) {
@@ -308,13 +309,6 @@ public class Oblig1 {
         return out;
     }
 
-
-
-
-
-
-
-
     ///// Oppgave 8 //////////////////////////////////////
     public static int [] indekssortering(int... verdier) {
         int[] copyArray = verdier.clone();
@@ -369,11 +363,16 @@ public class Oblig1 {
         int m2 = 1;      // m_2 er posisjonen til nest minste verdi
         int m3 = 2;      // m_3 er posisjonen til tredje minste verdi
 
-        //TODO: Bruke indekssortering på de tre første verdiene
 
-        int minverdi = verdier[m1];                // minste verdi
-        int nestminverdi = verdier[m2];      // nest minste verdi
-        int tredjeminverdi = verdier[m3];    // tredje minste verdi
+        int start1 = verdier[m1];
+        int start2 = verdier[m2];
+        int start3 = verdier[m3];
+
+        int [] sortert = indekssortering(new int [] {start1, start2, start3});
+
+        int minverdi = sortert[0];  // minste verdi
+        int nestminverdi = sortert[1]; // nest minste verdi
+        int tredjeminverdi = sortert[2];  // tredje minste verdi
 
         for (int i = 3; i < n; i++) {
             if (verdier[i] < tredjeminverdi) {

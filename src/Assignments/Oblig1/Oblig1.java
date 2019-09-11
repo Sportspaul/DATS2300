@@ -47,7 +47,8 @@ public class Oblig1 {
         return antall;
     }
 
-    //TODO: implementer metodene
+    //TODO: implementer metoden
+    ///// Oppgave 2 //////////////////////////////////////
     public static int antallUlikeSortert( int [] verdier ) {
         return 0;
     }
@@ -289,8 +290,6 @@ public class Oblig1 {
 
 
     ///// Oppgave 8 //////////////////////////////////////
-    //a)
-
     public static int [] indekssortering(int [] verdier) {
         return null;
     }

@@ -210,7 +210,7 @@ public class Oblig1 {
 
 
 
-    ///// Oppgave 8 //////////////////////////////////////
+    ///// Oppgave 7 //////////////////////////////////////
     /////  a)        //////////////////////////////////////
     public static String flett(String s1, String s2) {
         //creating string to append values to from both strings
@@ -267,7 +267,6 @@ public class Oblig1 {
 
 
     ///// Oppgave 8 //////////////////////////////////////
-    //a)
 
     public static int [] indekssortering(int [] verdier) {
         return null;

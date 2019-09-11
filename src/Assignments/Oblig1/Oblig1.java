@@ -52,7 +52,7 @@ public class Oblig1 {
         return 0;
     }
 
-    ///// Oppgave 4 //////////////////////////////////////
+    ///// Oppgave 3 //////////////////////////////////////
     /**Itererer gjennom en tabell, og finner ut av hvor mange unike tall det er i den*/
 
     public static int antallUlikeUsortert(int [] verdier ) {
@@ -74,7 +74,7 @@ public class Oblig1 {
         return antallUlike;
     }
 
-    ///// Oppgave 5 //////////////////////////////////////
+    ///// Oppgave 4 //////////////////////////////////////
     /**Metode som sorterer et array med oddetall på venstre halvdel og partall på høyre, i stigende rekkefølge*/
 
     public static void delsortering(int[] verdier) {
@@ -151,7 +151,7 @@ public class Oblig1 {
 
 
 
-    ///// Oppgave 6 //////////////////////////////////////
+    ///// Oppgave 5 //////////////////////////////////////
     /** Metode som tar inn en liste med 'char'-elementer og roterer alle elementene 1 plass mot høyre
     * eks. char[] a = {'A', 'B', 'C', 'D'}
     * rotasjon(a)
@@ -172,7 +172,7 @@ public class Oblig1 {
         }
     }
 
-    ///// Oppgave 7 //////////////////////////////////////
+    ///// Oppgave 6 //////////////////////////////////////
     public static void rotasjon(char [] verdier, int k) {
         int n = verdier.length;
 
@@ -233,7 +233,7 @@ public class Oblig1 {
 
 
     ///// Oppgave 7 //////////////////////////////////////
-    //a)
+    /////  a)       //////////////////////////////////////
     public static String flett(String s1, String s2) {
         //creating string to append values to from both strings
         String out= "";
@@ -252,7 +252,7 @@ public class Oblig1 {
     }
 
 
-    //b)
+    /////  b)    //////////////////////////////////////
     public static String flett(String... s) {
         //out is the String that will be appended to to create the merged string
         String out = "";

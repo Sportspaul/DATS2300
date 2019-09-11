@@ -178,7 +178,7 @@ public class Oblig1 {
         int n = verdier.length;
 
         // Roterer 1 plass for lengde lik 2 og 'antall flytt' % 'lengde' == 1
-        if(n == 2 && k%n == 1) { rotasjon(verdier); }
+        if(n == 2 && Math.abs(k)%n == 1) { rotasjon(verdier); return;}
         char[] temp = new char[n];                         // hjelpeliste
 
         if(n > 0 && n != 2) {

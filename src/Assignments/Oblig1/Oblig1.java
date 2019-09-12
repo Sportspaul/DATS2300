@@ -354,27 +354,28 @@ public class Oblig1 {
     }
 
 
-   //TODO: Ikke testet
    ///// Oppgave 9 //////////////////////////////////////
     public static int [] tredjeMin(int [] verdier) {
         int n = verdier.length;     // tabellens lengde
         if (n < 3) throw      // må ha minst tre verdier
                 new NoSuchElementException("Det er for få verdier i arrayet, verdier.length(" + n + ") < 3!");
 
-        int m1 = 0;      // m_1 er posisjonen til minste verdi
-        int m2 = 1;      // m_2 er posisjonen til nest minste verdi
-        int m3 = 2;      // m_3 er posisjonen til tredje minste verdi
+
+        int[] tempArray = new int[3];
+        for(int i = 0; i < 3; i++){
+            tempArray[i] = verdier[i];
+        }
+
+        int [] sortertIndeks = indekssortering(tempArray);
+
+        int m1 = sortertIndeks[0];  // m_1 er posisjonen til minste verdi
+        int m2 = sortertIndeks[1];  // m_2 er posisjonen til nest minste verdi
+        int m3 = sortertIndeks[2];  // m_3 er posisjonen til tredje minste verdi
 
 
-        int start1 = verdier[m1];
-        int start2 = verdier[m2];
-        int start3 = verdier[m3];
-
-        int [] sortert = indekssortering(new int [] {start1, start2, start3});
-
-        int minverdi = sortert[0];  // minste verdi
-        int nestminverdi = sortert[1]; // nest minste verdi
-        int tredjeminverdi = sortert[2];  // tredje minste verdi
+        int minverdi = verdier[m1];  // minste verdi
+        int nestminverdi = verdier[m2]; // nest minste verdi
+        int tredjeminverdi = verdier[m3];  // tredje minste verdi
 
         for (int i = 3; i < n; i++) {
             if (verdier[i] < tredjeminverdi) {

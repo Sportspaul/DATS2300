@@ -330,11 +330,13 @@ public class Oblig1 {
 
 
     public static int findMinIndex(int[] array, int[] ignoreIndexes){
-        int min = 187278361;
+        int min = 0;
+        boolean allowFirst=true;
         int index = 0;
         for (int i = 0; i < array.length; i++){
-            if (array[i]<min && !(isValueInArray(ignoreIndexes, i))){
+            if ((array[i]<min || allowFirst) && !(isValueInArray(ignoreIndexes, i))){
                 min = array[i];
+                allowFirst = false;
                 index = i;
             }
         }

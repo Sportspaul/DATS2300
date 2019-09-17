@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
+import static Assignments.Oblig1Test.Oblig1Test.randPerm;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -13,6 +14,90 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Lag små og enkle test-eksempler for å teste at metoden din fungerer som ønsket.
  */
 class Oblig1UnitTest {
+
+    @Test
+    void hastighetMaks() {
+        // main-metoden i class Program skal nå inneholde:
+        int n = 100_000, antall = 2_000; // tabellstørrelse og gjentagelser
+        long tid = 0;                    // for tidsmåling
+        int a[] = randPerm(n);           // en permutasjon av 1, . .  n
+
+
+        tid = System.currentTimeMillis();
+        for (int i = 0; i < antall; i++) Oblig1.maks(a);
+        tid = System.currentTimeMillis() - tid;
+        System.out.println("Maks-metoden: " + tid + " millisek");
+
+        tid = System.currentTimeMillis();
+        for (int i = 0; i < antall; i++) maks1(a);
+        tid = System.currentTimeMillis() - tid;
+        System.out.println("Maks1-metoden: " + tid + " millisek");
+
+        tid = System.currentTimeMillis();
+        for (int i = 0; i < antall; i++) maks2(a);
+        tid = System.currentTimeMillis() - tid;
+        System.out.println("Maks2-metoden: " + tid + " millisek");
+
+        tid = System.currentTimeMillis();
+        for (int i = 0; i < antall; i++) maks3(a);
+        tid = System.currentTimeMillis() - tid;
+        System.out.println("Maks3-metoden: " + tid + " millisek");
+
+    }
+
+    public static int maks1(int[] a)  // a er en heltallstabell
+    {
+        if (a.length < 1)
+            throw new java.util.NoSuchElementException("Tabellen a er tom!");
+
+        int m = 0;  // indeks til foreløpig største verdi
+
+        for (int i = 1; i < a.length; i++) // obs: starter med i = 1
+        {
+            if (a[i] > a[m]) m = i;  // indeksen oppdateres
+        }
+
+        return m;  // returnerer indeksen/posisjonen til største verdi
+
+    }
+
+    public static int maks2(int[] a)   // versjon 2 av maks-metoden
+    {
+        int m = 0;               // indeks til største verdi
+        int maksverdi = a[0];    // største verdi
+
+        for (int i = 1; i < a.length; i++) if (a[i] > maksverdi)
+        {
+            maksverdi = a[i];     // største verdi oppdateres
+            m = i;                // indeks til største verdi oppdateres
+        }
+        return m;   // returnerer indeks/posisjonen til største verdi
+
+    }
+
+    public static int maks3(int[] a)  // versjon 3 av maks-metoden
+    {
+        int sist = a.length - 1;       // siste posisjon i tabellen
+        int m = 0;                     // indeks til største verdi
+        int maksverdi = a[0];          // største verdi
+        int temp = a[sist];            // tar vare på siste verdi
+        a[sist] = 0x7fffffff;          // legger tallet 2147483647 sist
+
+        for (int i = 0; ; i++)         // i starter med 0
+            if (a[i] >= maksverdi)       // denne blir sann til slutt
+            {
+                if (i == sist)             // sjekker om vi er ferdige
+                {
+                    a[sist] = temp;          // legger siste verdi tilbake
+                    return temp >= maksverdi ? sist : m;   // er siste størst?
+                }
+                else
+                {
+                    maksverdi = a[i];        // maksverdi oppdateres
+                    m = i;                   // m oppdateres
+                }
+            }
+    }
 
     @Test
     void maks() {
@@ -53,7 +138,7 @@ class Oblig1UnitTest {
         int sum = 0;
         int n = 20;
         while(i < antall){
-            int[] heltall = Oblig1Test.randPerm(n);
+            int[] heltall = randPerm(n);
             int ant = Oblig1.ombyttinger(heltall);
 
             sum += ant;
@@ -66,7 +151,8 @@ class Oblig1UnitTest {
     @Test
     void antallUlikeSortert() {
         int [] test = {1,2,3,3,3,4};
-        assertEquals(4, Oblig1.antallUlikeSortert(test), "Metoden teller galt antall distinkte elementer");
+        int actual = Oblig1.antallUlikeSortert(test);
+        assertEquals(4, actual, "Metoden teller galt antall distinkte elementer");
     }
 
     @Test
@@ -76,7 +162,11 @@ class Oblig1UnitTest {
 
     @Test
     void delsortering() {
-        assertEquals(true, false, "Implementer delsortering og denne testen");
+        int feil = 0;
+        int[] a = {1, 2, 3, 4, 5, 6, 7, 8};
+        Oblig1.delsortering(a);
+        System.out.println(Arrays.toString(a));
+        assertEquals(0, feil, "Implementer delsortering og denne testen");
     }
 
     @Test
@@ -100,17 +190,43 @@ class Oblig1UnitTest {
 
     @Test
     void rotasjon2() {
+
+        //TEST 1
         // Tester for positiv verdi for antall rotasjoner
         char[] a = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
         char[] b = {'H', 'I', 'J', 'A', 'B', 'C', 'D', 'E', 'F', 'G'};
         Oblig1.rotasjon(a, 3);
-        assertEquals(Arrays.toString(b), Arrays.toString(a));
+        assertEquals(Arrays.toString(b), Arrays.toString(a), "Test 1 feilet");
 
-        // Tester for negativ verdi for antall rotasjoner
+        //TEST 2
+        // Tester for negativ verdi for antall rotasjoner når antall flytt er mindre enn tabellens lengde
         char[] c = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
-        char[] d = {'D', 'E', 'F', 'G', 'H', 'I', 'J', 'A', 'B', 'C',};
+        char[] d = {'D', 'E', 'F', 'G', 'H', 'I', 'J', 'A', 'B', 'C'};
         Oblig1.rotasjon(c, -3);
-        assertEquals(Arrays.toString(d), Arrays.toString(c));
+        assertEquals(Arrays.toString(d), Arrays.toString(c), "Test 2 feilet");
+
+        //TEST 3
+        // Tester for negativ verdi for antall rotasjoner når antall flytt er større enn tabellens lengde
+        char[] e = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+        char[] f = {'D', 'E', 'F', 'G', 'H', 'I', 'J', 'A', 'B', 'C'};
+        Oblig1.rotasjon(e, -13);
+        assertEquals(Arrays.toString(f), Arrays.toString(e), "Test 3 feilet");
+
+        //TEST 4
+        // Tester for positiv verdi for antall rotasjoner
+        char[] g = {'A', 'B'};
+        char[] h = {'A', 'B'};
+        Oblig1.rotasjon(g, 2);
+        assertEquals(Arrays.toString(h), Arrays.toString(h), "Test 4 feilet");
+
+        //TEST 5
+        // Tester for positiv verdi for antall rotasjoner
+        char[] i = {'A', 'B'};
+        char[] j = {'B', 'A'};
+        Oblig1.rotasjon(i, -1);
+        assertEquals(Arrays.toString(i), Arrays.toString(j), "Test 5 feilet");
+
+
     }
 
     @Test
@@ -209,6 +325,8 @@ class Oblig1UnitTest {
 
     @Test
     void indekssortering() {
+        int[] a = {5, 4, 3, 2, 1, 0};
+        int[] b = Oblig1.indekssortering(a);
         assertEquals(true, false, "Implementer indekssortering og denne testen");
     }
 

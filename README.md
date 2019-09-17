@@ -5,3 +5,6 @@ Felix Leypoldt s333743
 
 Herman Rustad s333769
 Paul Høglend s333733
+
+
+Spørsmålene i oppgave 1 er besvart i filen "TestResultat.txt".

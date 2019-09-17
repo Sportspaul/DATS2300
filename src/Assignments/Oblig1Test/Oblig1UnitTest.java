@@ -4,9 +4,9 @@ import Assignments.Oblig1.Oblig1;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Denne klassen kan du bruke til hjelp under utvikling av din oblig.
@@ -48,10 +48,10 @@ class Oblig1UnitTest {
 
 
 
-        Random random = new Random();
+
         int antall = 100; int i =1;
         int sum = 0;
-        int n = random.nextInt(20);
+        int n = 20;
         while(i < antall){
             int[] heltall = Oblig1Test.randPerm(n);
             int ant = Oblig1.ombyttinger(heltall);

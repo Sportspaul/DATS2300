@@ -1,6 +1,7 @@
 ///// Oppgave 1 //////////////////////////////////////
 Det er flest ombyttinger hvis maksverdien er først i arrayet
 Det er færrest ombyttinger hvis maksverdien er sist i arrayet
+Gjennomsnittlig antall ombyttinger på et array av lengde 20 er: 15.0
 
 
 ///// Testkjøring //////////////////////////////////////

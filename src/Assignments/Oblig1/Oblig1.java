@@ -48,6 +48,13 @@ public class Oblig1 {
     }
 
     ///// Oppgave 2 //////////////////////////////////////
+
+    /**
+     *
+     * Metoden sjekker hvor mange unike elementer det er i et sortert array
+     * @param verdier
+     * @return antall
+     */
     public static int antallUlikeSortert( int [] verdier ) {
         if(verdier.length == 0) {
             return 0;
@@ -62,7 +69,8 @@ public class Oblig1 {
 
         int temp = verdier[0];
         for(int i = 1; i < verdier.length; i++) {
-            if(verdier[i] > temp) {
+            if(verdier[i] > temp) {   /* Hvis det gjeldende element i arrayet er større enn den midlertidige verdien,
+                                        så har vi en unik verdi */
                 antall++;
                 temp = verdier[i];
             }

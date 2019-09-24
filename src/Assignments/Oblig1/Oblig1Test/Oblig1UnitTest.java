@@ -1,11 +1,11 @@
-package Assignments.Oblig1Test;
+package Assignments.Oblig1.Oblig1Test;
 
 import Assignments.Oblig1.Oblig1;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static Assignments.Oblig1Test.Oblig1Test.randPerm;
+import static Assignments.Oblig1.Oblig1Test.Oblig1Test.randPerm;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

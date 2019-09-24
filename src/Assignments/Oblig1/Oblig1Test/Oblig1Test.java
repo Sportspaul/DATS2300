@@ -1,4 +1,4 @@
-package Assignments.Oblig1Test;
+package Assignments.Oblig1.Oblig1Test;
 
 import Assignments.Oblig1.Oblig1;
 import org.junit.jupiter.api.Test;

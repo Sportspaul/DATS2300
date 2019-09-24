@@ -10,6 +10,15 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 
+/*
+    Andreas Hartmann s333759
+    Daniel Hansen s333748
+    Felix Leypoldt s333743
+    Herman Rustad s333769
+    Paul Høglend s333733
+*/
+
+
 
 public class DobbeltLenketListe<T> implements Liste<T> {
 

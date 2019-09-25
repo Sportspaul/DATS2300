@@ -52,7 +52,22 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public DobbeltLenketListe(T[] a) {
-        throw new NotImplementedException();
+        // Kaster unntak for tom tabell
+        if(a.length == 0){ throw new NullPointerException("Tabell a er null!"); }
+
+            Node<T> aktuell = new Node<>(a[0]);  // Opretter første node, og gir den verdi
+            antall++;                            // Opdaterer antall noder
+            hode = aktuell;                      // Setter hode lik første node
+
+        for(int i = 1; i < a.length; i++) {
+            Node<T> neste = new Node<>(a[i]);    // Opretter ny node
+            antall++;                            // Opdaterer antall noder
+            aktuell.neste = neste;               // Setter aktuell sin neste peker
+            neste.forrige = aktuell;             // Setter neste sin forrige peker
+            aktuell = neste;                     // Setter aktuell lik neste
+        }
+
+        hale = aktuell;                          // Setter halen lik siste node
     }
 
     public Liste<T> subliste(int fra, int til){
@@ -61,12 +76,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public int antall() {
-        throw new NotImplementedException();
+        return antall;
     }
 
     @Override
     public boolean tom() {
-        throw new NotImplementedException();
+        if(antall > 0){
+            return false;
+        }
+        return true;
     }
 
     @Override

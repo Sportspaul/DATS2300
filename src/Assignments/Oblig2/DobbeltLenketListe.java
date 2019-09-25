@@ -6,6 +6,7 @@ package Assignments.Oblig2;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
 
@@ -55,23 +56,53 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         // Kaster unntak for tom tabell
         if(a.length == 0){ throw new NullPointerException("Tabell a er null!"); }
 
+        a = fjernNullVerdier(a);
+
             Node<T> aktuell = new Node<>(a[0]);  // Opretter første node, og gir den verdi
             antall++;                            // Opdaterer antall noder
             hode = aktuell;                      // Setter hode lik første node
 
-        for(int i = 1; i < a.length; i++) {
-            Node<T> neste = new Node<>(a[i]);    // Opretter ny node
-            antall++;                            // Opdaterer antall noder
-            aktuell.neste = neste;               // Setter aktuell sin neste peker
-            neste.forrige = aktuell;             // Setter neste sin forrige peker
-            aktuell = neste;                     // Setter aktuell lik neste
+
+            for (int i = 1; i < a.length; i++) {
+                    Node<T> neste = new Node<>(a[i]);    // Opretter ny node
+                    antall++;                            // Opdaterer antall noder
+                    aktuell.neste = neste;               // Setter aktuell sin neste peker
+                    neste.forrige = aktuell;             // Setter neste sin forrige peker
+                    aktuell = neste;                     // Setter aktuell lik neste
+        }
+        hale = aktuell;                          // Setter halen lik siste node
+    }
+
+    public T[] fjernNullVerdier (T[] a) {
+        int antallNull = 0;
+
+        for(T verdi : a){
+            if(verdi == null){
+                antallNull++;
+            }
         }
 
-        hale = aktuell;                          // Setter halen lik siste node
+        if(antallNull == 0){ return a; }
+
+        T[] b = (T[]) new Object[a.length-antallNull];
+
+        int j = 0;
+        for(int i = 0; i < a.length; i++) {
+            if(a[i] != null){
+                b[j] = a[i];
+                j++;
+            }
+        }
+
+        return b;
     }
 
     public Liste<T> subliste(int fra, int til){
         throw new NotImplementedException();
+    }
+
+    public Node<T> getHode() {
+        return hode;
     }
 
     @Override

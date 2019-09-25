@@ -6,7 +6,6 @@ package Assignments.Oblig2;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
 
@@ -49,12 +48,11 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     private int endringer;         // antall endringer i listen
 
     public DobbeltLenketListe() {
-        throw new NotImplementedException();
     }
 
     public DobbeltLenketListe(T[] a) {
         // Kaster unntak for tom tabell
-        if(a.length == 0){ throw new NullPointerException("Tabell a er null!"); }
+        if(a == null){ throw new NullPointerException("Tabell a er null!"); }
 
         a = fjernNullVerdier(a);
 

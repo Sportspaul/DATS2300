@@ -51,7 +51,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public DobbeltLenketListe(T[] a) {
-        // Kaster unntak for tom tabell
+        // Kaster unntak for null tabell
         if(a == null){ throw new NullPointerException("Tabell a er null!"); }
 
         a = fjernNullVerdier(a);
@@ -163,11 +163,32 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public String toString() {
-        throw new NotImplementedException();
+        StringBuilder utskrift = new StringBuilder("[");
+        Node<T> aktuell  = hode; //starter på hode
+        /*Løper gjennom listen, så lenge nestepekeren er ulik null,
+          og legger verdien til aktuell node til utskriftstrengen
+         */
+        while(aktuell.neste != null) {
+            utskrift.append( aktuell.verdi);
+            aktuell = aktuell.neste;
+        }
+        utskrift.append("]");
+        return utskrift.toString();
     }
 
     public String omvendtString() {
-        throw new NotImplementedException();
+        StringBuilder utskrift = new StringBuilder("[");
+        Node<T> aktuell  = hale; //starter på halen
+
+        /*Løper gjennom listen, så lenge forrigepekeren er ulik null,
+          og legger verdien til aktuell node til utskriftstrengen
+         */
+        while(aktuell.forrige != null) {
+            utskrift.append( aktuell.verdi);
+            aktuell = aktuell.forrige;
+        }
+        utskrift.append("]");
+        return utskrift.toString();
     }
 
     @Override

@@ -161,7 +161,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public String toString() {
-        if(antall == 0) { return "[]"; }
         StringBuilder utskrift = new StringBuilder("[");
         Node<T> aktuell  = hode; //starter på hode
         /*Løper gjennom listen, så lenge aktuells nestepekeren er ulik null,
@@ -180,7 +179,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public String omvendtString() {
-        if(antall == 0) { return "[]"; }
         StringBuilder utskrift = new StringBuilder("[");
         Node<T> aktuell = hale; //starter på halen
 

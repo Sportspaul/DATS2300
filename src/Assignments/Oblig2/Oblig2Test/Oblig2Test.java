@@ -8,6 +8,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Oblig2Test {
 
+    @Test
+    void oppgave1Test() {
+        String[] s = {"Ole", null, "Per", "Kari", null};
+        Liste<String> liste = new DobbeltLenketListe<>(s);
+        System.out.println(liste.antall() + " " + liste.tom());
+    }
 
     @Test
     void instansTest() {
@@ -80,6 +86,7 @@ public class Oblig2Test {
         DobbeltLenketListe<Integer> liste2 = new DobbeltLenketListe<>(bInteger);
 
     }
+
 
     @Test
     void StringTest() {

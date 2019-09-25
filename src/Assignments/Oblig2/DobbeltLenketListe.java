@@ -163,7 +163,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public String toString() {
         StringBuilder utskrift = new StringBuilder("[");
         Node<T> aktuell  = hode; //starter på hode
-        /*Løper gjennom listen, så lenge nestepekeren er ulik null,
+        /*Løper gjennom listen, så lenge aktuells nestepekeren er ulik null,
           og legger verdien til aktuell node til utskriftstrengen
          */
         while(aktuell.neste != null) {
@@ -178,7 +178,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         StringBuilder utskrift = new StringBuilder("[");
         Node<T> aktuell  = hale; //starter på halen
 
-        /*Løper gjennom listen, så lenge forrigepekeren er ulik null,
+        /*Løper gjennom listen, så lenge aktuells forrigepekeren er ulik null,
           og legger verdien til aktuell node til utskriftstrengen
          */
         while(aktuell.forrige != null) {

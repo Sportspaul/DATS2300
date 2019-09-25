@@ -54,12 +54,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         // Kaster unntak for tom tabell
         if(a == null){ throw new NullPointerException("Tabell a er null!"); }
 
-        a = fjernNullVerdier(a);
+        a = fjernNullVerdier(a);             // Fjerner alle null-verdier
+        if(a.length == 0) { return; }        // Hopper ut av metoden hvis listen er tom
 
-            Node<T> aktuell = new Node<>(a[0]);  // Opretter første node, og gir den verdi
-            antall++;                            // Opdaterer antall noder
-            hode = aktuell;                      // Setter hode lik første node
-
+        Node<T> aktuell = new Node<>(a[0]);  // Opretter første node, og gir den verdi
+        antall++;                            // Opdaterer antall noder
+        hode = aktuell;                      // Setter hode lik første node
 
             for (int i = 1; i < a.length; i++) {
                     Node<T> neste = new Node<>(a[i]);    // Opretter ny node
@@ -71,20 +71,22 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         hale = aktuell;                          // Setter halen lik siste node
     }
 
-    public T[] fjernNullVerdier (T[] a) {
-        int antallNull = 0;
+    private T[] fjernNullVerdier (T[] a) {
+        int antallNullverdier = 0;              // Teller for antall nullverdier
 
         for(T verdi : a){
-            if(verdi == null){
-                antallNull++;
+            if(verdi == null){                  // Tester hvor mange verdier som er null
+                antallNullverdier++;
             }
         }
 
-        if(antallNull == 0){ return a; }
+        if(antallNullverdier == 0){ return a; }     // Returnerer oprinnelig liste hvis det ikke er noe nullverdier
 
-        T[] b = (T[]) new Object[a.length-antallNull];
+        T[] b = (T[]) new Object[a.length - antallNullverdier];     // Opretter returlisten
 
-        int j = 0;
+        int j = 0;  // index for returlisten
+
+        // Legger til alle verdiene som ikke er null til returlisten
         for(int i = 0; i < a.length; i++) {
             if(a[i] != null){
                 b[j] = a[i];
@@ -97,10 +99,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     public Liste<T> subliste(int fra, int til){
         throw new NotImplementedException();
-    }
-
-    public Node<T> getHode() {
-        return hode;
     }
 
     @Override
@@ -212,6 +210,25 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
         throw new NotImplementedException();
+    }
+
+
+    //Todo: Fjern før innlevering */
+    //Brukes kun for testing
+    public Node<T> getHodeForrige() {
+        return hode.forrige;
+    }
+
+    public Node<T> getHaleNeste() {
+        return hale.neste;
+    }
+
+    public Node<T> getHodeNeste() {
+        return hode.neste;
+    }
+
+    public Node<T> getHaleForrige() {
+        return hale.forrige;
     }
 
 } // class DobbeltLenketListe

@@ -4,9 +4,7 @@ import Assignments.Oblig2.DobbeltLenketListe;
 import Assignments.Oblig2.Liste;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Oblig2Test {
 
@@ -84,8 +82,15 @@ public class Oblig2Test {
     }
 
     @Test
-    void hodeOgHaleTest() {
+    void StringTest() {
+        String[] s1 = {}, s2 = {"A"}, s3 = {null,"A",null,"B",null};
+        DobbeltLenketListe<String> l1 = new DobbeltLenketListe<>(s1);
+        DobbeltLenketListe<String> l2 = new DobbeltLenketListe<>(s2);
+        DobbeltLenketListe<String> l3 = new DobbeltLenketListe<>(s3);
 
+        System.out.println(l1.toString() + "​ ​" + l2.toString()
+                + "​ ​"+ l3.toString() +"​ ​"+ l1.omvendtString() +"​ ​"
+                + l2.omvendtString() + "​ ​"+ l3.omvendtString());
     }
 
 }

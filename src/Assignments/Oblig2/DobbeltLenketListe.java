@@ -167,8 +167,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         /*Løper gjennom listen, så lenge aktuells nestepekeren er ulik null,
           og legger verdien til aktuell node til utskriftstrengen
          */
-        while(aktuell.neste != null) {
-            utskrift.append( aktuell.verdi);
+        while(aktuell != null) {
+            if(aktuell == hale){
+                utskrift.append(aktuell.verdi);
+            }else{
+                utskrift.append(aktuell.verdi + ", ");
+            }
             aktuell = aktuell.neste;
         }
         utskrift.append("]");
@@ -183,8 +187,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         /*Løper gjennom listen, så lenge aktuells forrigepekeren er ulik null,
           og legger verdien til aktuell node til utskriftstrengen
          */
-        while(aktuell.forrige != null) {
-            utskrift.append( aktuell.verdi);
+        while(aktuell != null) {
+            if(aktuell == hode){
+                utskrift.append(aktuell.verdi);
+            }else{
+                utskrift.append(aktuell.verdi + ", ");
+            }
             aktuell = aktuell.forrige;
         }
         utskrift.append("]");

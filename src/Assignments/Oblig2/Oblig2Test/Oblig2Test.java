@@ -100,4 +100,44 @@ public class Oblig2Test {
                 + l2.omvendtString() + "​ ​"+ l3.omvendtString());
     }
 
+
+    @Test
+    void legggInnTest() {
+        Integer[] listeInteger = new Integer[] {1, 2, 3};
+        DobbeltLenketListe<Integer> liste = new DobbeltLenketListe<>(listeInteger);
+        liste.leggInn(4);
+
+        // Tester om hale sin verdi er lik det som blir lagt til
+        assertEquals(4, liste.getHaleVerdi());
+
+        // Tester om hale sin forrige verdi er lik nest siste node
+        assertEquals(3, liste.getHaleForrigeVerdi());
+
+        // Tester om hale sin neste verdi er null
+        assertEquals(null, liste.getHaleNeste());
+
+        /*
+        Integer[] liste2Integer = new Integer[] {1, 2, 3};
+        DobbeltLenketListe<Integer> liste2 = new DobbeltLenketListe<>(liste2Integer);
+        liste.leggInn(null);
+         */
+
+        Integer[] liste3Integer = new Integer[] {};
+        DobbeltLenketListe<Integer> liste3 = new DobbeltLenketListe<>(liste3Integer);
+        liste3.leggInn(1);
+
+        // Tester om hode og hale peker på samme node når det bare er en node
+        assertEquals(1, liste3.getHaleVerdi());
+        assertEquals(1, liste3.getHodeVerdi());
+
+
+        DobbeltLenketListe<Integer> liste4 = new DobbeltLenketListe<>();
+        System.out.println(liste4.toString() + " " + liste4.omvendtString());
+        for (int i = 1; i <= 3; i++) {
+            liste4.leggInn(i);
+            System.out.println(liste4.toString() + " " + liste4.omvendtString());
+        }
+
+    }
+
 }

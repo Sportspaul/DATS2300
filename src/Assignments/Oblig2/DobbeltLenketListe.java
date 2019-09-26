@@ -8,6 +8,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Objects;
 
 
 /*
@@ -50,6 +51,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public DobbeltLenketListe() {
     }
 
+
+    // Konstruktør med en liste av elementer som parameter
     public DobbeltLenketListe(T[] a) {
         // Kaster unntak for null tabell
         if(a == null){ throw new NullPointerException("Tabell a er null!"); }
@@ -116,7 +119,24 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean leggInn(T verdi) {
-        throw new NotImplementedException();
+        verdi = Objects.requireNonNull(verdi, "Null-verdier er ikke tillatt");    // Tester for null-verdi
+
+        // Hvis det ikke fins noen noder fra før
+        if(antall == 0 && hode == null && hale == null){
+            Node<T> ny = new Node<>(verdi);                 // Opretter ny node
+            hode = ny;                                      // Setter hode lik ny node
+            hale = ny;                                      // Setter hale lik ny node
+        }else {
+            Node<T> ny = new Node<>(verdi);                 // Opretter ny node
+            ny.forrige = hale;                              // Setter ny sin forrige-peker lik halen
+            hale.neste = ny;                                // Setter hale sin neste-peker lik ny
+            hale = ny;                                      // Setter hale lik ny node
+        }
+
+        // Legger 1 til antall og endringer variablene
+        antall++;
+        endringer++;
+        return true;
     }
 
     @Override
@@ -259,6 +279,23 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public Node<T> getHaleForrige() {
         return hale.forrige;
     }
+
+    public T getHaleForrigeVerdi() {
+        return hale.forrige.verdi;
+    }
+
+    public T getHodeNesteVerdi() {
+        return hode.neste.verdi;
+    }
+
+    public T getHaleVerdi() {
+        return hale.verdi;
+    }
+
+    public T getHodeVerdi() {
+        return hale.verdi;
+    }
+
 
 } // class DobbeltLenketListe
 

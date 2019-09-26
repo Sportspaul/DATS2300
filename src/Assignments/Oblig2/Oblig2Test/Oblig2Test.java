@@ -141,6 +141,9 @@ public class Oblig2Test {
 
     }
 
+
+
+
     @Test
     void hastighet() {
         DobbeltLenketListe liste = new DobbeltLenketListe<>(new Integer[]{null, 1, null, 2, null});
@@ -156,5 +159,52 @@ public class Oblig2Test {
         }
         System.out.println("Tid: " + tid);
     }
+
+    @Test
+    void indeksTilTest() {
+        Integer[] listeInteger = new Integer[] {1, 2, 3, 4, 5, 6};
+        DobbeltLenketListe<Integer> liste = new DobbeltLenketListe<>(listeInteger);
+        assertEquals(2, liste.indeksTil(3));
+        System.out.println("Posisjon: "+ liste.indeksTil(3));
+        //Siste posisjon
+        assertEquals(5, liste.indeksTil(6));
+        System.out.println( "Posisjon: "+ liste.indeksTil(6));
+        //Første posisjon
+        assertEquals(0, liste.indeksTil(1));
+        System.out.println( "Posisjon: "+ liste.indeksTil(1));
+
+        //Lister med duplikater
+        Integer[] listeInteger2 = new Integer[] {10, 3, 2, 3, 4, 5, 3, 6};
+        DobbeltLenketListe<Integer> liste2 = new DobbeltLenketListe<>(listeInteger2);
+        //første posisjon
+        assertEquals(0, liste2.indeksTil(10));
+        System.out.println("Posisjon: "+ liste2.indeksTil(10));
+        //nok en unik verdi
+        assertEquals(2, liste2.indeksTil(2));
+        System.out.println("Posisjon: "+  liste2.indeksTil(2));
+        //Duplikatverdi
+        assertEquals(1, liste2.indeksTil(3));
+        System.out.println("Posisjon: "+ liste2.indeksTil(3));
+    }
+
+    @Test
+    void inneholderTest() {
+        Integer[] listeInteger = new Integer[] {1, 2, 3, 4, 5, 6, 7};
+        DobbeltLenketListe<Integer> liste = new DobbeltLenketListe<>(listeInteger);
+
+        assertEquals(true, liste.inneholder(3));
+        System.out.println("inneholder: "+ liste.inneholder(3));
+
+
+        assertEquals(false, liste.inneholder(10));
+        System.out.println("inneholder: "+ liste.inneholder(10));
+
+        assertEquals(false, liste.inneholder(null));
+        System.out.println("inneholder: "+ liste.inneholder(null));
+
+
+    }
+
+
 
 }

@@ -201,7 +201,31 @@ public class Oblig2Test {
 
         assertEquals(false, liste.inneholder(null));
         System.out.println("inneholder: "+ liste.inneholder(null));
+    }
 
+    @Test
+    void leggInn2Test() {
+        Integer[] listeInteger = new Integer[] {1, 3, 4, 5, 7};
+        DobbeltLenketListe<Integer> liste = new DobbeltLenketListe<>(listeInteger);
+
+        liste.leggInn(1, 2);
+        assertEquals(2, liste.getHodeNesteVerdi());
+
+        liste.leggInn(5, 6);
+        assertEquals(6, liste.getHaleForrigeVerdi());
+
+        Integer[] liste2Integer = new Integer[] {};
+        DobbeltLenketListe<Integer> liste2 = new DobbeltLenketListe<>(liste2Integer);
+
+        liste2.leggInn(0, 1);
+        assertEquals(1, liste2.getHodeVerdi());
+        assertEquals(1, liste2.getHaleVerdi());
+
+        Integer[] liste3Integer = new Integer[] {1, 2, 3};
+        DobbeltLenketListe<Integer> liste3 = new DobbeltLenketListe<>(liste3Integer);
+
+        liste3.leggInn(0, 0);
+        assertEquals(0, liste3.getHodeVerdi());
 
     }
 

@@ -143,7 +143,48 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void leggInn(int indeks, T verdi) {
-        throw new NotImplementedException();
+        leggInnUnntak(indeks, verdi);
+        Node<T> aktuell;
+
+        if(antall == 0 || indeks == antall) {
+            leggInn(verdi);
+            return;
+        }
+
+        if(indeks < antall/2) {
+            aktuell = hode;
+            int i = 0;
+            while(i < indeks) {
+                aktuell = aktuell.neste;
+                i++;
+            }
+        }else {
+            aktuell = hale;
+            int i = antall-1;
+            while(i > indeks) {
+                aktuell = aktuell.forrige;
+                i--;
+            }
+        }
+
+        Node<T> ny = new Node<>(verdi, aktuell.forrige, aktuell);  // Opretter en ny node
+        ny.neste.forrige = ny;                                     // ny-noden sin neste sin forrige-peker er lik ny
+        if(indeks == 0){
+            hode = ny;                                             // Oppdater hode hvis ny-noden legges inn på indeks 0
+        }else {
+            ny.forrige.neste = ny;                                 // ny-noden sin forrige sin neste-peker er lik ny
+        }
+
+        antall++;
+        endringer++;
+
+    }
+
+    // Hjelpemetode
+    private void leggInnUnntak(int indeks, T verdi) {
+        if(verdi == null) { throw new NullPointerException("Det kan ikke legges inn null-verdier i listen"); }
+        if(indeks > antall) { throw new IndexOutOfBoundsException("Indeksen til verdien som legges inn kan ikke være større enn antall elementer i listen"); }
+        if(indeks < 0) { throw new IndexOutOfBoundsException("Indeksen til verdien som legges inn kan ikke være mindre enn null"); }
     }
 
     @Override
@@ -170,7 +211,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 returNode = returNode.neste;
                 i++;
             }
-        } else {
+        }else {
             returNode = hale;
             int i = antall-1;
             while (i > indeks) {
@@ -333,7 +374,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public T getHodeVerdi() {
-        return hale.verdi;
+        return hode.verdi;
     }
 
     public Node<T> finnNodeTest(int indeks) {

@@ -122,14 +122,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         verdi = Objects.requireNonNull(verdi, "Null-verdier er ikke tillatt");    // Tester for null-verdi
 
         // Hvis det ikke fins noen noder fra før
-        if(antall == 0 && hode == null && hale == null){
+        if(antall > 0){
             Node<T> ny = new Node<>(verdi);                 // Opretter ny node
-            hode = ny;                                      // Setter hode lik ny node
+            hale.neste = ny;                                // Setter hale sin neste-peker lik ny
+            ny.forrige = hale;                              // Setter ny sin forrige-peker lik halen
             hale = ny;                                      // Setter hale lik ny node
+
         }else {
             Node<T> ny = new Node<>(verdi);                 // Opretter ny node
-            ny.forrige = hale;                              // Setter ny sin forrige-peker lik halen
-            hale.neste = ny;                                // Setter hale sin neste-peker lik ny
+            hode = ny;                                      // Setter hode lik ny node
             hale = ny;                                      // Setter hale lik ny node
         }
 
@@ -152,6 +153,28 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public T hent(int indeks) {
         throw new NotImplementedException();
+    }
+
+    private Node<T> finnNode(int indeks) {
+        Node<T> returNode;
+
+        if(indeks < antall/2) {
+            returNode = hode;
+            int i = 0;
+            while (i < indeks) {
+                returNode = returNode.neste;
+                i++;
+            }
+        } else {
+            returNode = hale;
+            int i = antall-1;
+            while (i > indeks) {
+                returNode = returNode.forrige;
+                i--;
+            }
+        }
+
+        return returNode;
     }
 
     @Override
@@ -179,6 +202,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         throw new NotImplementedException();
     }
 
+    //TODO: Metoden må gjøres raskere
     @Override
     public String toString() {
         StringBuilder utskrift = new StringBuilder("[");
@@ -198,6 +222,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return utskrift.toString();
     }
 
+    //TODO: Metoden må gjøres raskere
     public String omvendtString() {
         StringBuilder utskrift = new StringBuilder("[");
         Node<T> aktuell = hale; //starter på halen
@@ -296,6 +321,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return hale.verdi;
     }
 
+    public Node<T> finnNodeTest(int indeks) {
+        return finnNode(indeks);
+    }
 
 } // class DobbeltLenketListe
 

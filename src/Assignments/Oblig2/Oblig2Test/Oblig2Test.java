@@ -140,4 +140,28 @@ public class Oblig2Test {
 
     }
 
+    @Test
+    void finnNodeTest() {
+        Integer[] listeInteger = new Integer[] {1, 2, 3, 4, 5, 6};
+        DobbeltLenketListe<Integer> liste = new DobbeltLenketListe<>(listeInteger);
+        assertEquals(liste.getHodeNeste(), liste.finnNodeTest(1));
+        System.out.println(liste.getHaleForrigeVerdi());
+        System.out.println(liste.getHaleForrigeVerdi());
+        assertEquals(liste.getHaleForrige(), liste.finnNodeTest(4));
+
+    }
+
+    @Test
+    void hastighet() {
+        DobbeltLenketListe liste = new DobbeltLenketListe<>(new Integer[]{null, 1, null, 2, null});
+        for (int i = 0; i < 20000; i++) liste.leggInn(i);
+        long tid = System.currentTimeMillis();  // Setter starttidspunkt
+        liste.toString();                       // Kjører toString-metoden
+        tid = System.currentTimeMillis() - tid; // Finner diferansen mellom start- og slutt-tidspunkt
+
+        if (tid > 20) {
+            System.out.println("Tid: " + tid + " ms");
+        }
+    }
+
 }

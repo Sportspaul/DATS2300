@@ -74,6 +74,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         hale = aktuell;                          // Setter halen lik siste node
     }
 
+    //Hjelpemetode
     private T[] fjernNullVerdier (T[] a) {
         int antallNullverdier = 0;              // Teller for antall nullverdier
 
@@ -87,7 +88,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         T[] b = (T[]) new Object[a.length - antallNullverdier];     // Opretter returlisten
 
-        int j = 0;  // index for returlisten
+        int j = 0;  // indeks for returlisten
 
         // Legger til alle verdiene som ikke er null til returlisten
         for(int i = 0; i < a.length; i++) {
@@ -121,14 +122,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public boolean leggInn(T verdi) {
         verdi = Objects.requireNonNull(verdi, "Null-verdier er ikke tillatt");    // Tester for null-verdi
 
-        // Hvis det ikke fins noen noder fra før
+        //legger inn en ny node bakerst
         if(antall > 0){
             Node<T> ny = new Node<>(verdi);                 // Opretter ny node
             hale.neste = ny;                                // Setter hale sin neste-peker lik ny
             ny.forrige = hale;                              // Setter ny sin forrige-peker lik halen
             hale = ny;                                      // Setter hale lik ny node
 
-        }else {
+        } else {   // Hvis det ikke fins noen noder fra før
             Node<T> ny = new Node<>(verdi);                 // Opretter ny node
             hode = ny;                                      // Setter hode lik ny node
             hale = ny;                                      // Setter hale lik ny node

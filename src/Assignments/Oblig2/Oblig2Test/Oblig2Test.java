@@ -15,14 +15,9 @@ public class Oblig2Test {
         System.out.println(liste.antall() + " " + liste.tom());
     }
 
-    @Test
-    void instansTest() {
-        Liste<String> liste = new DobbeltLenketListe<>();
-    }
-
     // Tester konstruktør med et array som argument
     @Test
-    void instansTest2() {
+    void instansTest() {
         int antallFeil = 0;
 
         int[] a = {1, 2, 3, 4, 5};
@@ -102,7 +97,7 @@ public class Oblig2Test {
 
 
     @Test
-    void legggInnTest() {
+    void leggInnTest() {
         Integer[] listeInteger = new Integer[] {1, 2, 3};
         DobbeltLenketListe<Integer> liste = new DobbeltLenketListe<>(listeInteger);
         liste.leggInn(4);
@@ -116,11 +111,6 @@ public class Oblig2Test {
         // Tester om hale sin neste verdi er null
         assertEquals(null, liste.getHaleNeste());
 
-        /*
-        Integer[] liste2Integer = new Integer[] {1, 2, 3};
-        DobbeltLenketListe<Integer> liste2 = new DobbeltLenketListe<>(liste2Integer);
-        liste.leggInn(null);
-         */
 
         Integer[] liste3Integer = new Integer[] {};
         DobbeltLenketListe<Integer> liste3 = new DobbeltLenketListe<>(liste3Integer);
@@ -160,8 +150,11 @@ public class Oblig2Test {
         tid = System.currentTimeMillis() - tid; // Finner diferansen mellom start- og slutt-tidspunkt
 
         if (tid > 20) {
-            System.out.println("Tid: " + tid + " ms");
+            System.out.println("Dette inntreffer evt på MacOS");
+            System.out.println("Oppgave 2n: Dette (" + tid + " ms) gikk altfor sakte!");
+            System.out.println(" Har du kodet toString slik det ble bedt om?");
         }
+        System.out.println("Tid: " + tid);
     }
 
 }

@@ -4,6 +4,8 @@ import Assignments.Oblig2.DobbeltLenketListe;
 import Assignments.Oblig2.Liste;
 import org.junit.jupiter.api.Test;
 
+import java.util.LinkedList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Oblig2Test {
@@ -201,8 +203,40 @@ public class Oblig2Test {
 
         assertEquals(false, liste.inneholder(null));
         System.out.println("inneholder: "+ liste.inneholder(null));
+    }
+
+    @Test
+    void nullstillTest() {
+
+        // Tester om nullstill metode 1 gir riktig resultat
+        Integer[] listeInteger = new Integer[] {1, 2, 3, 4, 5, 6, 7};
+        DobbeltLenketListe<Integer> liste = new DobbeltLenketListe<>(listeInteger);
+        liste.nullstill();
+        assertEquals("[]", liste.toString());
+
+        // Tester om nullstill metode 2 gir riktig resultat
+        listeInteger = new Integer[] {1, 2, 3, 4, 5, 6, 7};
+        liste = new DobbeltLenketListe<>(listeInteger);
+        liste.nullstill2();
+        assertEquals("[]", liste.toString());
 
 
+        // Tester hvilke av nullstill metodene som er raskest
+
+        // Metode 1
+        liste = new DobbeltLenketListe<>();
+        for(int i = 0; i < 10_000_000; i++){ liste.leggInn(i); }
+        long tid = System.currentTimeMillis();
+        liste.nullstill();
+        tid = System.currentTimeMillis() - tid;
+        System.out.println("Metode nummer 1 brukte: " + tid + "(ms)" );
+
+        // Metode 2
+        for(int i = 0; i < 10_000_000; i++){ liste.leggInn(i); }
+        tid = System.currentTimeMillis();
+        liste.nullstill2();
+        tid = System.currentTimeMillis() - tid;
+        System.out.println("Metode nummer 2 brukte: " + tid + "(ms)" );
     }
 
     @Test

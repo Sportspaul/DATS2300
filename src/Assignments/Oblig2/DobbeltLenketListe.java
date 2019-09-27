@@ -276,7 +276,26 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void nullstill() {
-        throw new NotImplementedException();
+        Node<T> aktuell = hode;
+
+        while(aktuell != null) {
+            Node<T> neste = aktuell.neste;
+            aktuell.verdi = null;
+            aktuell.neste = null;
+            aktuell.forrige = null;
+            aktuell = neste;
+        }
+
+        hode = hale = null;
+        antall = 0;
+        endringer++;
+    }
+
+    public void nullstill2() {
+        int startAntall = antall;
+        for(int i = 0; i < startAntall; i++) {
+            fjern(0);
+        }
     }
 
     //TODO: Metoden må gjøres raskere

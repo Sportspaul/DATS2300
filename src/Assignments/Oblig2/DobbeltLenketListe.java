@@ -208,14 +208,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         if(verdi == null) { return false;}
         Node<T> aktuell = hode;
 
-        int i = 0;
-        while(i < antall-1) {
-            if(aktuell.verdi.equals(verdi)){ break; }
+        int i = 1;
+        while(!aktuell.verdi.equals(verdi) && i < antall) {
             aktuell = aktuell.neste;
             i++;
         }
 
-        if(i == antall-1 && !aktuell.verdi.equals(verdi)) {
+        if(i == antall && !aktuell.verdi.equals(verdi)) {
             return false;
         }
 

@@ -205,12 +205,74 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean fjern(T verdi) {
-        throw new NotImplementedException();
+        if(verdi == null) { return false;}
+        Node<T> aktuell = hode;
+
+        int i = 0;
+        while(i < antall-1) {
+            if(aktuell.verdi.equals(verdi)){ break; }
+            aktuell = aktuell.neste;
+            i++;
+        }
+
+        if(i == antall-1 && !aktuell.verdi.equals(verdi)) {
+            return false;
+        }
+
+        if(antall == 1){
+            hode = null;
+            hale = null;
+        }else if(aktuell.forrige == null) {
+            hode.neste.forrige = null;
+            hode = hode.neste;
+        }else if(aktuell.neste == null) {
+            hale.forrige.neste = null;
+            hale = hale.forrige;
+        }else {
+            aktuell.forrige.neste = aktuell.neste;
+            aktuell.neste.forrige = aktuell.forrige;
+        }
+
+        antall--;
+        endringer++;
+        return true;
     }
 
     @Override
     public T fjern(int indeks) {
-        throw new NotImplementedException();
+        if(indeks < 0) { throw new IndexOutOfBoundsException("Indeksen kan ikke være et negativt tall"); }
+        if(indeks >= antall) { throw new IndexOutOfBoundsException("Indeksen kan ikke være større enn antall noder i listen"); }
+
+        T returverdi;
+
+        if(antall == 1){                    // Hvis siste element skal fjernes
+            returverdi = hode.verdi;
+            hode = null;
+            hale = null;
+        }else if(indeks == 0) {             // Hvis den første noden skal fjernes
+            returverdi = hode.verdi;
+            hode.neste.forrige = null;
+            hode = hode.neste;
+        }else if(indeks == antall-1) {      // Hvis den siste noden skal fjernes
+            returverdi = hale.verdi;
+            hale.forrige.neste = null;
+            hale = hale.forrige;
+        }else {                             // Hvis en node mellom to andre skal fjernes
+            Node<T> aktuell = hode;
+            int i = 0;
+            while(i < indeks) {
+                aktuell = aktuell.neste;
+                i++;
+            }
+
+            returverdi = aktuell.verdi;
+            aktuell.forrige.neste = aktuell.neste;
+            aktuell.neste.forrige = aktuell.forrige;
+        }
+
+        antall--;
+        endringer++;
+        return returverdi;
     }
 
     @Override

@@ -205,6 +205,52 @@ public class Oblig2Test {
 
     }
 
+    @Test
+    void fjernIndeksTest() {
+        Integer[] listeInteger = new Integer[] {1, 2, 3, 4, 5};
+        DobbeltLenketListe<Integer> liste = new DobbeltLenketListe<>(listeInteger);
+
+        assertEquals(2, liste.fjern(1));
+        assertEquals(1, liste.fjern(0));
+        assertEquals(5, liste.fjern(2));
+        assertEquals(3, liste.fjern(0));
+        assertEquals(4, liste.fjern(0));
+
+
+        Integer[] liste2Integer = new Integer[] {};
+        DobbeltLenketListe<Integer> liste2 = new DobbeltLenketListe<>(liste2Integer);
+
+    }
+
+    @Test
+    void fjernVerdiTest() {
+        String[] listeString = new String[] {"A", "B", "C", "D"};
+        DobbeltLenketListe<String> liste = new DobbeltLenketListe<>(listeString);
+        System.out.println(liste.toString());
+
+        liste.fjern("C");
+        assertEquals("[A, B, D]", liste.toString());
+        System.out.println(liste.toString());
+
+        liste.fjern("D");
+        assertEquals("[A, B]", liste.toString());
+        System.out.println(liste.toString());
+
+        liste.fjern("A");
+        assertEquals("[B]", liste.toString());
+        System.out.println(liste.toString());
+
+        liste.fjern("B");
+        assertEquals("[]", liste.toString());
+        System.out.println(liste.toString());
+
+        String[] liste2String = new String[] {"A", "B", "C", "D"};
+        DobbeltLenketListe<String> liste2 = new DobbeltLenketListe<>(liste2String);
+        System.out.println(liste2.toString());
+
+        assertEquals(false, liste2.fjern("E"));
+    }
+
 
 
 }

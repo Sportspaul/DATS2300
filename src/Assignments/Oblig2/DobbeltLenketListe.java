@@ -161,19 +161,24 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         throw new NotImplementedException();
     }
 
+    // Hjelpemetode
     private Node<T> finnNode(int indeks) {
         Node<T> returNode;
 
-        if(indeks < antall/2) {
+        if(indeks < antall/2) {                 // Hvis indeksen er mindre enn antall / 2
             returNode = hode;
             int i = 0;
+
+            // Setter returnNode lik neste verdi helt til indeksen stemmer
             while (i < indeks) {
                 returNode = returNode.neste;
                 i++;
             }
-        } else {
+        } else {                                // Hvis indeks er >= antall / 2
             returNode = hale;
             int i = antall-1;
+
+            // Setter returnNode lik forrige verdi helt til indeksen stemmer
             while (i > indeks) {
                 returNode = returNode.forrige;
                 i--;

@@ -2,6 +2,7 @@ package Assignments.Oblig2.Oblig2Test;
 
 import Assignments.Oblig2.DobbeltLenketListe;
 import Assignments.Oblig2.Liste;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -138,7 +139,34 @@ public class Oblig2Test {
         System.out.println(liste.getHaleForrigeVerdi());
         System.out.println(liste.getHaleForrigeVerdi());
         assertEquals(liste.getHaleForrige(), liste.finnNodeTest(4));
+    }
 
+    @Test
+    void hentTest() {
+        Integer[] listeInteger = new Integer[] {1, 2, 3, 4, 5, 6};
+        DobbeltLenketListe<Integer> liste = new DobbeltLenketListe<>(listeInteger);
+        assertEquals(3, liste.hent(2), "hente index 2");
+        assertEquals(1, liste.hent(0), "hente index 0");
+        assertEquals(6, liste.hent(5), "hente index 5");
+        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
+            liste.hent(-3);
+        });
+    }
+
+    @Test
+    void oppdaterTest() {
+        Integer[] listeInteger = new Integer[] {1, 2, 3, 4, 5, 6};
+        DobbeltLenketListe<Integer> liste = new DobbeltLenketListe<>(listeInteger);
+        assertEquals(2, liste.oppdater(1,3));
+        assertEquals(1, liste.oppdater(0, 2));
+        assertEquals(6, liste.oppdater(5,3));
+        assertEquals("[2, 3, 3, 4, 5, 3]", liste.toString());
+        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
+            liste.oppdater(-3, 2);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            liste.oppdater(3, null);
+        });
     }
 
 

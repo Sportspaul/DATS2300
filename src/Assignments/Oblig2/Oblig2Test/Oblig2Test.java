@@ -131,6 +131,8 @@ public class Oblig2Test {
 
     }
 
+    //Oppgave 3a
+
     @Test
     void finnNodeTest() {
         Integer[] listeInteger = new Integer[] {1, 2, 3, 4, 5, 6};
@@ -169,7 +171,26 @@ public class Oblig2Test {
         });
     }
 
+    //Oppgave 3b
 
+    @Test
+    void sublisteTest() {
+        Integer[] listeInteger = new Integer[] {1, 2, 3, 4, 5, 6};
+        DobbeltLenketListe<Integer> liste = new DobbeltLenketListe<>(listeInteger);
+        assertEquals("[2, 3, 4]", liste.subliste(1,4).toString());
+        assertEquals("[1]" ,liste.subliste(0, 1).toString());
+        assertEquals("[]", liste.subliste(0,0).toString());
+        assertEquals("[4, 5, 6]", liste.subliste(3,6).toString());
+        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
+            liste.subliste(-2,5);
+        });
+        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> {
+            liste.subliste(3,9);
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            liste.subliste(4,3);
+        });
+    }
 
 
     @Test

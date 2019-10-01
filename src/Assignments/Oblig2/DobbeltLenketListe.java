@@ -307,23 +307,26 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public Iterator<T> iterator(int indeks) {
-        throw new NotImplementedException();
+        indeksKontroll(indeks, false);          // Sjekker at indeksen er lovlig
+        return new DobbeltLenketListeIterator(indeks);
     }
 
-    private class DobbeltLenketListeIterator implements Iterator<T>
-    {
+    //DobbeltLenketListeIterator
+    private class DobbeltLenketListeIterator implements Iterator<T> {
         private Node<T> denne;
         private boolean fjernOK;
         private int iteratorendringer;
 
         private DobbeltLenketListeIterator(){
-            denne = hode;     // denne starter på den første i listen
-            fjernOK = false;  // blir sann når next() kalles
+            denne = hode;                   // denne starter på den første i listen
+            fjernOK = false;                // blir sann når next() kalles
             iteratorendringer = endringer;  // teller endringer
         }
 
         private DobbeltLenketListeIterator(int indeks){
-            throw new NotImplementedException();
+            denne = finnNode(indeks);       // denne starter på den oppgitte indeksen i listen
+            fjernOK = false;                // blir sann når next() kalles
+            iteratorendringer = endringer;  // teller endringer
         }
 
         @Override
@@ -333,7 +336,18 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         @Override
         public T next(){
-            throw new NotImplementedException();
+            if(iteratorendringer != endringer) {
+                throw new ConcurrentModificationException("iterator endringer er ikke lik endringer");
+            }                                   // Får feilmelding om det er gjort endring i listen før metoden kjøres
+
+            if(hasNext() != true) {
+                throw new NoSuchElementException("Det er ikke flere igjen i listen");
+            }                                   // Får feilmelding om det ikke er flere igjen i listen
+
+            fjernOK = true;
+            T denneVerdi = denne.verdi;         // Lagring av denne.verdi
+            denne = denne.neste;                // Denne peker på neste node i listen
+            return denneVerdi;                  // Returnerer den lagrede verdien
         }
 
         @Override

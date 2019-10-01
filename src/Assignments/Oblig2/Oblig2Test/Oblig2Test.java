@@ -5,7 +5,12 @@ import Assignments.Oblig2.Liste;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class Oblig2Test {
 
@@ -254,6 +259,35 @@ public class Oblig2Test {
 
     }
 
+    //Oppgave 8
 
+    @Test
+    void nextTest() {
+        Integer[] listeInteger = new Integer[] {1,2,3,4,5,6};
+        DobbeltLenketListe<Integer> liste = new DobbeltLenketListe<>(listeInteger);
+        Iterator<Integer> i = liste.iterator();
+        assertTrue(i.hasNext());
+        i.next();
+        assertEquals(2, i.next());
+        Integer[] listeIntegerTom = new Integer[] {};
+        DobbeltLenketListe<Integer> listeTom = new DobbeltLenketListe<>(listeIntegerTom);
+        Iterator<Integer> ii = listeTom.iterator();
+        Assertions.assertThrows(NoSuchElementException.class, () -> {
+            ii.next();
+        });
+        liste.oppdater(3,2);
+        Assertions.assertThrows(ConcurrentModificationException.class, () -> {
+            i.next();
+        });
+    }
+
+    @Test
+    void IteratorTest() {
+        Integer[] listeInteger = new Integer[] {1,2,3,4,5,6};
+        DobbeltLenketListe<Integer> liste = new DobbeltLenketListe<>(listeInteger);
+        Iterator<Integer> i = liste.iterator(2);
+        assertEquals(true, i.hasNext());
+        assertEquals(3, i.next());
+    }
 
 }

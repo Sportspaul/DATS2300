@@ -5,6 +5,7 @@ import Assignments.Oblig2.Liste;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Comparator;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -288,6 +289,17 @@ public class Oblig2Test {
         Iterator<Integer> i = liste.iterator(2);
         assertEquals(true, i.hasNext());
         assertEquals(3, i.next());
+    }
+
+    @Test
+    void sorterTest() {
+        String [] navn = {"Lars","Anders","Bodil","Kari","Per","Berit"};
+        Liste<String> liste1 = new DobbeltLenketListe<>(navn);
+        DobbeltLenketListe.sorter(liste1, Comparator.naturalOrder());
+        System.out.println("----------------------------");
+        Integer [] tall = {2,6,4,7,9,16,16};
+        Liste<Integer> liste2 = new DobbeltLenketListe<>(tall);
+        DobbeltLenketListe.sorter(liste2, Comparator.naturalOrder());
     }
 
 }

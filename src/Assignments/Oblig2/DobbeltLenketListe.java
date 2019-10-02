@@ -318,41 +318,66 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         private int iteratorendringer;
 
         private DobbeltLenketListeIterator(){
-            denne = hode;                   // denne starter på den første i listen
-            fjernOK = false;                // blir sann når next() kalles
-            iteratorendringer = endringer;  // teller endringer
+            denne = hode;                         // denne starter på den første i listen
+            fjernOK = false;                      // blir sann når next() kalles
+            iteratorendringer = endringer;        // teller endringer
         }
 
         private DobbeltLenketListeIterator(int indeks){
-            denne = finnNode(indeks);       // denne starter på den oppgitte indeksen i listen
-            fjernOK = false;                // blir sann når next() kalles
-            iteratorendringer = endringer;  // teller endringer
+            denne = finnNode(indeks);             // denne starter på den oppgitte indeksen i listen
+            fjernOK = false;                      // blir sann når next() kalles
+            iteratorendringer = endringer;        // teller endringer
         }
 
         @Override
         public boolean hasNext(){
-            return denne != null;  // denne koden skal ikke endres!
+            return denne != null;                 // denne koden skal ikke endres!
         }
 
         @Override
         public T next(){
-            if(iteratorendringer != endringer) {
+            if(iteratorendringer != endringer) {  // Sjekker om det er gjort endringer i listen før metoden ble kjørt
                 throw new ConcurrentModificationException("iterator endringer er ikke lik endringer");
-            }                                   // Får feilmelding om det er gjort endring i listen før metoden kjøres
+            }
 
-            if(hasNext() != true) {
+            if(hasNext() != true) {               // Sjekker om det er flere igjen i listen
                 throw new NoSuchElementException("Det er ikke flere igjen i listen");
-            }                                   // Får feilmelding om det ikke er flere igjen i listen
+            }
 
-            fjernOK = true;
-            T denneVerdi = denne.verdi;         // Lagring av denne.verdi
-            denne = denne.neste;                // Denne peker på neste node i listen
-            return denneVerdi;                  // Returnerer den lagrede verdien
+            fjernOK = true;                       // Om fjernOK er true kan man bruke remove() metoden.
+            T denneVerdi = denne.verdi;           // Lagring av denne.verdi
+            denne = denne.neste;                  // Denne peker på neste node i listen
+            return denneVerdi;                    // Returnerer den lagrede verdien
         }
 
         @Override
         public void remove(){
-            throw new NotImplementedException();
+            if(antall == 0 || fjernOK == false) { // Sjekker om det er lov å kalle remove()
+                throw new IllegalStateException("Tabellen kan ikke være tom!");
+            }
+
+            if(iteratorendringer != endringer) {  // Sjekker om det er gjort endringer i listen før remove() ble kjørt
+                throw new ConcurrentModificationException("iterator endringer er ikke lik endringer");
+            }
+
+            fjernOK = false;                      // Om fjernOK er false kan man ikke bruke remove() igjen
+
+            if(antall == 1) {                     // Tester for om det bare er en verdi i listen
+                hode = null;
+                hale = null;
+            } else if(denne == null) {            // Tester for om denne er den siste verdien i listen
+                hale = hale.forrige;              // Flytter hale til forrige i listen
+                hale.neste = null;                // Fjerner den gamle halen fra listen
+            } else if(denne.forrige == hode) {    // Tester for om denne er den første verdien i listen
+                hode = hode.neste;                // Flytter hodet til neste i listen
+                hode.forrige = null;              // Fjerner det gamle hodet fra listen
+            } else {                              // Denne et sted midt i en liste med flere noder
+                denne.forrige.forrige.neste = denne;    // Noden man vil fjerne blir ikke pekt på av noden bak
+                denne.forrige = denne.forrige.forrige;  // Noden man vil fjerne blir ikke pekt på av noden forran
+            }
+            antall--;                             // En node ble slettet, antallet minsker med 1
+            endringer++;                          // En endring er gjort i listen
+            iteratorendringer++;                  // En endring er gjort i iteratoren
         }
 
     } // class DobbeltLenketListeIterator

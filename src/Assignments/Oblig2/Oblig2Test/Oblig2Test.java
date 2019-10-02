@@ -291,6 +291,8 @@ public class Oblig2Test {
         assertEquals(3, i.next());
     }
 
+    //Oppgave 10
+
     @Test
     void sorterTest() {
         String [] navn = {"Lars","Anders","Bodil","Kari","Per","Berit"};
@@ -300,6 +302,50 @@ public class Oblig2Test {
         Integer [] tall = {2,6,4,7,9,16,16};
         Liste<Integer> liste2 = new DobbeltLenketListe<>(tall);
         DobbeltLenketListe.sorter(liste2, Comparator.naturalOrder());
+    }
+
+    //Oppgave 9
+
+    @Test
+    void removeTest() {
+        DobbeltLenketListe<String> liste =
+                new DobbeltLenketListe<>(new String[]
+                        {"Lars","Anders","Bodil","Kari","Per"});
+        liste.fjernHvis(navn -> navn.charAt(0) == 'B'); // fjerner navn som starter med B
+        assertEquals("[Lars, Anders, Kari, Per]", liste.toString());
+        assertEquals("[Per, Kari, Anders, Lars]", liste.omvendtString());
+
+        DobbeltLenketListe<String> liste2 =
+                new DobbeltLenketListe<>(new String[]
+                        {"Birger","Lars","Anders","Kari","Per"});
+        liste2.fjernHvis(navn -> navn.charAt(0) == 'B'); // fjerner navn som starter med B
+        assertEquals("[Lars, Anders, Kari, Per]", liste2.toString());
+        assertEquals("[Per, Kari, Anders, Lars]", liste2.omvendtString());
+
+        DobbeltLenketListe<String> liste3 =
+                new DobbeltLenketListe<>(new String[]
+                        {"Lars","Anders","Kari","Per","Berit"});
+        liste3.fjernHvis(navn -> navn.charAt(0) == 'B'); // fjerner navn som starter med B
+        assertEquals("[Lars, Anders, Kari, Per]", liste3.toString());
+        assertEquals("[Per, Kari, Anders, Lars]", liste3.omvendtString());
+
+        DobbeltLenketListe<String> liste4 =
+                new DobbeltLenketListe<>(new String[]
+                        {"Birger","Lars","Anders","Bodil","Kari","Per","Berit"});
+        liste4.fjernHvis(navn -> navn.charAt(0) == 'B'); // fjerner navn som starter med B
+        assertEquals("[Lars, Anders, Kari, Per]", liste4.toString());
+        assertEquals("[Per, Kari, Anders, Lars]", liste4.omvendtString());
+
+        Integer[] listeInteger = new Integer[] {};
+        DobbeltLenketListe<Integer> listeInt = new DobbeltLenketListe<>(listeInteger);
+        Iterator<Integer> i = listeInt.iterator();
+        Assertions.assertThrows(IllegalStateException.class, () -> {
+            i.remove();
+        });
+
+
+
+
     }
 
 }

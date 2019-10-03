@@ -383,14 +383,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     } // class DobbeltLenketListeIterator
 
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
+        if(liste.antall() < 2) {
+            return;
+        }
         for(int i = 1; i < liste.antall(); i++) {
             int verdi = c.compare(liste.hent(i-1), liste.hent(i));
             System.out.println(verdi);
         }
-
-
-
-
     }
 
 

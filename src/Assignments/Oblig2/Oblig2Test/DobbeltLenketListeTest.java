@@ -5,6 +5,7 @@ import Assignments.Oblig2.Liste;
 
 import java.util.*;
 
+
 class DobbeltLenketListeTest {
 
     ////// Oppgave 1 /////////////////////

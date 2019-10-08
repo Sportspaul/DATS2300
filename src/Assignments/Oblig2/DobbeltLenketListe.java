@@ -384,10 +384,19 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
 
+        // looper gjennom listen
         for(int i = 1; i < liste.antall(); i++) {
+
+            // int verdi blir positiv hvis det er en i-1 og i er en inversjon
             int verdi = c.compare(liste.hent(i-1), liste.hent(i));
+
+            // Så lenge det er en inversjon, stoppes før indeksen går OutOfBounds
             while(verdi > 0 && i >= 1) {
+
+                    // int verdi blir positiv hvis det er en inversjon
                     verdi = c.compare(liste.hent(i-1), liste.hent(i));
+
+                    // Bytter plass på verdiene i-1 og i
                     liste.oppdater(i, liste.oppdater(i - 1, liste.hent(i)));
                     i--;
             }

@@ -9,4 +9,4 @@
 //Sortering med 19 elementer tar 3 millisek
 
 Ved hjelp av Wolfram alpha's regresjon kalkulator så fant vi en kvadratisk formel som passet extremt godt.
-Vi tror derfor at kompleksiteten er av O(n^2) grad
+Vi tror derfor at kompleksiteten er av O(n^2) grad.

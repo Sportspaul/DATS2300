@@ -1,0 +1,17 @@
+///// Oppgave 1 //////////////////////////////////////
+Det er flest ombyttinger hvis maksverdien er først i arrayet
+Det er færrest ombyttinger hvis maksverdien er sist i arrayet
+Gjennomsnittlig antall ombyttinger på et array av lengde 20 er: 15.0
+
+Maks metoden legger største element på siste plass i arrayet, dette er en ekstra krav i forhold til de andre
+maks-metodene og vi vil tro at det er derfor den er treigere enn de andre metodene fra kompendiet
+
+Maks-metoden: 473 millisek
+Maks1-metoden: 434 millisek
+Maks2-metoden: 309 millisek
+Maks3-metoden: 194 millisek
+
+
+
+///// Testkjøring //////////////////////////////////////
+Tests passed: 10 of 10 tests - 460 ms

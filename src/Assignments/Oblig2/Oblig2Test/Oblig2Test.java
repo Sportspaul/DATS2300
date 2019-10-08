@@ -346,7 +346,7 @@ public class Oblig2Test {
 
     @Test
     void sorterTest2() {
-        String [] navn = {"Lars","Anders","Bodil"};
+        String [] navn = {"Bodil", "Einar", "Caroline", "Anders"};
         Liste<String> liste1 = new DobbeltLenketListe<>(navn);
         DobbeltLenketListe.sorter(liste1, Comparator.naturalOrder());
         System.out.print(liste1.toString());

@@ -403,6 +403,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
     }
 
+    //Sortering med 2700 elementer tar 17882 millisek
+    //Sortering med 1100 elementer tar 1476 millisek
+    //Sortering med 400 elementer tar 89 millisek
+    //Sortering med 100 elementer tar 14 millisek
+    //Sortering med 65 elementer tar 5 millisek
+    //Sortering med 32 elementer tar 5 millisek
+    //Sortering med 19 elementer tar 3 millisek
+
 
     //Todo: Fjern før innlevering */
     //Brukes kun for testing

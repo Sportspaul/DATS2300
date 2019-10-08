@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
+import java.util.LinkedList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -253,8 +255,86 @@ public class Oblig2Test {
 
         assertEquals(false, liste.inneholder(null));
         System.out.println("inneholder: "+ liste.inneholder(null));
+    }
+
+    @Test
+    void nullstillTest() {
+
+        // Tester om nullstill metode 1 gir riktig resultat
+        Integer[] listeInteger = new Integer[] {1, 2, 3, 4, 5, 6, 7};
+        DobbeltLenketListe<Integer> liste = new DobbeltLenketListe<>(listeInteger);
+        liste.nullstill();
+        assertEquals("[]", liste.toString());
+
+        // Tester om nullstill metode 2 gir riktig resultat
+        listeInteger = new Integer[] {1, 2, 3, 4, 5, 6, 7};
+        liste = new DobbeltLenketListe<>(listeInteger);
+        liste.nullstill2();
+        assertEquals("[]", liste.toString());
 
 
+        // Tester hvilke av nullstill metodene som er raskest
+
+        // Metode 1
+        liste = new DobbeltLenketListe<>();
+        for(int i = 0; i < 10_000_000; i++){ liste.leggInn(i); }
+        long tid = System.currentTimeMillis();
+        liste.nullstill();
+        tid = System.currentTimeMillis() - tid;
+        System.out.println("Metode nummer 1 brukte: " + tid + "(ms)" );
+
+        // Metode 2
+        for(int i = 0; i < 10_000_000; i++){ liste.leggInn(i); }
+        tid = System.currentTimeMillis();
+        liste.nullstill2();
+        tid = System.currentTimeMillis() - tid;
+        System.out.println("Metode nummer 2 brukte: " + tid + "(ms)" );
+    }
+
+    @Test
+    void fjernIndeksTest() {
+        Integer[] listeInteger = new Integer[] {1, 2, 3, 4, 5};
+        DobbeltLenketListe<Integer> liste = new DobbeltLenketListe<>(listeInteger);
+
+        assertEquals(2, liste.fjern(1));
+        assertEquals(1, liste.fjern(0));
+        assertEquals(5, liste.fjern(2));
+        assertEquals(3, liste.fjern(0));
+        assertEquals(4, liste.fjern(0));
+
+
+        Integer[] liste2Integer = new Integer[] {};
+        DobbeltLenketListe<Integer> liste2 = new DobbeltLenketListe<>(liste2Integer);
+
+    }
+
+    @Test
+    void fjernVerdiTest() {
+        String[] listeString = new String[] {"A", "B", "C", "D"};
+        DobbeltLenketListe<String> liste = new DobbeltLenketListe<>(listeString);
+        System.out.println(liste.toString());
+
+        liste.fjern("C");
+        assertEquals("[A, B, D]", liste.toString());
+        System.out.println(liste.toString());
+
+        liste.fjern("D");
+        assertEquals("[A, B]", liste.toString());
+        System.out.println(liste.toString());
+
+        liste.fjern("A");
+        assertEquals("[B]", liste.toString());
+        System.out.println(liste.toString());
+
+        liste.fjern("B");
+        assertEquals("[]", liste.toString());
+        System.out.println(liste.toString());
+
+        String[] liste2String = new String[] {"A", "B", "C", "D"};
+        DobbeltLenketListe<String> liste2 = new DobbeltLenketListe<>(liste2String);
+        System.out.println(liste2.toString());
+
+        assertEquals(false, liste2.fjern("E"));
     }
 
     //Oppgave 8

@@ -4,9 +4,6 @@ package Assignments.Oblig2;
 ////////////////// class DobbeltLenketListe //////////////////////////////
 
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
-import javax.xml.bind.SchemaOutputResolver;
 import java.util.*;
 
 
@@ -394,7 +391,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
     }
 
-    //TODO: Metoden må gjøres raskere
+
     @Override
     public String toString() {
         StringBuilder utskrift = new StringBuilder("[");
@@ -414,7 +411,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return utskrift.toString();
     }
 
-    //TODO: Metoden må gjøres raskere
     public String omvendtString() {
         StringBuilder utskrift = new StringBuilder("[");
         Node<T> aktuell = hale; //starter på halen
@@ -543,45 +539,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     //Sortering med 65 elementer tar 5 millisek
     //Sortering med 32 elementer tar 5 millisek
     //Sortering med 19 elementer tar 3 millisek
-
-
-    //Todo: Fjern før innlevering */
-    //Brukes kun for testing
-    public Node<T> getHodeForrige() {
-        return hode.forrige;
-    }
-
-    public Node<T> getHaleNeste() {
-        return hale.neste;
-    }
-
-    public Node<T> getHodeNeste() {
-        return hode.neste;
-    }
-
-    public Node<T> getHaleForrige() {
-        return hale.forrige;
-    }
-
-    public T getHaleForrigeVerdi() {
-        return hale.forrige.verdi;
-    }
-
-    public T getHodeNesteVerdi() {
-        return hode.neste.verdi;
-    }
-
-    public T getHaleVerdi() {
-        return hale.verdi;
-    }
-
-    public T getHodeVerdi() {
-        return hale.verdi;
-    }
-
-    public Node<T> finnNodeTest(int indeks) {
-        return finnNode(indeks);
-    }
 
 } // class DobbeltLenketListe
 

@@ -6,6 +6,7 @@ package Assignments.Oblig2;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import javax.xml.bind.SchemaOutputResolver;
 import java.util.*;
 
 
@@ -172,7 +173,59 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void leggInn(int indeks, T verdi) {
-        throw new NotImplementedException();
+        if(indeks < 0 || antall < indeks){                  //Unntak
+            throw new IndexOutOfBoundsException("Kan ikke ha negativ indeks og antall kan ikke være mindre enn indeks.");
+        }
+
+        if(antall == 0) {
+            leggInn(verdi);
+            return;
+        }
+
+        else if(indeks == 0){
+            Node<T> ny = new Node<>(verdi);                 //Oppretter ny hode
+            ny.neste = hode;                                //Setter ny sin neste-peker lik hode
+            hode.forrige = ny;                              //Setter hode sin forrige-peker lik ny
+            hode = ny;                                      //Setter hode lik ny
+
+        }
+
+        else if(indeks == antall){
+            Node<T> ny = new Node<>(verdi);                 //Oppretter ny hale
+            ny.forrige = hale;                              //Setter ny sin forrige-peker lik hale
+            hale.neste = ny;                                //Setter hale sin neste-peker lik ny
+            hale = ny;                                      //Setter hale lik ny
+        }
+
+        else if(indeks > antall/2){                         //legger inn node fra høyre
+            Node<T> aktuell = hode;
+            for(int i = 0; i < indeks-1; i++){
+                aktuell = aktuell.neste;
+            }
+
+            Node<T> ny = new Node<>(verdi);
+            ny.neste = aktuell.neste;
+            ny.forrige = aktuell;
+            aktuell.neste = ny;
+            ny.neste.forrige = ny;
+        }
+
+        else{
+            Node<T> aktuell = hale;                         //legger inn node fra venstre
+            for(int i = antall; i > indeks; i--){
+                aktuell = aktuell.forrige;
+            }
+
+            Node<T> ny = new Node<>(verdi);
+            ny.neste = aktuell.neste;
+            ny.forrige = aktuell;
+            aktuell.neste = ny;
+            ny.neste.forrige = ny;
+
+
+        }
+        antall++;
+        endringer++;
     }
 
     @Override

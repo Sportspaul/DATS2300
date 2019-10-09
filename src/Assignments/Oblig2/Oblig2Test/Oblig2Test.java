@@ -1,6 +1,5 @@
 package Assignments.Oblig2.Oblig2Test;
 
-
 import Assignments.Oblig2.DobbeltLenketListe;
 import Assignments.Oblig2.Liste;
 import org.junit.jupiter.api.Assertions;
@@ -8,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-import static Assignments.Oblig1.Oblig1Test.Oblig1Test.randPerm;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -344,21 +342,6 @@ public class Oblig2Test {
         Integer [] tall = {2,6,4,7,9,16,16};
         Liste<Integer> liste2 = new DobbeltLenketListe<>(tall);
         DobbeltLenketListe.sorter(liste2, Comparator.naturalOrder());
-    }
-
-    @Test
-    void sorterTest2() {
-        long tid = 0;
-        tid = System.currentTimeMillis();
-        Integer [] tall = {1,12,15,2,123,15,2
-        };
-
-        Liste<Integer> liste1 = new DobbeltLenketListe<>(tall);
-        DobbeltLenketListe.sorter(liste1, Comparator.naturalOrder());
-        System.out.println(liste1.toString());
-
-        tid = System.currentTimeMillis() - tid;
-        System.out.println("Sortering med "+ tall.length +" elementer tar " + tid + " millisek");
     }
 
 }

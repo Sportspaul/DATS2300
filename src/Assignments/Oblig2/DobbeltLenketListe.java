@@ -248,17 +248,97 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean fjern(T verdi) {
-        throw new NotImplementedException();
+        if(verdi == null) { return false;}
+        Node<T> aktuell = hode;
+
+        int i = 1;
+        while(!aktuell.verdi.equals(verdi) && i < antall) {
+            aktuell = aktuell.neste;
+            i++;
+        }
+
+        if(i == antall && !aktuell.verdi.equals(verdi)) {
+            return false;
+        }
+
+        if(antall == 1){
+            hode = null;
+            hale = null;
+        }else if(aktuell.forrige == null) {
+            hode.neste.forrige = null;
+            hode = hode.neste;
+        }else if(aktuell.neste == null) {
+            hale.forrige.neste = null;
+            hale = hale.forrige;
+        }else {
+            aktuell.forrige.neste = aktuell.neste;
+            aktuell.neste.forrige = aktuell.forrige;
+        }
+
+        antall--;
+        endringer++;
+        return true;
     }
 
     @Override
     public T fjern(int indeks) {
-        throw new NotImplementedException();
+        if(indeks < 0) { throw new IndexOutOfBoundsException("Indeksen kan ikke være et negativt tall"); }
+        if(indeks >= antall) { throw new IndexOutOfBoundsException("Indeksen kan ikke være større enn antall noder i listen"); }
+
+        T returverdi;
+
+        if(antall == 1){                    // Hvis siste element skal fjernes
+            returverdi = hode.verdi;
+            hode = null;
+            hale = null;
+        }else if(indeks == 0) {             // Hvis den første noden skal fjernes
+            returverdi = hode.verdi;
+            hode.neste.forrige = null;
+            hode = hode.neste;
+        }else if(indeks == antall-1) {      // Hvis den siste noden skal fjernes
+            returverdi = hale.verdi;
+            hale.forrige.neste = null;
+            hale = hale.forrige;
+        }else {                             // Hvis en node mellom to andre skal fjernes
+            Node<T> aktuell = hode;
+            int i = 0;
+            while(i < indeks) {
+                aktuell = aktuell.neste;
+                i++;
+            }
+
+            returverdi = aktuell.verdi;
+            aktuell.forrige.neste = aktuell.neste;
+            aktuell.neste.forrige = aktuell.forrige;
+        }
+
+        antall--;
+        endringer++;
+        return returverdi;
     }
 
     @Override
     public void nullstill() {
-        throw new NotImplementedException();
+        Node<T> aktuell = hode;
+
+        while(aktuell != null) {
+            Node<T> neste = aktuell.neste;
+            aktuell.verdi = null;
+            aktuell.neste = null;
+            aktuell.forrige = null;
+            aktuell = neste;
+        }
+
+        hode = hale = null;
+        antall = 0;
+        endringer++;
+    }
+
+    public void nullstill2() {
+        int startAntall = antall;
+        for(int i = 0; i < startAntall; i++) {
+            fjern(0);
+        }
     }
 
     //TODO: Metoden må gjøres raskere
@@ -383,14 +463,33 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     } // class DobbeltLenketListeIterator
 
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
-        if(liste.antall() < 2) {
-            return;
-        }
+
+        // looper gjennom listen
         for(int i = 1; i < liste.antall(); i++) {
+
+            // int verdi blir positiv hvis det er en i-1 og i er en inversjon
             int verdi = c.compare(liste.hent(i-1), liste.hent(i));
-            System.out.println(verdi);
+
+            // Så lenge det er en inversjon, stoppes før indeksen går OutOfBounds
+            while(verdi > 0 && i >= 1) {
+
+                    // int verdi blir positiv hvis det er en inversjon
+                    verdi = c.compare(liste.hent(i-1), liste.hent(i));
+
+                    // Bytter plass på verdiene i-1 og i
+                    liste.oppdater(i, liste.oppdater(i - 1, liste.hent(i)));
+                    i--;
+            }
         }
     }
+
+    //Sortering med 2700 elementer tar 17882 millisek
+    //Sortering med 1100 elementer tar 1476 millisek
+    //Sortering med 400 elementer tar 89 millisek
+    //Sortering med 100 elementer tar 14 millisek
+    //Sortering med 65 elementer tar 5 millisek
+    //Sortering med 32 elementer tar 5 millisek
+    //Sortering med 19 elementer tar 3 millisek
 
 
     //Todo: Fjern før innlevering */

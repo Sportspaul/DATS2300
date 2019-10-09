@@ -229,7 +229,7 @@ public class Oblig2Test {
         // Tester om nullstill metode 2 gir riktig resultat
         listeInteger = new Integer[] {1, 2, 3, 4, 5, 6, 7};
         liste = new DobbeltLenketListe<>(listeInteger);
-        liste.nullstill2();
+        liste.nullstill();
         assertEquals("[]", liste.toString());
 
 
@@ -246,7 +246,7 @@ public class Oblig2Test {
         // Metode 2
         for(int i = 0; i < 10_000_000; i++){ liste.leggInn(i); }
         tid = System.currentTimeMillis();
-        liste.nullstill2();
+        liste.nullstill();
         tid = System.currentTimeMillis() - tid;
         System.out.println("Metode nummer 2 brukte: " + tid + "(ms)" );
     }

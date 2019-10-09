@@ -1,3 +1,11 @@
+//opg7
+15 testkjøringer med 10_000_000 elementer i listene resulterte i:
+
+nullstill-metode 1 brukte i gjennomsnitt 159ms
+nullstill-metode 2 brukte i gjennomsnitt 138ms
+
+Det resulterte i at metode 2 var i gjennomsnitt 15% raskere enn metode 1
+
 //opg 10
 
 //Sortering med 2700 elementer tar 17882 millisek

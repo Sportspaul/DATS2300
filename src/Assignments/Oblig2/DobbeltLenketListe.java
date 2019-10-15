@@ -367,7 +367,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return returverdi;
     }
 
-    @Override
+  /*@Override
     public void nullstill() {
         Node<T> aktuell = hode;
 
@@ -383,8 +383,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         antall = 0;
         endringer++;
     }
+   */
 
-    public void nullstill2() {
+    @Override
+    public void nullstill() {
         int startAntall = antall;
         for(int i = 0; i < startAntall; i++) {
             fjern(0);
@@ -519,7 +521,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             // int verdi blir positiv hvis det er en i-1 og i er en inversjon
             int verdi = c.compare(liste.hent(i-1), liste.hent(i));
 
-            // Så lenge det er en inversjon, stoppes før indeksen går OutOfBounds
+            // Looper så lenge det er en inversjon, og stoppes før indeksen går OutOfBounds
             while(verdi > 0 && i >= 1) {
 
                     // int verdi blir positiv hvis det er en inversjon

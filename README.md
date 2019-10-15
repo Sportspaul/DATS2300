@@ -6,6 +6,12 @@ Felix Leypoldt s333743
 Herman Rustad s333769
 Paul Høglend s333733
 
+
+Oblig 3 ligger i mappen Assignments/Oblig3
+
+
+---------------------------------------------------------------
+
 Oblig 2 ligger i mappen Assignments/Oblig2
 
 

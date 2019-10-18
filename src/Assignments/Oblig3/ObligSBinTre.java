@@ -156,7 +156,10 @@ public class ObligSBinTre<T> implements Beholder<T>
     
     private BladnodeIterator()  // konstruktør
     {
-      throw new UnsupportedOperationException("Ikke kodet ennå!");
+      // Gjør ingenting om treet er tomt
+      if(rot == null) {
+        return;
+      }
     }
     
     @Override

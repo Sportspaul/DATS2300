@@ -160,6 +160,10 @@ public class ObligSBinTre<T> implements Beholder<T>
       if(rot == null) {
         return;
       }
+      while(hasNext()) {
+          //TODO:sjekke spesialtilfeller
+          p = p.venstre;
+      }
     }
     
     @Override
@@ -167,7 +171,8 @@ public class ObligSBinTre<T> implements Beholder<T>
     {
       return p != null;  // Denne skal ikke endres!
     }
-    
+
+    //Det er q sin verdi som skal fjernes når remove() kalles. I next() settes q lik p før p flyttes:
     @Override
     public T next()
     {

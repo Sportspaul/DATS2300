@@ -168,6 +168,11 @@ public class ObligSBinTre<T> implements Beholder<T>
       while(hasNext()) {
           p = p.venstre;
       }
+      if(p.høyre != null ) {
+          while(hasNext()) {
+              p = p.venstre;
+          }
+      }
     }
     
     @Override

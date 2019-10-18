@@ -160,8 +160,12 @@ public class ObligSBinTre<T> implements Beholder<T>
       if(rot == null) {
         return;
       }
+      // Gå til høyre om venstre barn ikke finnes
+      if(rot.venstre == null) {
+        p = p.høyre;
+      }
+
       while(hasNext()) {
-          //TODO:sjekke spesialtilfeller
           p = p.venstre;
       }
     }

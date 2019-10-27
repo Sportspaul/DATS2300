@@ -190,11 +190,13 @@ public class ObligSBinTre<T> implements Beholder<T>
     private Node<T> p = rot, q = null;
     private boolean removeOK = false;
     private int iteratorendringer = endringer;
-    
+
+
+    //TODO: ta en ny titt på metoden
     private BladnodeIterator()  // konstruktør
     {
       // Gjør ingenting om treet er tomt
-      if(rot == null) {
+      if(!hasNext()) {
         return;
       }
       // Gå til høyre om venstre barn ikke finnes
@@ -222,7 +224,10 @@ public class ObligSBinTre<T> implements Beholder<T>
     @Override
     public T next()
     {
-      throw new UnsupportedOperationException("Ikke kodet ennå!");
+      if (iteratorendringer != endringer)
+        throw new ConcurrentModificationException();
+      //TODO: kode resten
+      return null;
     }
     
     @Override

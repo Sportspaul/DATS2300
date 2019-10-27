@@ -67,6 +67,7 @@ public class ObligSBinTre<T> implements Beholder<T>
     else q.høyre = p;                        // høyre barn til q
 
     antall++;                                // én verdi mer i treet
+    endringer++;                             // ny endring
     return true;                             // vellykket innlegging
   }
   

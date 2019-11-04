@@ -51,7 +51,6 @@ public class Oblig3UnitTest {
         tre.lengstGren();
         assertEquals("[I, A, B, H, C, F, E, D]", tre.lengstGren());
     }
-}
 
     @Test
     void nesteInorden() {

@@ -225,10 +225,20 @@ public class ObligSBinTre<T> implements Beholder<T>
     @Override
     public T next()
     {
-      if (iteratorendringer != endringer)
+      if (iteratorendringer != endringer) {
         throw new ConcurrentModificationException();
-      //TODO: kode resten
-      return null;
+      }
+      if(!hasNext()) {
+        throw new NoSuchElementException("Det er ikke flere noder igjen i treet!");
+      }
+      removeOK = true;
+      T verdi = p.verdi;
+      if(p.venstre != null) {
+        p = p.venstre;
+      } else {
+        p = p.høyre;
+      }
+      return verdi;
     }
     
     @Override

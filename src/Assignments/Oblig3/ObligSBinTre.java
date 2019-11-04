@@ -139,17 +139,6 @@ public class ObligSBinTre<T> implements Beholder<T>
     throw new UnsupportedOperationException("Ikke kodet ennå!");
   }
 
-  
-/*  private static <T> Node<T> nesteInorden(Node<T> p)
-  {
-if(p == null) {
-  return ;
-} else {
-nesteInorden()
-}
-
-    return null;
-  }*/
 
   public static <T> Node<T> nesteInorden(Node<T> p)
   {

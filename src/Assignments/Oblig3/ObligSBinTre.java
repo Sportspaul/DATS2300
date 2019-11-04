@@ -90,14 +90,59 @@ public class ObligSBinTre<T> implements Beholder<T>
   }
   
   @Override
-  public boolean fjern(T verdi)
-  {
-    throw new UnsupportedOperationException("Ikke kodet ennå!");
+  public boolean fjern(T verdi) {
+    if (verdi == null) return false;  // treet har ingen nullverdier
+
+    Node<T> p = rot, q = null;   // q skal være forelder til p
+
+    while (p != null) {            // leter etter verdi
+
+      int cmp = comp.compare(verdi,p.verdi);      // sammenligner
+      if (cmp < 0) { q = p; p = p.venstre; }      // går til venstre
+      else if (cmp > 0) { q = p; p = p.høyre; }   // går til høyre
+      else break;    // den søkte verdien ligger i p
+    }
+    if (p == null) return false;   // finner ikke verdi
+
+    if (p.venstre == null || p.høyre == null) {  // Hvis noden som skal fjernes har 0 eller 1 barn
+
+      Node<T> b = p.venstre != null ? p.venstre : p.høyre;  // b for barn
+      if (p == rot) {
+        rot = b;
+      }else if (p == q.venstre) {
+        q.venstre = b;
+      }else {
+        q.høyre = b;
+      }
+
+    } else {  // Hvis noden som skal fjernes har 2 barn
+
+      Node<T> s = p, r = p.høyre;   // finner neste i inorden
+      while (r.venstre != null) {
+        s = r;    // s er forelder til r
+        r = r.venstre;
+      }
+
+      p.verdi = r.verdi;   // kopierer verdien i r til p
+
+
+      if (s != p) {
+        s.venstre = r.høyre;
+      }
+      else s.høyre = r.høyre;
+    }
+
+    antall--;   // det er nå én node mindre i treet
+    endringer++; // det er gjort en ny endring på treet
+    return true;
   }
   
   public int fjernAlle(T verdi)
   {
-    throw new UnsupportedOperationException("Ikke kodet ennå!");
+    int antallFjernet = 0;
+    while(fjern(verdi) == true) { antallFjernet++; }
+
+    return antallFjernet;
   }
   
   @Override
@@ -134,12 +179,30 @@ public class ObligSBinTre<T> implements Beholder<T>
   }
   
   @Override
-  public void nullstill()
-  {
-    throw new UnsupportedOperationException("Ikke kodet ennå!");
+  public void nullstill() {
+      fjernNeste(rot);
   }
 
-  
+  private void fjernNeste(Node<T> p) {
+    if(p == null) { return; }
+
+    Node<T> q;
+    q = p.venstre;
+    fjernNeste(p.venstre);
+
+    q.verdi = null;
+    q.forelder = null;
+    q.forelder.venstre = null;
+
+    q = p.høyre;
+    fjernNeste(q);
+
+  }
+
+
+  private static <T> Node<T> nesteInorden(Node<T> p)
+
+
 /*  private static <T> Node<T> nesteInorden(Node<T> p)
   {
 if(p == null) {
@@ -196,14 +259,64 @@ nesteInorden()
     throw new UnsupportedOperationException("Ikke kodet ennå!");
   }
   
-  public String høyreGren()
-  {
-    throw new UnsupportedOperationException("Ikke kodet ennå!");
+  public String høyreGren() {
+      if(rot == null) { return "[]"; }
+      StringBuilder str = new StringBuilder();
+      str.append("[");
+      Node<T> p = rot;
+
+      // Itererer helt ned til bladnoden
+      while(p != null) {
+        str.append(p.verdi + ", ");
+
+        // Prøver å gå til høyre i treet, hvis ikke det er mulig gå venstre
+        if(p.høyre != null) {
+          p = p.høyre;
+        }else {
+          p = p.venstre;
+        }
+      }
+
+      str.delete(str.length() - 2, str.length()); // Fjerner de to siste tegnene slik at formatering blir riktig
+      str.append("]");
+      return str.toString();
   }
-  
-  public String lengstGren()
-  {
-    throw new UnsupportedOperationException("Ikke kodet ennå!");
+
+
+  private String gren = "";
+
+  public String lengstGren() {
+    if(rot == null) { return "[]"; }
+    StringBuilder str = new StringBuilder();
+    str.append("[");
+    finnLengsteGren(rot, "", 0);
+    str.append(gren);
+    str.delete(str.length() - 2, str.length()); // Fjerner de to siste tegnene slik at formatering blir riktig
+    str.append("]");
+    return str.toString();
+  }
+
+  private int maksLengde = 0; // Lengden på legste gren
+
+  private void finnLengsteGren(Node node, String midlertidigGren, int lengde) {
+
+    if(node == null) {
+
+      // Tar vare på stringen hvis hvis det blir funnet en nye "lengste gren"
+      if(lengde > maksLengde) {
+          maksLengde = lengde;
+          gren = midlertidigGren;
+      // Tilbakestiller
+      } else if(lengde < maksLengde) {
+          midlertidigGren = "";
+      }
+      return;
+    }
+
+    midlertidigGren += node.verdi + ", ";
+
+    finnLengsteGren(node.venstre, gren, lengde + 1);
+    finnLengsteGren(node.høyre, gren, lengde + 1);
   }
   
   public String[] grener()

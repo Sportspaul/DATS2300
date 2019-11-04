@@ -266,16 +266,33 @@ nesteInorden()
     @Override
     public T next()
     {
-      if (iteratorendringer != endringer)
+      if (iteratorendringer != endringer) {
         throw new ConcurrentModificationException();
-      //TODO: kode resten
-      return null;
+      }
+      if(!hasNext()) {
+        throw new NoSuchElementException("Det er ikke flere noder igjen i treet!");
+      }
+      removeOK = true;
+      T verdi = p.verdi;
+      if(p.venstre != null) {
+        p = p.venstre;
+      } else {
+        p = p.høyre;
+      }
+      return verdi;
     }
     
     @Override
     public void remove()
     {
-      throw new UnsupportedOperationException("Ikke kodet ennå!");
+      if(antall == 0 || removeOK == false) { // Sjekker om det er lov å kalle remove()
+        throw new IllegalStateException("Metoden remove() kan ikke kalles!");
+      }
+
+      if(iteratorendringer != endringer) {  // Sjekker om det er gjort endringer i listen før remove() ble kjørt
+        throw new ConcurrentModificationException("iteratorendringer kan ikke være ulik endringer!");
+      }
+
     }
 
   } // BladnodeIterator

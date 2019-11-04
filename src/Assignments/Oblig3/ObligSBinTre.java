@@ -200,20 +200,6 @@ public class ObligSBinTre<T> implements Beholder<T>
   }
 
 
-  private static <T> Node<T> nesteInorden(Node<T> p)
-
-
-/*  private static <T> Node<T> nesteInorden(Node<T> p)
-  {
-if(p == null) {
-  return ;
-} else {
-nesteInorden()
-}
-
-    return null;
-  }*/
-
   public static <T> Node<T> nesteInorden(Node<T> p)
   {
     Node<T> q = p.forelder;   //Hjelpereferanse for

@@ -141,7 +141,7 @@ public class ObligSBinTre<T> implements Beholder<T>
   public int fjernAlle(T verdi)
   {
     int antallFjernet = 0;
-    while(fjern(verdi) == true) { antallFjernet++; }
+    while(fjern(verdi)) { antallFjernet++; }
 
     return antallFjernet;
   }
@@ -203,7 +203,7 @@ public class ObligSBinTre<T> implements Beholder<T>
 
   public static <T> Node<T> nesteInorden(Node<T> p)
   {
-    Node<T> q = p.forelder;   // Hjelpereferanse, alltid foreldren til p
+    Node<T> q = p.forelder;   // Hjelpereferanse, foreldren til p
 
     if (p.høyre != null) {    // Hvis p har et høyrebarn utføres løkken
       p = p.høyre;            // P flyttes til sitt høyrebarn
@@ -212,9 +212,10 @@ public class ObligSBinTre<T> implements Beholder<T>
         p = p.venstre;        // P flyttes ned i treet helt til den blir null (treffer en node uten left
                               // child), og q peker på denne noden
       }
-    } else {
-      while (q != null && q.høyre == p) { // Hvis p ikke er roten OG p er et høyrebarn utføres løkken (hvis koden har
-                                          // kommet hit, og dette ikke stemmer så er neste node q (p sin forelder)
+    }
+    else {
+      while (q != null && q.høyre == p) { // Hvis p ikke er roten OG p er et høyrebarn utføres løkken (Når while-løkken
+                                          // feiler så er neste node q)
         p = q;
         q = p.forelder;      // P flyttes opp til sin venstre foreldre, og q blir flyttet til p sin foreldre
       }

@@ -33,6 +33,7 @@ public class ObligSBinTre<T> implements Beholder<T>
   private Node<T> rot;                            // peker til rotnoden
   private int antall;                             // antall noder
   private int endringer;                          // antall endringer
+  private String gren = "";
 
   private final Comparator<? super T> comp;       // komparator
 
@@ -269,7 +270,7 @@ public class ObligSBinTre<T> implements Beholder<T>
   }
 
 
-  private String gren = "";
+
 
   public String lengstGren() {
     if(rot == null) { return "[]"; }
@@ -391,7 +392,9 @@ public class ObligSBinTre<T> implements Beholder<T>
       if(iteratorendringer != endringer) {  // Sjekker om det er gjort endringer i listen før remove() ble kjørt
         throw new ConcurrentModificationException("iteratorendringer kan ikke være ulik endringer!");
       }
-
+      removeOK = false;
+      q = p;
+      
     }
 
   } // BladnodeIterator

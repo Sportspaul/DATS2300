@@ -91,4 +91,29 @@ public class Oblig3UnitTest {
         }
         assertEquals("[]", tre2.omvendtString());
     }
+
+    @Test
+    void fjernTest() {
+        int[] a = {4, 7, 2, 9, 4, 10, 8, 7, 4, 6, 1};
+        ObligSBinTre<Integer> tre = new ObligSBinTre<>(Comparator.naturalOrder());
+        for (int verdi : a) tre.leggInn(verdi);
+        System.out.println(tre.toString());
+        tre.fjernAlle(4);
+        System.out.println(tre.toString());
+        tre.fjernAlle(7);
+        System.out.println(tre.toString());
+        tre.fjernAlle(8);
+        System.out.println(tre.toString());
+        System.out.println(tre.antall());
+
+    }
+
+    @Test
+    void nullstrillTest() {
+        int[] a = {4, 7, 2, 9, 4, 10, 8, 7, 4, 6, 1};
+        ObligSBinTre<Integer> tre = new ObligSBinTre<>(Comparator.naturalOrder());
+        for (int verdi : a) tre.leggInn(verdi);
+
+        tre.nullstill();
+    }
 }

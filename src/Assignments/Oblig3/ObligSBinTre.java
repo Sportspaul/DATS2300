@@ -89,57 +89,77 @@ public class ObligSBinTre<T> implements Beholder<T>
 
     return false;
   }
-  
+
+
   @Override
-  public boolean fjern(T verdi) {
-    if (verdi == null) return false;  // treet har ingen nullverdier
+  public boolean fjern(T verdi)
+  {
+    if (verdi == null) return false;  // Treet har ingen nullverdier
 
     Node<T> p = rot, q = null;   // q skal være forelder til p
 
-    while (p != null) {            // leter etter verdi
-
-      int cmp = comp.compare(verdi,p.verdi);      // sammenligner
-      if (cmp < 0) { q = p; p = p.venstre; }      // går til venstre
-      else if (cmp > 0) { q = p; p = p.høyre; }   // går til høyre
-      else break;    // den søkte verdien ligger i p
+    while (p != null)            // Leter etter verdi
+    {
+      int cmp = comp.compare(verdi,p.verdi);      // Sammenligner
+      if (cmp < 0) { q = p; p = p.venstre; }      // Går til venstre
+      else if (cmp > 0) { q = p; p = p.høyre; }   // Går til høyre
+      else break;                                 // Den søkte verdien ligger i p
     }
-    if (p == null) return false;   // finner ikke verdi
+    if (p == null) return false;   // Finner ikke verdi
 
-    if (p.venstre == null || p.høyre == null) {  // Hvis noden som skal fjernes har 0 eller 1 barn
-
-      Node<T> b = p.venstre != null ? p.venstre : p.høyre;  // b for barn
+    if (p.venstre == null || p.høyre == null)  // Hvis noden som skal fjernes har 0 eller 1 barn
+    {
+      Node<T> b = p.venstre != null ? p.venstre : p.høyre;  // b er barnet til p noden
       if (p == rot) {
         rot = b;
-      }else if (p == q.venstre) {
-        q.venstre = b;
-      }else {
-        q.høyre = b;
       }
-
-    } else {  // Hvis noden som skal fjernes har 2 barn
-
-      Node<T> s = p, r = p.høyre;   // finner neste i inorden
-      while (r.venstre != null) {
-        s = r;    // s er forelder til r
+      else if (p == q.venstre){
+        q.venstre = b;
+        if(b != null){
+          b.forelder = q;
+        }
+      }
+      else {
+        q.høyre = b;
+        if(b != null){
+          b.forelder = q;
+        }
+      }
+    }
+    else  // Hvis noden som skal fjernes har 2 barn
+    {
+      Node<T> s = p, r = p.høyre;   // Finner neste i inorden
+      while (r.venstre != null)
+      {
+        s = r;                      // s er forelder til r
         r = r.venstre;
       }
 
-      p.verdi = r.verdi;   // kopierer verdien i r til p
-
+      p.verdi = r.verdi;   // Kopierer verdien i r til p
 
       if (s != p) {
         s.venstre = r.høyre;
+        if(r.høyre != null){
+          r.høyre.forelder = s;
+        }
+
       }
-      else s.høyre = r.høyre;
+      else {
+        s.høyre = r.høyre;
+        if(r.høyre != null){
+          r.høyre.forelder = s;
+        }
+      }
     }
 
-    antall--;   // det er nå én node mindre i treet
-    endringer++; // det er gjort en ny endring på treet
+    antall--;      // Det er nå én node mindre i treet
+    endringer++;   // Det er gjort en ny endring på treet
     return true;
   }
   
   public int fjernAlle(T verdi)
   {
+    if(antall == 0) { return 0; }
     int antallFjernet = 0;
     while(fjern(verdi)) { antallFjernet++; }
 
@@ -181,23 +201,27 @@ public class ObligSBinTre<T> implements Beholder<T>
   
   @Override
   public void nullstill() {
-      fjernNeste(rot);
+      int temp = antall;                // Tar vare på antall (før noder fjernes)
+      System.out.println(endringer);
+      slettAlleNoder(rot);              // Kaller på en rekursiv metode som sletter alle nodene i treet
+      rot = null;
+      antall = 0;
+      endringer += temp;                // Legger til antall noder som ble fjernet til endringer
   }
 
-  private void fjernNeste(Node<T> p) {
+  /** Hjelpemetode som rekursivt nuller ut alle verdier og pekerere i treet
+   * dette skjer i postorden */
+  private void slettAlleNoder(Node<T> p) {
     if(p == null) { return; }
 
-    Node<T> q;
-    q = p.venstre;
-    fjernNeste(p.venstre);
+    slettAlleNoder(p.venstre);
+    slettAlleNoder(p.høyre);
 
-    q.verdi = null;
-    q.forelder = null;
-    q.forelder.venstre = null;
-
-    q = p.høyre;
-    fjernNeste(q);
-
+    // Fjerner alle verider og pekere til nodene
+    p.verdi = null;
+    p.venstre = null;
+    p.høyre = null;
+    p.forelder = null;
   }
 
 
@@ -298,32 +322,32 @@ public class ObligSBinTre<T> implements Beholder<T>
     str.append("[");
     finnLengsteGren(rot, "", 0);
     str.append(gren);
-    str.delete(str.length() - 2, str.length()); // Fjerner de to siste tegnene slik at formatering blir riktig
     str.append("]");
     return str.toString();
   }
 
   private int maksLengde = 0; // Lengden på legste gren
 
-  private void finnLengsteGren(Node node, String midlertidigGren, int lengde) {
+  private void finnLengsteGren(Node node, String tempString, int lengde) {
 
     if(node == null) {
 
       // Tar vare på stringen hvis hvis det blir funnet en nye "lengste gren"
       if(lengde > maksLengde) {
           maksLengde = lengde;
-          gren = midlertidigGren;
+          tempString = tempString.substring(0,tempString.length() - 2);
+          gren = tempString;
       // Tilbakestiller
       } else if(lengde < maksLengde) {
-          midlertidigGren = "";
+          tempString = "";
       }
       return;
     }
 
-    midlertidigGren += node.verdi + ", ";
+    tempString += node.verdi + ", ";
 
-    finnLengsteGren(node.venstre, gren, lengde + 1);
-    finnLengsteGren(node.høyre, gren, lengde + 1);
+    finnLengsteGren(node.venstre, tempString, lengde + 1);
+    finnLengsteGren(node.høyre, tempString, lengde + 1);
   }
   
   public String[] grener()

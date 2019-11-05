@@ -203,18 +203,20 @@ public class ObligSBinTre<T> implements Beholder<T>
 
   public static <T> Node<T> nesteInorden(Node<T> p)
   {
-    Node<T> q = p.forelder;   //Hjelpereferanse for
+    Node<T> q = p.forelder;   // Hjelpereferanse, alltid foreldren til p
 
-    if (p.høyre != null) {
-      p = p.høyre;
+    if (p.høyre != null) {    // Hvis p har et høyrebarn utføres løkken
+      p = p.høyre;            // P flyttes til sitt høyrebarn
       while (p != null) {
         q = p;
-        p = p.venstre;
+        p = p.venstre;        // P flyttes ned i treet helt til den blir null (treffer en node uten left
+                              // child), og q peker på denne noden
       }
     } else {
-      while (q != null && q.høyre == p) {
+      while (q != null && q.høyre == p) { // Hvis p ikke er roten OG p er et høyrebarn utføres løkken (hvis koden har
+                                          // kommet hit, og dette ikke stemmer så er neste node q (p sin forelder)
         p = q;
-        q = p.forelder;
+        q = p.forelder;      // P flyttes opp til sin venstre foreldre, og q blir flyttet til p sin foreldre
       }
     }
 
@@ -224,17 +226,17 @@ public class ObligSBinTre<T> implements Beholder<T>
   @Override
   public String toString()
   {
-    if (tom()) return "[]";
+    if (tom()) return "[]";           //Returnerer [] hvis treet ikke har noen noder
 
     StringJoiner sj = new StringJoiner(", ", "[", "]");
     Node<T> p = rot;
 
     while (p.venstre != null) {
-      p = p.venstre;
+      p = p.venstre;                  // Gjør slik at p peker på noden nederst til venstre istede for rot
     }
 
     while (p != null) {
-      sj.add(p.toString());
+      sj.add(p.toString());           // Skriver ut toStringen til nodene i inorden-rekkefølge
       p = nesteInorden(p);
     }
 
@@ -244,22 +246,23 @@ public class ObligSBinTre<T> implements Beholder<T>
   public String omvendtString()
   {
     if(tom()){
-      return "[]";
+      return "[]";           //Returnerer [] hvis treet ikke har noen noder
     }
 
     TabellStakk<Node> omvendtStack = new TabellStakk<>();
     Node<T> p = rot;
 
     while (p.venstre != null) {
-      p = p.venstre;
+      p = p.venstre;                              // Gjør slik at p peker på noden nederst til venstre istede for rot
     }
 
     while (p != null) {
-      omvendtStack.leggInn(p);
+      omvendtStack.leggInn(p);                    // Fyller stacken med noder
       p = nesteInorden(p);
     }
 
-    return omvendtStack.toString();
+    return omvendtStack.toString();              // Returnerer toStringen til nodene i omvendt rekkefølge, de siste som
+                                                 // ble puttet inn i stacken blir skrevet ut først (LIFO)
   }
   
   public String høyreGren() {

@@ -337,9 +337,6 @@ public class ObligSBinTre<T> implements Beholder<T>
           maksLengde = lengde;
           tempString = tempString.substring(0,tempString.length() - 2);
           gren = tempString;
-      // Tilbakestiller
-      } else if(lengde < maksLengde) {
-          tempString = "";
       }
       return;
     }

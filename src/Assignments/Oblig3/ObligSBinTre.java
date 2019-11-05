@@ -243,7 +243,23 @@ public class ObligSBinTre<T> implements Beholder<T>
   
   public String omvendtString()
   {
-    throw new UnsupportedOperationException("Ikke kodet ennå!");
+    if(tom()){
+      return "[]";
+    }
+
+    TabellStakk<Node> omvendtStack = new TabellStakk<>();
+    Node<T> p = rot;
+
+    while (p.venstre != null) {
+      p = p.venstre;
+    }
+
+    while (p != null) {
+      omvendtStack.leggInn(p);
+      p = nesteInorden(p);
+    }
+
+    return omvendtStack.toString();
   }
   
   public String høyreGren() {

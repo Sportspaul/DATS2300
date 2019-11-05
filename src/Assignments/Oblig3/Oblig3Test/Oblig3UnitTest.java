@@ -74,4 +74,21 @@ public class Oblig3UnitTest {
         }
         assertEquals("[1, 2, 4, 4, 4, 6, 7, 7, 8, 9, 10]", tre.toString());
     }
+
+    @Test
+    void omvendtString() {
+        Integer[] a = {4,7,2,9,4,10,8,7,4,6};
+        ObligSBinTre<Integer> tre = new ObligSBinTre<>(Comparator.naturalOrder());
+        for(int verdi : a) {
+            tre.leggInn(verdi);
+        }
+        assertEquals("[10, 9, 8, 7, 7, 6, 4, 4, 4, 2]", tre.omvendtString());
+
+        Integer[] b = {};
+        ObligSBinTre<Integer> tre2 = new ObligSBinTre<>(Comparator.naturalOrder());
+        for(int verdi : b) {
+            tre2.leggInn(verdi);
+        }
+        assertEquals("[]", tre2.omvendtString());
+    }
 }

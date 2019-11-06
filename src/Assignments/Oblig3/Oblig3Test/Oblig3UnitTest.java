@@ -4,6 +4,7 @@ import Assignments.Oblig3.ObligSBinTre;
 import org.junit.jupiter.api.Test;
 
 import java.util.Comparator;
+import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -115,5 +116,16 @@ public class Oblig3UnitTest {
         for (int verdi : a) tre.leggInn(verdi);
 
         tre.nullstill();
+    }
+
+    @Test
+    void bladnodeIterator() {
+        ObligSBinTre<Character> tre = new ObligSBinTre<>(Comparator.naturalOrder());
+        char[] verdier = "IATBHJCRSOFELKGDMPQN".toCharArray();
+        for (char c : verdier) tre.leggInn(c);
+
+        Iterator iter = tre.iterator();
+
+        for (Character c : tre) System.out.print(c + " ");
     }
 }

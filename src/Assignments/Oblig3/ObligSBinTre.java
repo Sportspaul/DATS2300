@@ -382,19 +382,7 @@ public class ObligSBinTre<T> implements Beholder<T>
       if(!hasNext()) {
         return;
       }
-      // Gå til høyre om venstre barn ikke finnes
-      if(rot.venstre == null) {
-        p = p.høyre;
-      }
 
-      while(hasNext()) {
-          p = p.venstre;
-      }
-      if(p.høyre != null ) {
-          while(hasNext()) {
-              p = p.venstre;
-          }
-      }
     }
     
     @Override
@@ -403,7 +391,7 @@ public class ObligSBinTre<T> implements Beholder<T>
       return p != null;  // Denne skal ikke endres!
     }
 
-    //Det er q sin verdi som skal fjernes når remove() kalles. I next() settes q lik p før p flyttes:
+    // I next() settes q lik p før p flyttes:
     @Override
     public T next()
     {
@@ -413,16 +401,10 @@ public class ObligSBinTre<T> implements Beholder<T>
       if(!hasNext()) {
         throw new NoSuchElementException("Det er ikke flere noder igjen i treet!");
       }
-      removeOK = true;
-      T verdi = p.verdi;
-      if(p.venstre != null) {
-        p = p.venstre;
-      } else {
-        p = p.høyre;
-      }
-      return verdi;
+      return null;
     }
-    
+
+    //Det er q sin verdi som skal fjernes når remove() kalles.
     @Override
     public void remove()
     {
@@ -433,7 +415,6 @@ public class ObligSBinTre<T> implements Beholder<T>
       if(iteratorendringer != endringer) {  // Sjekker om det er gjort endringer i listen før remove() ble kjørt
         throw new ConcurrentModificationException("iteratorendringer kan ikke være ulik endringer!");
       }
-      removeOK = false;
       q = p;
       
     }

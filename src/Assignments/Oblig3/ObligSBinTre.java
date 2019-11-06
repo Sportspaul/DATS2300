@@ -489,6 +489,9 @@ public class ObligSBinTre<T> implements Beholder<T>
 
       while(hasNext()) {
         p = nesteInorden(p);
+        if(p == null) {
+          return verdi;
+        }
         if (p.venstre == null && p.høyre == null) {
           return verdi;
         }

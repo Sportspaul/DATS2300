@@ -2,6 +2,7 @@ package Assignments.Oblig3;
 
 ////////////////// ObligSBinTre /////////////////////////////////
 
+import java.sql.SQLOutput;
 import java.util.*;
 
 public class ObligSBinTre<T> implements Beholder<T>
@@ -347,14 +348,74 @@ public class ObligSBinTre<T> implements Beholder<T>
     finnLengsteGren(node.høyre, tempString, lengde + 1);
   }
   
-  public String[] grener()
-  {
-    throw new UnsupportedOperationException("Ikke kodet ennå!");
+  public String[] grener() {
+    TabellListe<Node<T>> bladnoder = finnBladnoder(); // Tabellliste som inneholder alle bladnodene i et tre
+    String[] alleGrener = new String[bladnoder.antall()]; // String-liste på størrelse med antall bladnoder
+
+    for(int i = 0; i < bladnoder.antall(); i++) {
+      alleGrener[i] = finnGren(bladnoder.hent(i)); // Finner grenen til hver enkelt bladnodene
+    }
+    return alleGrener; // Returnerer hver enkelt gren i treet
+  }
+
+  /** Hjelpemetode for "grener()"*/
+  private static String finnGren(Node p) {
+    StringJoiner sj = new StringJoiner(", ", "[", "]");
+    TabellStakk stack = new TabellStakk<>(); // LIFO
+    while(p != null) {
+      stack.leggInn(p); // Finner grenen fra en spesifik node, og legger hver verdi inn i en stack
+      p = p.forelder; // Beveger peker i retning roten av treet
+    }
+
+    while(!stack.tom()) {
+      p = (Node)stack.taUt(); // Konkatenerer fra Object til Node
+      sj.add(p.toString()); // Mens stacken ikke er tom legges hvert element til en stringjoiner
+    }
+
+    return sj.toString(); // Returnerer en gren fra p
+  }
+
+  /** Hjelpemetode for "grener()*/
+  private TabellListe<Node<T>> finnBladnoder() {
+    TabellListe<Node<T>> bladnoder = new TabellListe<>(); // TabellListe som skal holde alle bladnodene i et tre
+
+    Node<T> p = rot;
+
+    if(tom()) {
+      return bladnoder; // Hvis listen er tom returneres en tom TabellListe
+    }
+
+    while(p.venstre != null) {
+      p = p.venstre; // Beveger seg til første node i innorden
+    }
+
+    while(p!=null) {
+      if(p.venstre == null && p.høyre == null) {
+        bladnoder.leggInn(p); // Hvis man befinner seg i en bladnode (ingen barn) legges den til TabellListen
+      }
+      p = nesteInorden(p); // Går til neste node i innorden
+    }
+
+    return bladnoder; // Returnerer en liste med alle bladnoder
+
+
   }
   
-  public String bladnodeverdier()
-  {
-    throw new UnsupportedOperationException("Ikke kodet ennå!");
+  public String bladnodeverdier() {
+    bladNode(rot);
+
+  }
+
+  public  void bladNode(Node p) {
+    TabellListe<Node<T>> bladnoder = new TabellListe<>();
+    if (p == null) return;
+
+    if(p.venstre == null && p.høyre == null){
+      bladnoder.leggInn(p);
+    }
+
+    bladNode(p.venstre);
+    bladNode(p.høyre);
   }
   
   public String postString()

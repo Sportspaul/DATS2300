@@ -488,18 +488,20 @@ public class ObligSBinTre<T> implements Beholder<T>
     private int iteratorendringer = endringer;
 
 
-    //TODO: ta en ny titt på metoden
+
     private BladnodeIterator()  // konstruktør
     {
         // Gjør ingenting om treet er tomt
         if (!hasNext()) {
             return;
         }
-
+        // Går til venstre sålenge det er mulig
         while (p.venstre != null) {
             p = p.venstre;
         }
 
+        // Hvis peker ikke er nullpeker, sjekker vi om det er en bladnode
+        // Hvis ikke bruker vi nesteInorden(p)-metoden. Den kjører til vi finner en bladnode
         while (hasNext()) {
             if (p.venstre == null && p.høyre == null) {
                 return;
@@ -514,27 +516,28 @@ public class ObligSBinTre<T> implements Beholder<T>
       return p != null;  // Denne skal ikke endres!
     }
 
-    // I next() settes q lik p før p flyttes:
+    // I next() settes q lik p før p flyttes
     @Override
     public T next()
     {
       if (iteratorendringer != endringer) {
-        throw new ConcurrentModificationException();
+        throw new ConcurrentModificationException("Treet er endret!");
       }
       if(!hasNext()) {
         throw new NoSuchElementException("Det er ikke flere bladnoder igjen i treet!");
       }
 
-      removeOK = true;
-      q = p;
-      T verdi = q.verdi;
+      removeOK = true; // lovlig å fjerne bladnode
+      q = p; // q er p sin forelder
+      T verdi = q.verdi; // tar vare på gammel verdi
 
-      while(hasNext()) {
+
+      while(hasNext()) { // Node p er ulik null
         p = nesteInorden(p);
-        if(p == null) {
+        if(p == null) { //workaround hvis p blir null
           return verdi;
         }
-        if (p.venstre == null && p.høyre == null) {
+        if (p.venstre == null && p.høyre == null) { //sjekker at det er en bladnode
           return verdi;
         }
       }

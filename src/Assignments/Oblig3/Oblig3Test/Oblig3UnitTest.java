@@ -153,13 +153,13 @@ public class Oblig3UnitTest {
         char[] verdier = "IATBHJCRSOFELKGDMPQN".toCharArray();
         for (char c : verdier) tre.leggInn(c);
 
-        /*Iterator it = tre.iterator();
+       /* Iterator it = tre.iterator();
         assertThrows(IllegalStateException.class, ()-> it.remove());
         for (Character c : tre) System.out.print(c + " ");
         System.out.println();
         it.next();
         it.remove();
-        for (Character c : tre) System.out.print(c + " "); */
+        for (Character c : tre) System.out.print(c + " ");*/
         while (!tre.tom()) {
             System.out.println(tre);
             tre.fjernHvis(x -> true);

@@ -4,6 +4,8 @@ import Assignments.Oblig3.ObligSBinTre;
 import org.junit.jupiter.api.Test;
 
 import java.util.Comparator;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -144,4 +146,24 @@ public class Oblig3UnitTest {
 
         for (Character c : tre) System.out.print(c + " ");
     }
+
+    @Test
+    void removeTest() {
+        ObligSBinTre<Character> tre = new ObligSBinTre<>(Comparator.naturalOrder());
+        char[] verdier = "IATBHJCRSOFELKGDMPQN".toCharArray();
+        for (char c : verdier) tre.leggInn(c);
+
+        /*Iterator it = tre.iterator();
+        assertThrows(IllegalStateException.class, ()-> it.remove());
+        for (Character c : tre) System.out.print(c + " ");
+        System.out.println();
+        it.next();
+        it.remove();
+        for (Character c : tre) System.out.print(c + " "); */
+        while (!tre.tom()) {
+            System.out.println(tre);
+            tre.fjernHvis(x -> true);
+        }
+    }
+
 }

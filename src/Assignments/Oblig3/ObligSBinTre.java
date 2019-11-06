@@ -508,8 +508,21 @@ public class ObligSBinTre<T> implements Beholder<T>
       if(iteratorendringer != endringer) {  // Sjekker om det er gjort endringer i listen før remove() ble kjørt
         throw new ConcurrentModificationException("iteratorendringer kan ikke være ulik endringer!");
       }
-      q = p;
-      
+
+      if(antall == 0) {
+        return;
+      }
+
+      if(q.forelder.venstre == q) {
+        q.forelder.venstre = null;
+
+      } else {
+        q.forelder.høyre = null;
+      }
+      removeOK = false;
+      antall--;
+      iteratorendringer++;
+      endringer++;
     }
 
   } // BladnodeIterator

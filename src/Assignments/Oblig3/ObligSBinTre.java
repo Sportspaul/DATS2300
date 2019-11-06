@@ -2,6 +2,7 @@ package Assignments.Oblig3;
 
 ////////////////// ObligSBinTre /////////////////////////////////
 
+import java.sql.SQLOutput;
 import java.util.*;
 
 public class ObligSBinTre<T> implements Beholder<T>
@@ -346,70 +347,91 @@ public class ObligSBinTre<T> implements Beholder<T>
     finnLengsteGren(node.venstre, tempString, lengde + 1);
     finnLengsteGren(node.høyre, tempString, lengde + 1);
   }
+  
+  public String[] grener() {
+    TabellListe<Node<T>> bladnoder = finnBladnoder(); // Tabellliste som inneholder alle bladnodene i et tre
+    String[] alleGrener = new String[bladnoder.antall()]; // String-liste på størrelse med antall bladnoder
 
-  /**Finner alle individuelle grener*/
-  public String[] grener()
-  {
-      TabellListe<Node<T>> bladnoder = finnBladnoder();          // Tabellliste som inneholder alle bladnodene i et tre
-      String[] alleGrener = new String[bladnoder.antall()];      // String-liste på størrelse med antall bladnoder
-
-      for(int i = 0; i < bladnoder.antall(); i++) {
-          alleGrener[i] = finnGren(bladnoder.hent(i));           // Finner grenen til hver enkelt bladnodene
-      }
-      return alleGrener;                                         // Returnerer hver enkelt gren i treet
+    for(int i = 0; i < bladnoder.antall(); i++) {
+      alleGrener[i] = finnGren(bladnoder.hent(i)); // Finner grenen til hver enkelt bladnodene
+    }
+    return alleGrener; // Returnerer hver enkelt gren i treet
   }
 
   /** Hjelpemetode for "grener()"*/
   private static String finnGren(Node p) {
-      StringJoiner sj = new StringJoiner(", ", "[", "]");
-      TabellStakk stack = new TabellStakk<>();   // LIFO
-      while(p != null) {
-          stack.leggInn(p);          // Finner grenen fra en spesifik node, og legger hver verdi inn i en stack
-          p = p.forelder;            // Beveger peker i retning roten av treet
-      }
+    StringJoiner sj = new StringJoiner(", ", "[", "]");
+    TabellStakk stack = new TabellStakk<>(); // LIFO
+    while(p != null) {
+      stack.leggInn(p); // Finner grenen fra en spesifik node, og legger hver verdi inn i en stack
+      p = p.forelder; // Beveger peker i retning roten av treet
+    }
 
-      while(!stack.tom()) {
-          p = (Node)stack.taUt();    // Konkatenerer fra Object til Node
-          sj.add(p.toString());      // Mens stacken ikke er tom legges hvert element til en stringjoiner
-      }
+    while(!stack.tom()) {
+      p = (Node)stack.taUt(); // Konkatenerer fra Object til Node
+      sj.add(p.toString()); // Mens stacken ikke er tom legges hvert element til en stringjoiner
+    }
 
-      return sj.toString();          // Returnerer en gren fra p
+    return sj.toString(); // Returnerer en gren fra p
   }
 
   /** Hjelpemetode for "grener()*/
   private TabellListe<Node<T>> finnBladnoder() {
-      TabellListe<Node<T>> bladnoder = new TabellListe<>();     // TabellListe som skal holde alle bladnodene i et tre
+    TabellListe<Node<T>> bladnoder = new TabellListe<>(); // TabellListe som skal holde alle bladnodene i et tre
 
-      Node<T> p = rot;
+    Node<T> p = rot;
 
-      if(tom()) {
-          return bladnoder;           // Hvis listen er tom returneres en tom TabellListe
+    if(tom()) {
+      return bladnoder; // Hvis listen er tom returneres en tom TabellListe
+    }
+
+    while(p.venstre != null) {
+      p = p.venstre; // Beveger seg til første node i innorden
+    }
+
+    while(p!=null) {
+      if(p.venstre == null && p.høyre == null) {
+        bladnoder.leggInn(p); // Hvis man befinner seg i en bladnode (ingen barn) legges den til TabellListen
       }
+      p = nesteInorden(p); // Går til neste node i innorden
+    }
 
-      while(p.venstre != null) {
-          p = p.venstre;              // Beveger seg til første node i innorden
-      }
+    return bladnoder; // Returnerer en liste med alle bladnoder
 
-      while(p!=null) {
-          if(p.venstre == null && p.høyre == null) {
-              bladnoder.leggInn(p);   // Hvis man befinner seg i en bladnode (ingen barn) legges den til TabellListen
-          }
-          p = nesteInorden(p);        // Går til neste node i innorden
-      }
 
-      return bladnoder;               // Returnerer en liste med alle bladnoder
-}
-
+  }
   
-  public String bladnodeverdier()
-  {
-    throw new UnsupportedOperationException("Ikke kodet ennå!");
+  public String bladnodeverdier() {
+    if(antall == 0) {return "[]"; }
+
+    StringBuilder str = new StringBuilder();
+    str.append("[");
+    bladNode(rot, str);
+    str.delete(str.length() - 2, str.length()); // Fjerner de to siste tegnene slik at formatering blir riktig
+    str.append("]");
+    return str.toString();
+  }
+
+
+  public  void bladNode(Node p, StringBuilder str) {
+    if (p == null) return;
+
+    if(p.venstre == null && p.høyre == null){
+      str.append(p.verdi + ", ");
+    }
+
+    bladNode(p.venstre, str);
+    bladNode(p.høyre, str);
   }
   
   public String postString()
   {
-    throw new UnsupportedOperationException("Ikke kodet ennå!");
+    StringBuilder str = new StringBuilder();
+
+    return "";
   }
+
+ // private void treverserPostorden
   
   @Override
   public Iterator<T> iterator()
@@ -432,17 +454,6 @@ public class ObligSBinTre<T> implements Beholder<T>
         return;
       }
 
-      while(p.venstre != null) {
-          p = p.venstre;
-      }
-
-        while(hasNext()) {
-            if(p.venstre == null && p.høyre == null) {
-                return;
-
-            }
-            p = nesteInorden(p);        // Går til neste node i innorden
-        }
     }
     
     @Override
@@ -459,22 +470,9 @@ public class ObligSBinTre<T> implements Beholder<T>
         throw new ConcurrentModificationException();
       }
       if(!hasNext()) {
-        throw new NoSuchElementException("Det er ikke flere bladnoder igjen i treet!");
+        throw new NoSuchElementException("Det er ikke flere noder igjen i treet!");
       }
-
-        removeOK = true;
-
-        q = p;
-        T verdi = q.verdi;
-
-        while(hasNext()) {
-            p = nesteInorden(p);
-            if(p.venstre == null && p.høyre == null) {
-                return verdi;
-            }
-                    // Går til neste node i innorden
-        }
-        return verdi;
+      return null;
     }
 
     //Det er q sin verdi som skal fjernes når remove() kalles.

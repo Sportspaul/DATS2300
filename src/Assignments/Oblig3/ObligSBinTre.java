@@ -505,18 +505,18 @@ public class ObligSBinTre<T> implements Beholder<T>
         throw new IllegalStateException("Metoden remove() kan ikke kalles!");
       }
 
-      if(iteratorendringer != endringer) {  // Sjekker om det er gjort endringer i listen før remove() ble kjørt
+      if(iteratorendringer != endringer) {    // Sjekker om det er gjort endringer i listen før remove() ble kjørt
         throw new ConcurrentModificationException("iteratorendringer kan ikke være ulik endringer!");
       }
 
       if(q == rot) {
-        rot = null;
+        rot = null;                           // Hvis man er på roten så fjernes den
       } else {
         if (q.forelder.venstre == q) {
-          q.forelder.venstre = null;
+          q.forelder.venstre = null;          // Hvis q er et venstrbarn fjernes q
 
         } else {
-          q.forelder.høyre = null;
+          q.forelder.høyre = null;            // Hvis q er et høyrebarn fjernes q
         }
       }
 

@@ -402,26 +402,36 @@ public class ObligSBinTre<T> implements Beholder<T>
   }
   
   public String bladnodeverdier() {
-    bladNode(rot);
+    if(antall == 0) {return "[]"; }
 
+    StringBuilder str = new StringBuilder();
+    str.append("[");
+    bladNode(rot, str);
+    str.delete(str.length() - 2, str.length()); // Fjerner de to siste tegnene slik at formatering blir riktig
+    str.append("]");
+    return str.toString();
   }
 
-  public  void bladNode(Node p) {
-    TabellListe<Node<T>> bladnoder = new TabellListe<>();
+
+  public  void bladNode(Node p, StringBuilder str) {
     if (p == null) return;
 
     if(p.venstre == null && p.høyre == null){
-      bladnoder.leggInn(p);
+      str.append(p.verdi + ", ");
     }
 
-    bladNode(p.venstre);
-    bladNode(p.høyre);
+    bladNode(p.venstre, str);
+    bladNode(p.høyre, str);
   }
   
   public String postString()
   {
-    throw new UnsupportedOperationException("Ikke kodet ennå!");
+    StringBuilder str = new StringBuilder();
+
+    return "";
   }
+
+ // private void treverserPostorden
   
   @Override
   public Iterator<T> iterator()

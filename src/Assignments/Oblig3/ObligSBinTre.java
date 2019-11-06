@@ -2,7 +2,6 @@ package Assignments.Oblig3;
 
 ////////////////// ObligSBinTre /////////////////////////////////
 
-import java.sql.SQLOutput;
 import java.util.*;
 
 public class ObligSBinTre<T> implements Beholder<T>
@@ -203,7 +202,6 @@ public class ObligSBinTre<T> implements Beholder<T>
   @Override
   public void nullstill() {
       int temp = antall;                // Tar vare på antall (før noder fjernes)
-      System.out.println(endringer);
       slettAlleNoder(rot);              // Kaller på en rekursiv metode som sletter alle nodene i treet
       rot = null;
       antall = 0;
@@ -234,8 +232,8 @@ public class ObligSBinTre<T> implements Beholder<T>
       p = p.høyre;            // P flyttes til sitt høyrebarn
       while (p != null) {
         q = p;
-        p = p.venstre;        // P flyttes ned i treet helt til den blir null (treffer en node uten left
-                              // child), og q peker på denne noden
+        p = p.venstre;        // P flyttes ned i treet helt til den blir null (treffer en node uten venstre
+                              // barn), og q peker på denne noden
       }
     }
     else {

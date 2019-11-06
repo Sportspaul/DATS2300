@@ -482,7 +482,18 @@ public class ObligSBinTre<T> implements Beholder<T>
       if(!hasNext()) {
         throw new NoSuchElementException("Det er ikke flere bladnoder igjen i treet!");
       }
-      return null;
+
+      removeOK = true;
+      q = p;
+      T verdi = q.verdi;
+
+      while(hasNext()) {
+        p = nesteInorden(p);
+        if (p.venstre == null && p.høyre == null) {
+          return verdi;
+        }
+      }
+      return verdi;
     }
 
     //Det er q sin verdi som skal fjernes når remove() kalles.

@@ -424,19 +424,63 @@ public class ObligSBinTre<T> implements Beholder<T>
   
   public String postString()
   {
+    if(antall == 0) { return "[]"; }  // Returnerer tom liste hvis treet er tomt
     StringBuilder str = new StringBuilder();
-
-    return "";
+    str.append("[");
+    treverserPostorden(str);                     // Metoder som legger til allle nodene i postorden, til StringBuilderen
+    str.delete(str.length() - 2, str.length());  // Fjerner de to siste tegnene slik at formatering blir riktig
+    str.append("]");
+    return str.toString();
   }
 
- // private void treverserPostorden
-  
+  /** Hjelpemetoden som legger til elementene i treet til StringBuilderen, i postorden */
+  private void treverserPostorden(StringBuilder str) {
+    Stack<Node> stack = new Stack<>();
+
+    if (rot == null) { return; }   // Hopper ut av metoden hvis treet er tomt
+
+    stack.push(rot);               // Starter med å legge roten til stacken
+    Node q = null;
+
+    // Kjører så lenge det er elementer i stacken
+    while (!stack.isEmpty()) {
+      Node p = stack.peek();    // Setter p lik øverste element i stacken
+
+      /* Treverserer treet iterativt, i postorden
+      og appender node.verdi på StringBuilderen*/
+      if (q == null || q.venstre == p || q.høyre == p) {
+        if (p.venstre != null) {
+          stack.push(p.venstre);
+      }else if (p.høyre != null) {
+          stack.push(p.høyre);
+        }else {
+          stack.pop();
+          str.append(p.verdi + ", ");
+        }
+
+      }else if (p.venstre == q) {
+        if (p.høyre != null) {
+          stack.push(p.høyre);
+        }else {
+          stack.pop();
+          str.append(p.verdi + ", ");
+        }
+
+      }else if (p.høyre == q) {
+        stack.pop();
+        str.append(p.verdi + ", ");
+      }
+
+      q = p;
+    }
+  }
+
   @Override
   public Iterator<T> iterator()
   {
     return new BladnodeIterator();
   }
-  
+
   private class BladnodeIterator implements Iterator<T>
   {
     private Node<T> p = rot, q = null;
@@ -463,7 +507,7 @@ public class ObligSBinTre<T> implements Beholder<T>
             p = nesteInorden(p);
         }
     }
-    
+
     @Override
     public boolean hasNext()
     {

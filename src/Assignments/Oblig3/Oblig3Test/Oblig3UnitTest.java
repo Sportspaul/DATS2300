@@ -121,12 +121,6 @@ public class Oblig3UnitTest {
         tre.nullstill();
     }
 
-    @Test
-    void postStringTest() {
-        ObligSBinTre<Character> tre = new ObligSBinTre<>(Comparator.naturalOrder());
-        char[] verdier = "IATBHJCRSOFELKGDMPQN".toCharArray();
-        for (char c : verdier) tre.leggInn(c);
-    }
 
     @Test
     void bladNode() {
@@ -146,6 +140,29 @@ public class Oblig3UnitTest {
 
         for (Character c : tre) System.out.print(c + " ");
     }
+
+    @Test
+    void postStringTest() {
+        int[] a = {5, 2, 1, 3, 7, 9, 6};
+        ObligSBinTre<Integer> tre = new ObligSBinTre<>(Comparator.naturalOrder());
+        for (int verdi : a) tre.leggInn(verdi);
+
+        tre.postString();
+        assertEquals("[1, 3, 2, 6, 9, 7, 5]", tre.postString());
+    }
+
+    @Test
+    void testPostString() {
+        int[] a = {10, 15};
+        ObligSBinTre<Integer> tre = new ObligSBinTre<>(Comparator.naturalOrder());
+        for (int verdi : a) tre.leggInn(verdi);
+
+        tre.postString();
+        System.out.println(tre.postString());
+    }
+
+
+
 
     @Test
     void removeTest() {

@@ -501,7 +501,7 @@ public class ObligSBinTre<T> implements Beholder<T>
     @Override
     public void remove()
     {
-      if(antall == 0 || removeOK == false) { // Sjekker om det er lov å kalle remove()
+      if(antall == 0 || removeOK == false) {  // Sjekker om det er lov å kalle remove()
         throw new IllegalStateException("Metoden remove() kan ikke kalles!");
       }
 

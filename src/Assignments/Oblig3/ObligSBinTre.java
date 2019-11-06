@@ -449,11 +449,21 @@ public class ObligSBinTre<T> implements Beholder<T>
     //TODO: ta en ny titt på metoden
     private BladnodeIterator()  // konstruktør
     {
-      // Gjør ingenting om treet er tomt
-      if(!hasNext()) {
-        return;
-      }
+        // Gjør ingenting om treet er tomt
+        if (!hasNext()) {
+            return;
+        }
 
+        while (p.venstre != null) {
+            p = p.venstre;
+        }
+
+        while (hasNext()) {
+            if (p.venstre == null && p.høyre == null) {
+                return;
+            }
+            p = nesteInorden(p);
+        }
     }
     
     @Override
@@ -470,7 +480,7 @@ public class ObligSBinTre<T> implements Beholder<T>
         throw new ConcurrentModificationException();
       }
       if(!hasNext()) {
-        throw new NoSuchElementException("Det er ikke flere noder igjen i treet!");
+        throw new NoSuchElementException("Det er ikke flere bladnoder igjen i treet!");
       }
       return null;
     }
